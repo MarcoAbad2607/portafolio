@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Case Study — Título del Proyecto</title>
+  <meta name="description" content="Caso de estudio de proyecto: contexto, arquitectura, implementación, resultados y lecciones." />
+  <link rel="icon" href="../favicon.ico">
+  <style>
+    :root { --bg:#0e0e12; --card:#171720; --ink:#f7f7fb; --muted:#aab0bf; --acc:#ffd54d; --line:#272737; }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,Arial,sans-serif;background:var(--bg);color:var(--ink)}
+    a{color:var(--acc);text-decoration:none}
+    a:hover{text-decoration:underline}
+    .wrap{max-width:1080px;margin:0 auto;padding:24px}
+    h1{margin:8px 0}
+    .muted{color:var(--muted)}
+    .grid{display:grid;gap:16px;grid-template-columns:1fr}
+    @media(min-width:920px){.grid{grid-template-columns:1.2fr .8fr}}
+    .card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:16px}
+    img{width:100%;border-radius:12px;background:#0b0b0f}
+    pre{background:#0b0b0f;color:#f7f7fb;padding:12px;border-radius:12px;overflow:auto}
+    code{font-family:ui-monospace,Menlo,Consolas,monospace}
+    .row{display:flex;flex-wrap:wrap;gap:8px}
+    .tag{font-size:12px;color:var(--muted);border:1px solid var(--line);padding:6px 8px;border-radius:8px}
+    .back{display:inline-block;margin:12px 0}
+    .gallery{display:grid;gap:10px;grid-template-columns:1fr}
+    @media(min-width:720px){.gallery{grid-template-columns:1fr 1fr}}
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <a class="back" href="../index.html">← Volver al portafolio</a>
+    <h1>Título del Proyecto</h1>
+    <p class="muted">Resumen breve del objetivo, alcance y resultados (2–3 líneas). Datos e imágenes anonimizados.</p>
+
+    <div class="grid">
+      <!-- Columna principal -->
+      <main class="card">
+        <h2>Contexto</h2>
+        <p>Describe el problema a resolver, restricciones (tiempo, línea/equipo, normativas) y tu rol (diseño, desarrollo, pruebas, despliegue, soporte).</p>
+
+        <h2>Arquitectura / Flujo</h2>
+        <img src="../img/ejemplos/arquitectura.png" alt="Diagrama de arquitectura" />
+        <p class="muted">Sustituye por tu diagrama. Evita logos o datos sensibles.</p>
+
+        <h2>Implementación</h2>
+        <h3>Descripción</h3>
+        <p>Explica los módulos clave (backend, UI, base de datos, endpoints MES/IMES, servicios Windows, etc.).</p>
+
+        <h3>Fragmentos de código</h3>
+        <pre><code>// Ejemplo ASP.NET Controller
+[HttpPost("/configuracion/registrar/entrada")]
+public IActionResult RegistrarEntrada([FromBody] EntradaDto dto) {
+    // Validaciones, persistencia, retorno
+    return Ok(new { ok = true });
+}
+
+// Ejemplo WPF ViewModel (MVVM)
+public class ConveyorViewModel {
+    public ICommand StartCmd { get; }
+    // ... lógica de estados / reglas de negocio
+}
+</code></pre>
+
+        <h2>Resultados</h2>
+        <ul>
+          <li>+X% FPY, -Y% tiempo de ciclo, -Z% errores de registro.</li>
+          <li>Mejor visibilidad en tiempo real y trazabilidad.</li>
+        </ul>
+
+        <h2>Lecciones aprendidas</h2>
+        <ul>
+          <li>Buenas prácticas, validaciones tempranas, pruebas automatizadas, etc.</li>
+        </ul>
+      </main>
+
+      <!-- Aside derecho -->
+      <aside class="card">
+        <h3>Ficha técnica</h3>
+        <div class="row">
+          <span class="tag">ASP.NET</span>
+          <span class="tag">WPF</span>
+          <span class="tag">SQL Server</span>
+          <span class="tag">SQLite</span>
+          <span class="tag">MES/IMES</span>
+          <span class="tag">SPC / NPI</span>
+        </div>
+
+        <h3>Galería</h3>
+        <div class="gallery">
+          <img src="../img/ejemplos/captura1.png" alt="Captura 1" />
+          <img src="../img/ejemplos/captura2.png" alt="Captura 2" />
+          <!-- Agrega más imágenes si lo necesitas -->
+        </div>
+
+        <h3>Descargas</h3>
+        <ul>
+          <li><a href="#">Manual/diagrama PDF (opcional)</a></li>
+          <li><a href="#">Dataset/CV (opcional)</a></li>
+        </ul>
+      </aside>
+    </div>
+  </div>
+</body>
+</html>
