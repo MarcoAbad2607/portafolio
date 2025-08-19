@@ -3,9 +3,9 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Marco Abad — Portafolio</title>
-  <meta name="description" content="Portafolio técnico de ingeniería mecatrónica: C#, ASP.NET, Arduino, pruebas ICT/Funcionales, trazabilidad, automatización." />
-  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='0.9em' font-size='90'>🛠️</text></svg>">
+  <title>Case Study — Título del Proyecto</title>
+  <meta name="description" content="Caso de estudio de proyecto: contexto, arquitectura, implementación, resultados y lecciones." />
+  <link rel="icon" href="../favicon.ico">
   <style>
     :root { --bg:#0e0e12; --card:#171720; --ink:#f7f7fb; --muted:#aab0bf; --acc:#ffd54d; --line:#272737; }
     *{box-sizing:border-box}
@@ -13,180 +13,95 @@
     body{margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,Arial,sans-serif;background:var(--bg);color:var(--ink)}
     a{color:var(--acc);text-decoration:none}
     a:hover{text-decoration:underline}
-    header{padding:24px 20px}
-    .wrap{max-width:1080px;margin:0 auto;padding:0 20px}
-    .hero{display:grid;gap:18px;grid-template-columns:1fr;align-items:center;padding:28px 0 8px}
-    .hero h1{font-size:clamp(28px,4.5vw,48px);margin:0;line-height:1.1}
-    .hero p{margin:0;color:var(--muted)}
-    .pill{display:inline-flex;gap:8px;align-items:center;background:var(--card);border:1px solid var(--line);padding:8px 12px;border-radius:999px;font-size:14px}
-    .grid{display:grid;gap:16px}
-    .cards{grid-template-columns:repeat(auto-fit,minmax(260px,1fr))}
-    .card{background:var(--card);border:1px solid var(--line);border-radius:16px;overflow:hidden;display:flex;flex-direction:column}
-    .card img{width:100%;height:160px;object-fit:cover;background:#0b0b0f}
-    .card .body{padding:16px}
-    .card h3{margin:0 0 6px;font-size:18px}
-    .badge{display:inline-block;font-size:12px;color:#111;background:var(--acc);padding:2px 8px;border-radius:999px;margin-right:6px}
-    .row{display:flex;flex-wrap:wrap;gap:8px}
-    .row .tag{font-size:12px;color:var(--muted);border:1px solid var(--line);padding:6px 8px;border-radius:8px}
-    section{padding:28px 0}
-    h2{font-size:22px;margin:0 0 12px}
+    .wrap{max-width:1080px;margin:0 auto;padding:24px}
+    h1{margin:8px 0}
     .muted{color:var(--muted)}
-    .bar{height:1px;background:var(--line);margin:24px 0}
-    .footer{padding:28px 0 48px;color:var(--muted);font-size:14px}
-    .btn{display:inline-flex;align-items:center;justify-content:center;padding:10px 14px;border-radius:10px;background:var(--acc);color:#111;font-weight:600;border:none}
-    nav{display:flex;gap:16px;align-items:center;justify-content:flex-end}
-    .lang{background:var(--card);border:1px solid var(--line);color:var(--ink);padding:6px 10px;border-radius:10px}
-    .two{display:grid;grid-template-columns:1fr;gap:16px}
-    @media (min-width:860px){
-      .hero{grid-template-columns:1.2fr .8fr}
-      .two{grid-template-columns:1fr 1fr}
-    }
-    .avatar{width:120px;height:120px;border-radius:50%;border:2px solid var(--line);background:#111;display:block}
-    .mono{font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;}
-    .kbd{border:1px solid var(--line);padding:2px 6px;border-radius:6px;background:var(--card)}
-    .card .actions{margin-top:10px;display:flex;gap:10px;flex-wrap:wrap}
+    .grid{display:grid;gap:16px;grid-template-columns:1fr}
+    @media(min-width:920px){.grid{grid-template-columns:1.2fr .8fr}}
+    .card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:16px}
+    img{width:100%;border-radius:12px;background:#0b0b0f}
+    pre{background:#0b0b0f;color:#f7f7fb;padding:12px;border-radius:12px;overflow:auto}
+    code{font-family:ui-monospace,Menlo,Consolas,monospace}
+    .row{display:flex;flex-wrap:wrap;gap:8px}
+    .tag{font-size:12px;color:var(--muted);border:1px solid var(--line);padding:6px 8px;border-radius:8px}
+    .back{display:inline-block;margin:12px 0}
+    .gallery{display:grid;gap:10px;grid-template-columns:1fr}
+    @media(min-width:720px){.gallery{grid-template-columns:1fr 1fr}}
   </style>
 </head>
 <body>
-  <header class="wrap">
-    <nav>
-      <a href="#proyectos">Proyectos</a>
-      <a href="#experiencia">Experiencia</a>
-      <a href="#contacto">Contacto</a>
-      <button id="lang" class="lang" aria-label="Switch language">ES</button>
-    </nav>
-  </header>
+  <div class="wrap">
+    <a class="back" href="../index.html">← Volver al portafolio</a>
+    <h1>Título del Proyecto</h1>
+    <p class="muted">Resumen breve del objetivo, alcance y resultados (2–3 líneas). Datos e imágenes anonimizados.</p>
 
-  <main class="wrap">
-    <section class="hero">
-      <div>
-        <span class="pill">🧭 Portafolio técnico</span>
-        <h1 id="t1">Marco Abad — Ingeniero en Mecatrónica</h1>
-        <p id="t2">C#, ASP.NET, Arduino, pruebas ICT/funcional, automatización de manufactura, trazabilidad y optimización de procesos.</p>
-        <div style="margin-top:14px;display:flex;gap:10px;flex-wrap:wrap">
-          <a class="btn" href="#proyectos" id="t3">Ver proyectos</a>
-          <a class="btn" href="cv/Marco_Abad_CV.pdf" target="_blank" rel="noopener" id="t4">Descargar CV</a>
-        </div>
-      </div>
-      <div>
-        <img class="avatar" alt="Foto o avatar" src="https://avatars.githubusercontent.com/u/1?v=4" />
-        <p class="muted" style="margin-top:10px" id="t5">¿Buscas ejemplos de código? <a href="https://github.com/" target="_blank" rel="noopener">GitHub</a></p>
-      </div>
-    </section>
+    <div class="grid">
+      <!-- Columna principal -->
+      <main class="card">
+        <h2>Contexto</h2>
+        <p>Describe el problema a resolver, restricciones (tiempo, línea/equipo, normativas) y tu rol (diseño, desarrollo, pruebas, despliegue, soporte).</p>
 
-    <section class="two" id="sobre">
-      <div>
-        <h2 id="t6">Sobre mí</h2>
-        <p id="t7">Ingeniero en Mecatrónica con enfoque en pruebas de producción, desarrollo de herramientas en C#/ASP.NET y sistemas con Arduino. Experiencia integrando bases de datos (SQLite/SQL Server), reportes en Excel (EPPlus) y comunicación con MES/IMES. Me interesan la calidad, la confiabilidad y la mejora continua.</p>
-      </div>
-      <div>
-        <h2 id="t8">Habilidades</h2>
+        <h2>Arquitectura / Flujo</h2>
+        <img src="../img/ejemplos/arquitectura.png" alt="Diagrama de arquitectura" />
+        <p class="muted">Sustituye por tu diagrama. Evita logos o datos sensibles.</p>
+
+        <h2>Implementación</h2>
+        <h3>Descripción</h3>
+        <p>Explica los módulos clave (backend, UI, base de datos, endpoints MES/IMES, servicios Windows, etc.).</p>
+
+        <h3>Fragmentos de código</h3>
+        <pre><code>// Ejemplo ASP.NET Controller
+[HttpPost("/configuracion/registrar/entrada")]
+public IActionResult RegistrarEntrada([FromBody] EntradaDto dto) {
+    // Validaciones, persistencia, retorno
+    return Ok(new { ok = true });
+}
+
+// Ejemplo WPF ViewModel (MVVM)
+public class ConveyorViewModel {
+    public ICommand StartCmd { get; }
+    // ... lógica de estados / reglas de negocio
+}
+</code></pre>
+
+        <h2>Resultados</h2>
+        <ul>
+          <li>+X% FPY, -Y% tiempo de ciclo, -Z% errores de registro.</li>
+          <li>Mejor visibilidad en tiempo real y trazabilidad.</li>
+        </ul>
+
+        <h2>Lecciones aprendidas</h2>
+        <ul>
+          <li>Buenas prácticas, validaciones tempranas, pruebas automatizadas, etc.</li>
+        </ul>
+      </main>
+
+      <!-- Aside derecho -->
+      <aside class="card">
+        <h3>Ficha técnica</h3>
         <div class="row">
-          <span class="tag">C#, .NET / ASP.NET</span>
-          <span class="tag">EPPlus / Excel</span>
-          <span class="tag">SQLite / SQL Server</span>
-          <span class="tag">Arduino / 2N2222 / ACS712</span>
-          <span class="tag">ICT / Funcional / Burn-in / Hi-Pot</span>
-          <span class="tag">Trazabilidad / NPI</span>
+          <span class="tag">ASP.NET</span>
+          <span class="tag">WPF</span>
+          <span class="tag">SQL Server</span>
+          <span class="tag">SQLite</span>
+          <span class="tag">MES/IMES</span>
+          <span class="tag">SPC / NPI</span>
         </div>
-      </div>
-    </section>
 
-    <section id="proyectos">
-      <h2 id="t9">Proyectos destacados</h2>
-      <p class="muted" id="t10">*Las imágenes y datos están anonimizados para proteger la confidencialidad.*</p>
-      <div class="grid cards">
-        <!-- Proyecto 1 -->
-        <article class="card">
-          <img alt="Captura de app ASP.NET" src="https://picsum.photos/seed/aspnet/800/400" />
-          <div class="body">
-            <div><span class="badge">Caso de estudio</span></div>
-            <h3>Registro de Operadores (ASP.NET)</h3>
-            <p class="muted">Control de entradas/salidas, pausas y reportes a SQL Server. Turnos automáticos y tablero en tiempo real.</p>
-            <div class="row"><span class="tag">ASP.NET</span><span class="tag">SQLite</span><span class="tag">SQL Server</span></div>
-            <div class="actions"><a class="btn" href="proyectos/registro-operadores.html">Caso completo</a></div>
-          </div>
-        </article>
+        <h3>Galería</h3>
+        <div class="gallery">
+          <img src="../img/ejemplos/captura1.png" alt="Captura 1" />
+          <img src="../img/ejemplos/captura2.png" alt="Captura 2" />
+          <!-- Agrega más imágenes si lo necesitas -->
+        </div>
 
-        <!-- Proyecto 2 -->
-        <article class="card">
-          <img alt="Arduino y conveyor" src="https://picsum.photos/seed/arduino/800/400" />
-          <div class="body">
-            <div><span class="badge">Hardware</span></div>
-            <h3>Interlock de Conveyor</h3>
-            <p class="muted">Validación de seriales y control de paso de piezas interfiriendo señal al conveyor; protección con diodo y transistor 2N2222.</p>
-            <div class="row"><span class="tag">Arduino</span><span class="tag">2N2222</span><span class="tag">Trazabilidad</span></div>
-            <div class="actions"><a class="btn" href="proyectos/control-conveyor-wpf.html">Caso completo</a></div>
-          </div>
-        </article>
-
-        <!-- Proyecto 3 -->
-        <article class="card">
-          <img alt="Pruebas eléctricas" src="https://picsum.photos/seed/ict/800/400" />
-          <div class="body">
-            <div><span class="badge">Testing</span></div>
-            <h3>Pruebas de Fuente de Poder</h3>
-            <p class="muted">ICT, Funcional Voltage Test. Mantenimiento/calibración, SPC y mejora continua para elevar FPY.</p>
-            <div class="row"><span class="tag">ICT</span><span class="tag">Hi-Pot</span><span class="tag">SPC</span></div>
-            <div class="actions"><a class="btn" href="proyectos/pruebas-fuente-poder.html">Caso completo</a></div>
-          </div>
-        </article>
-      </div>
-    </section>
-
-    <section id="experiencia">
-      <h2 id="t11">Experiencia</h2>
-      <ul class="muted">
-        <li>Soporte ICT: verificación HW/SW de estaciones y *fixtures* de prueba; coordinación con proveedores y R&D.</li>
-        <li>Desarrollo de proyectos ASP NET y SQL Server databases.</li>
-        <li>Colaboración multifuncional para análisis de fallas y calidad.</li>
-      </ul>
-    </section>
-
-    <section id="contacto">
-      <h2 id="t12">Contacto</h2>
-      <p class="muted" id="t13">¿Te interesa colaborar? Escríbeme a <a href="mailto:marcomunizabad@yahoo.com">marcomunizabad@yahoo.com</a> o vía <a href="https://www.linkedin.com/in/marco-antonio-mu%C3%B1iz-abad-37b94721a/" target="_blank" rel="noopener">LinkedIn</a>.</p>
-    </section>
-
-    <div class="bar"></div>
-
-    <footer class="footer">
-      <div>© <span id="year"></span> Marco Abad. Construido con HTML estático y desplegado en GitHub Pages.</div>
-      <div class="mono">Tip: presiona <span class="kbd">/</span> para cambiar idioma.</div>
-    </footer>
-  </main>
-
-  <script>
-    // Año dinámico
-    document.getElementById('year').textContent = new Date().getFullYear();
-
-    // Toggle de idioma ES/EN (texto mínimo)
-    const es = {
-      t1: 'Marco Abad — Ingeniero en Mecatrónica',
-      t2: 'C#, ASP.NET, Arduino, pruebas ICT/funcional, automatización de manufactura, trazabilidad y optimización de procesos.',
-      t3: 'Ver proyectos',
-      t4: 'Descargar CV',
-      t5: '¿Buscas ejemplos de código? ',
-      t6: 'Sobre mí', t7: 'Ingeniero en Mecatrónica con enfoque en pruebas de producción, desarrollo de herramientas en C#/ASP.NET y sistemas con Arduino. Experiencia integrando bases de datos (SQLite/SQL Server), reportes en Excel (EPPlus) y comunicación con MES/IMES. Me interesan la calidad, la confiabilidad y la mejora continua.',
-      t8: 'Habilidades', t9:'Proyectos destacados', t10:'*Las imágenes y datos están anonimizados para proteger la confidencialidad.*',
-      t11:'Experiencia', t12:'Contacto', t13:'¿Te interesa colaborar? Escríbeme a ',
-    };
-    const en = {
-      t1: 'Marco Abad — Mechatronics Engineer',
-      t2: 'C#, ASP.NET, Arduino, ICT/functional testing, manufacturing automation, traceability and process optimization.',
-      t3: 'See projects',
-      t4: 'Download CV',
-      t5: 'Looking for code samples? ',
-      t6: 'About me', t7: 'Mechatronics engineer focused on production testing, C#/ASP.NET tools and Arduino systems. Experience with databases (SQLite/SQL Server), Excel reports (EPPlus) and MES/IMES integration. Passionate about quality, reliability and continuous improvement.',
-      t8: 'Skills', t9:'Featured projects', t10:'*Images and data are anonymized to protect confidentiality.*',
-      t11:'Experience', t12:'Contact', t13:'Interested in working together? Email me at ',
-    };
-    let lang = 'es';
-    const ids = ['t1','t2','t3','t4','t5','t6','t7','t8','t9','t10','t11','t12','t13'];
-    function applyLang(dict){ ids.forEach(id=>{ const el=document.getElementById(id); if(!el) return; if(id==='t5' || id==='t13'){ const parts = el.innerHTML.split('</a>'); el.innerHTML = dict[id] + parts[0].split('>')[0] + '>' + parts[0].split('>')[1] + '</a>'; } else { el.textContent = dict[id]; } }); }
-    function toggleLang(){ lang = (lang==='es')?'en':'es'; applyLang(lang==='es'?es:en); document.getElementById('lang').textContent = lang.toUpperCase(); }
-    document.getElementById('lang').addEventListener('click', toggleLang);
-    document.addEventListener('keydown', (e)=>{ if(e.key === '/') toggleLang(); });
-  </script>
+        <h3>Descargas</h3>
+        <ul>
+          <li><a href="#">Manual/diagrama PDF (opcional)</a></li>
+          <li><a href="#">Dataset/CV (opcional)</a></li>
+        </ul>
+      </aside>
+    </div>
+  </div>
 </body>
 </html>
