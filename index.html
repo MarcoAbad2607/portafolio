@@ -44,6 +44,7 @@
     .avatar{width:120px;height:120px;border-radius:50%;border:2px solid var(--line);background:#111;display:block}
     .mono{font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;}
     .kbd{border:1px solid var(--line);padding:2px 6px;border-radius:6px;background:var(--card)}
+    .card .actions{margin-top:10px;display:flex;gap:10px;flex-wrap:wrap}
   </style>
 </head>
 <body>
@@ -61,14 +62,14 @@
       <div>
         <span class="pill">🧭 Portafolio técnico</span>
         <h1 id="t1">Marco Abad — Ingeniero en Mecatrónica</h1>
-        <p id="t2">C#, ASP.NET, pruebas ICT/funcional, automatización de manufactura, trazabilidad y optimización de procesos.</p>
+        <p id="t2">C#, ASP.NET, Arduino, pruebas ICT/funcional, automatización de manufactura, trazabilidad y optimización de procesos.</p>
         <div style="margin-top:14px;display:flex;gap:10px;flex-wrap:wrap">
           <a class="btn" href="#proyectos" id="t3">Ver proyectos</a>
           <a class="btn" href="cv/Marco_Abad_CV.pdf" target="_blank" rel="noopener" id="t4">Descargar CV</a>
         </div>
       </div>
       <div>
-        <img class="avatar" alt="Foto o avatar" src="img/me.jpg" />
+        <img class="avatar" alt="Foto o avatar" src="https://avatars.githubusercontent.com/u/1?v=4" />
         <p class="muted" style="margin-top:10px" id="t5">¿Buscas ejemplos de código? <a href="https://github.com/" target="_blank" rel="noopener">GitHub</a></p>
       </div>
     </section>
@@ -76,7 +77,7 @@
     <section class="two" id="sobre">
       <div>
         <h2 id="t6">Sobre mí</h2>
-        <p id="t7">Ingeniero en Mecatrónica con enfoque en pruebas de producción, desarrollo de herramientas en C#/ASP.NET y sistemas de automatizacion. Experiencia integrando bases de datos (SQLite/SQL Server), reportes en Excel (EPPlus) y comunicación con MES/IMES. Me interesan la calidad, la confiabilidad y la mejora continua.</p>
+        <p id="t7">Ingeniero en Mecatrónica con enfoque en pruebas de producción, desarrollo de herramientas en C#/ASP.NET y sistemas con Arduino. Experiencia integrando bases de datos (SQLite/SQL Server), reportes en Excel (EPPlus) y comunicación con MES/IMES. Me interesan la calidad, la confiabilidad y la mejora continua.</p>
       </div>
       <div>
         <h2 id="t8">Habilidades</h2>
@@ -84,7 +85,8 @@
           <span class="tag">C#, .NET / ASP.NET</span>
           <span class="tag">EPPlus / Excel</span>
           <span class="tag">SQLite / SQL Server</span>
-          <span class="tag">ICT / Funcional </span>
+          <span class="tag">Arduino / 2N2222 / ACS712</span>
+          <span class="tag">ICT / Funcional / Burn-in / Hi-Pot</span>
           <span class="tag">Trazabilidad / NPI</span>
         </div>
       </div>
@@ -94,6 +96,7 @@
       <h2 id="t9">Proyectos destacados</h2>
       <p class="muted" id="t10">*Las imágenes y datos están anonimizados para proteger la confidencialidad.*</p>
       <div class="grid cards">
+        <!-- Proyecto 1 -->
         <article class="card">
           <img alt="Captura de app ASP.NET" src="https://picsum.photos/seed/aspnet/800/400" />
           <div class="body">
@@ -101,17 +104,23 @@
             <h3>Registro de Operadores (ASP.NET)</h3>
             <p class="muted">Control de entradas/salidas, pausas y reportes a SQL Server. Turnos automáticos y tablero en tiempo real.</p>
             <div class="row"><span class="tag">ASP.NET</span><span class="tag">SQLite</span><span class="tag">SQL Server</span></div>
+            <div class="actions"><a class="btn" href="proyectos/registro-operadores.html">Caso completo</a></div>
           </div>
         </article>
+
+        <!-- Proyecto 2 -->
         <article class="card">
           <img alt="Arduino y conveyor" src="https://picsum.photos/seed/arduino/800/400" />
           <div class="body">
             <div><span class="badge">Hardware</span></div>
             <h3>Interlock de Conveyor</h3>
-            <p class="muted">Validación de seriales y control de paso de piezas interfiriendo señal al conveyor.</p>
-            <div class="row"><span class="tag">Interlock</span><span class="tag">2N2222</span><span class="tag">Trazabilidad</span></div>
+            <p class="muted">Validación de seriales y control de paso de piezas interfiriendo señal al conveyor; protección con diodo y transistor 2N2222.</p>
+            <div class="row"><span class="tag">Arduino</span><span class="tag">2N2222</span><span class="tag">Trazabilidad</span></div>
+            <div class="actions"><a class="btn" href="proyectos/control-conveyor-wpf.html">Caso completo</a></div>
           </div>
         </article>
+
+        <!-- Proyecto 3 -->
         <article class="card">
           <img alt="Pruebas eléctricas" src="https://picsum.photos/seed/ict/800/400" />
           <div class="body">
@@ -119,6 +128,7 @@
             <h3>Pruebas de Fuente de Poder</h3>
             <p class="muted">ICT, Funcional Voltage Test. Mantenimiento/calibración, SPC y mejora continua para elevar FPY.</p>
             <div class="row"><span class="tag">ICT</span><span class="tag">Hi-Pot</span><span class="tag">SPC</span></div>
+            <div class="actions"><a class="btn" href="proyectos/pruebas-fuente-poder.html">Caso completo</a></div>
           </div>
         </article>
       </div>
@@ -135,7 +145,7 @@
 
     <section id="contacto">
       <h2 id="t12">Contacto</h2>
-      <p class="muted" id="t13">¿Te interesa colaborar? Escríbeme a <a href="mailto:tucorreo@ejemplo.com">marcomunizabad@yahoo.com</a> o vía <a href="https://www.linkedin.com/in/marco-antonio-mu%C3%B1iz-abad-37b94721a/" target="_blank" rel="noopener">LinkedIn</a>.</p>
+      <p class="muted" id="t13">¿Te interesa colaborar? Escríbeme a <a href="mailto:marcomunizabad@yahoo.com">marcomunizabad@yahoo.com</a> o vía <a href="https://www.linkedin.com/in/marco-antonio-mu%C3%B1iz-abad-37b94721a/" target="_blank" rel="noopener">LinkedIn</a>.</p>
     </section>
 
     <div class="bar"></div>
@@ -163,7 +173,7 @@
     };
     const en = {
       t1: 'Marco Abad — Mechatronics Engineer',
-      t2: 'C#, ASP.NET, ICT/functional testing, manufacturing automation, traceability and process optimization.',
+      t2: 'C#, ASP.NET, Arduino, ICT/functional testing, manufacturing automation, traceability and process optimization.',
       t3: 'See projects',
       t4: 'Download CV',
       t5: 'Looking for code samples? ',
