@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Marco Antonio Muñiz Abad — Portafolio</title>
   <meta name="description" content="Test & Automation Engineer: ICT/FCT, ASP.NET, WPF, SQL Server, MES/IMES, automatización y trazabilidad." />
-  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='0.9em' font-size='90'>⚙️</text></svg>">
+  <link rel="icon" href="img/favicon.ico"><text y='0.9em' font-size='90'>⚙️</text></svg>">
   <style>
     /* === Diseño base y paleta === */
     :root{
@@ -119,7 +119,7 @@
         </div>
       </div>
       <div>
-        <img class="avatar" alt="Avatar" src="https://picsum.photos/seed/avatar/300/300" />
+        <img class="avatar" alt="Avatar" src="img/avatar.jpg" />
       </div>
     </div>
   </div>
@@ -170,7 +170,7 @@
         <div class="grid cards" id="cards">
           <!-- Registro de Operadores -->
           <article class="card" data-tags="aspnet sql mes">
-            <img alt="ASP.NET y SQL Server" src="https://picsum.photos/seed/aspnet/800/400" />
+            <img alt="ASP.NET y SQL Server" src="img/registro-operadores.jpg" />
             <div class="body">
               <div><span class="badge">Software</span></div>
               <h3>Registro de Operadores (ASP.NET + SQL Server)</h3>
@@ -181,7 +181,7 @@
           </article>
           <!-- Control Conveyor WPF -->
           <article class="card" data-tags="wpf mes">
-            <img alt="WPF Conveyor" src="https://picsum.photos/seed/wpf/800/400" />
+            <img alt="WPF Conveyor" src="img/control-conveyor-wpf.jpg" />
             <div class="body">
               <div><span class="badge" style="background:var(--warn)">Desktop</span></div>
               <h3>Control de Conveyor — App WPF (C#)</h3>
@@ -192,7 +192,7 @@
           </article>
           <!-- Pruebas Fuente de Poder -->
           <article class="card" data-tags="testing spc">
-            <img alt="Pruebas eléctricas" src="https://picsum.photos/seed/ict/800/400" />
+            <img alt="Pruebas eléctricas" src="img/pruebas-fuente-poder.jpg" />
             <div class="body">
               <div><span class="badge" style="background:var(--ok)">Testing</span></div>
               <h3>Pruebas de Fuente de Poder</h3>
@@ -256,27 +256,43 @@
     // Año dinámico
     document.getElementById('year').textContent = new Date().getFullYear();
 
-    // Modo claro/oscuro (solo invierte fondos y acentos básicos)
+    // ===== Tema claro/oscuro =====
     const modeBtn = document.getElementById('mode');
-    let dark = true;
-    modeBtn.addEventListener('click', ()=>{
-      dark = !dark;
-      document.documentElement.style.setProperty('--bg', dark?'#0b1220':'#f8fafc');
-      document.documentElement.style.setProperty('--panel', dark?'#0f172a':'#ffffff');
-      document.documentElement.style.setProperty('--ink', dark?'#e6edf3':'#0b1220');
-      document.documentElement.style.setProperty('--muted', dark?'#98a2b3':'#475569');
-      document.documentElement.style.setProperty('--line', dark?'#22314c':'#cbd5e1');
-      modeBtn.textContent = dark?'☾':'☼';
-    });
+    function applyTheme(isDark){
+      document.documentElement.style.setProperty('--bg', isDark?'#0b1220':'#f8fafc');
+      document.documentElement.style.setProperty('--panel', isDark?'#0f172a':'#ffffff');
+      document.documentElement.style.setProperty('--ink', isDark?'#e6edf3':'#0b1220');
+      document.documentElement.style.setProperty('--muted', isDark?'#98a2b3':'#475569');
+      document.documentElement.style.setProperty('--line', isDark?'#22314c':'#cbd5e1');
+      document.documentElement.dataset.theme = isDark?'dark':'light';
+      if (modeBtn) modeBtn.textContent = isDark?'☾':'☼';
+    }
+    (function initTheme(){
+      const saved = localStorage.getItem('theme');
+      let isDark;
+      if (saved === 'dark') isDark = true; else if (saved === 'light') isDark = false; else {
+        const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+        const h = new Date().getHours();
+        const hourDark = (h >= 19 || h < 7);
+        isDark = prefersDark || hourDark;
+      }
+      applyTheme(isDark);
+    })();
+    if (modeBtn){
+      modeBtn.addEventListener('click', ()=>{
+        const nowDark = (document.documentElement.dataset.theme !== 'dark');
+        applyTheme(nowDark);
+        localStorage.setItem('theme', nowDark ? 'dark' : 'light');
+      });
+    }
 
-    // Búsqueda y filtros de proyectos
+    // ===== Búsqueda y filtros de proyectos =====
     const q = document.getElementById('q');
     const cards = Array.from(document.querySelectorAll('#cards .card'));
     const filterBtns = Array.from(document.querySelectorAll('.filters button'));
     let currentFilter = 'all';
-
     function applyFilters(){
-      const term = (q.value||'').toLowerCase();
+      const term = (q && q.value||'').toLowerCase();
       cards.forEach(card=>{
         const tags = (card.dataset.tags||'').toLowerCase();
         const text = card.innerText.toLowerCase();
@@ -285,7 +301,7 @@
         card.style.display = matchFilter && matchTerm ? '' : 'none';
       });
     }
-    q.addEventListener('input', applyFilters);
+    if (q) q.addEventListener('input', applyFilters);
     filterBtns.forEach(btn=>btn.addEventListener('click', ()=>{
       filterBtns.forEach(b=>b.classList.remove('active'));
       btn.classList.add('active');
@@ -293,22 +309,24 @@
       applyFilters();
     }));
 
-    // Botón subir
+    // ===== Botón subir =====
     const toTop = document.getElementById('toTop');
     window.addEventListener('scroll', ()=>{
-      toTop.style.display = window.scrollY>500 ? 'inline-flex' : 'none';
+      if (toTop) toTop.style.display = window.scrollY>500 ? 'inline-flex' : 'none';
     });
-    toTop.addEventListener('click', ()=>window.scrollTo({top:0,behavior:'smooth'}));
+    if (toTop) toTop.addEventListener('click', ()=>window.scrollTo({top:0,behavior:'smooth'}));
 
-    // Idioma ES/EN (mínimo)
+    // ===== Idioma ES/EN =====
     const langBtn = document.getElementById('lang');
     const dict = {
       es: {t1:'Marco Antonio Muñiz Abad',t2:'ICT/FCT, ASP.NET & WPF, SQL Server/SQLite, endpoints MES/IMES, automatización y trazabilidad. Enfoque en FPY, SPC y mejora continua.',t3:'Ver proyectos',t4:'Contactar',t5:'Habilidades principales',t6:'Proyectos destacados',t7:'Experiencia',t8:'Contacto'},
       en: {t1:'Marco Antonio Muñiz Abad',t2:'ICT/FCT, ASP.NET & WPF, SQL Server/SQLite, MES/IMES endpoints, automation and traceability. Focus on FPY, SPC and continuous improvement.',t3:'See projects',t4:'Contact',t5:'Core skills',t6:'Featured projects',t7:'Experience',t8:'Contact'}
     };
-    let lang = 'es';
     function applyLang(){ const d=dict[lang]; ['t1','t2','t3','t4','t5','t6','t7','t8'].forEach(id=>{ const el=document.getElementById(id); if(el) el.textContent=d[id]; }); }
-    langBtn.addEventListener('click', ()=>{ lang = (lang==='es')?'en':'es'; langBtn.textContent = lang.toUpperCase(); applyLang(); });
+    let lang = 'es';
+    if (langBtn){
+      langBtn.addEventListener('click', ()=>{ lang = (lang==='es')?'en':'es'; langBtn.textContent = lang.toUpperCase(); applyLang(); });
+    }
     applyLang();
   </script>
 </body>
