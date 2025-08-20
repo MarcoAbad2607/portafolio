@@ -86,6 +86,21 @@
 
     /* === Botón subir === */
     #toTop{position:fixed;right:16px;bottom:16px;display:none;align-items:center;gap:6px;padding:10px 12px;border-radius:999px;border:1px solid var(--line);background:rgba(15,23,42,.75);color:var(--ink)}
+
+    /* === Menú responsive (no superpuesto) === */
+    .burger{display:none;align-items:center;justify-content:center;width:40px;height:40px;border:1px solid var(--line);border-radius:10px;background:transparent;color:var(--ink);font-size:20px;cursor:pointer}
+    .mobile-menu{display:grid;gap:10px;background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:14px;position:static;margin-top:10px;box-shadow:0 20px 40px rgba(0,0,0,.25)}
+    .mobile-menu a{display:block;padding:10px 12px;border:1px solid var(--line);border-radius:10px;color:var(--ink);text-decoration:none}
+    .mobile-menu[hidden]{display:none !important}
+    @media (max-width: 860px){
+      .links{display:none}
+      .burger{display:inline-flex}
+    }
+    @media (min-width: 861px){
+      #mobileMenu{display:none !important}
+      .links{display:flex}
+      .burger{display:none}
+    }
   </style>
 </head>
 <body>
@@ -93,6 +108,7 @@
     <div class="wrap">
       <nav>
         <div class="brand"><span class="dot"></span> <span>Marco A. Muñiz — Portafolio</span></div>
+        <button id="menuToggle" class="burger" aria-label="Abrir menú" aria-expanded="false" aria-controls="mobileMenu">☰</button>
         <div class="links">
           <a href="#proyectos">Proyectos</a>
           <a href="#habilidades">Habilidades</a>
@@ -103,6 +119,14 @@
           <a class="btn" href="cv/Marco_Antonio_Muniz_Abad_CV.pdf" target="_blank" rel="noopener">Descargar CV</a>
         </div>
       </nav>
+      <!-- Menú móvil -->
+      <div id="mobileMenu" class="mobile-menu" hidden>
+        <a href="#proyectos">Proyectos</a>
+        <a href="#habilidades">Habilidades</a>
+        <a href="#experiencia">Experiencia</a>
+        <a href="#contacto">Contacto</a>
+        <a class="btn" href="cv/Marco_Antonio_Muniz_Abad_CV.pdf" target="_blank" rel="noopener">Descargar CV</a>
+      </div>
     </div>
   </header>
 
@@ -343,6 +367,29 @@
       langBtn.addEventListener('click', ()=>{ lang = (lang==='es')?'en':'es'; langBtn.textContent = lang.toUpperCase(); applyLang(); });
     }
     applyLang();
+
+    // ===== Menú móvil (toggle + autocerrar) =====
+    const menuBtn = document.getElementById('menuToggle');
+    const mobileMenu = document.getElementById('mobileMenu');
+    if (menuBtn && mobileMenu){
+      menuBtn.addEventListener('click', ()=>{
+        const isHidden = mobileMenu.hasAttribute('hidden');
+        if (isHidden) mobileMenu.removeAttribute('hidden'); else mobileMenu.setAttribute('hidden','');
+        menuBtn.setAttribute('aria-expanded', String(isHidden));
+      });
+      mobileMenu.querySelectorAll('a[href^="#"]').forEach(a=>{
+        a.addEventListener('click', ()=>{
+          mobileMenu.setAttribute('hidden','');
+          menuBtn.setAttribute('aria-expanded','false');
+        });
+      });
+      window.addEventListener('scroll', ()=>{
+        if (!mobileMenu.hasAttribute('hidden')){
+          mobileMenu.setAttribute('hidden','');
+          menuBtn.setAttribute('aria-expanded','false');
+        }
+      }, { passive:true });
+    }
   </script>
 </body>
 </html>
