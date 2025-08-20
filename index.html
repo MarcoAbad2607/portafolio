@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Marco Antonio Muñiz Abad — Portafolio</title>
   <meta name="description" content="Test & Automation Engineer: ICT/FCT, ASP.NET, WPF, SQL Server, MES/IMES, automatización y trazabilidad." />
-  <link rel="icon" href="img/favicon.ico"><text y='0.9em' font-size='90'>⚙️</text></svg>">
+  <link rel="icon" href="img/favicon.ico">
   <style>
     /* === Diseño base y paleta === */
     :root{
@@ -20,8 +20,8 @@
       --ok:#34d399;        /* verde */
     }
     *{box-sizing:border-box}
-    html,body{height:100%}
-    body{margin:0;font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,Arial,sans-serif;background:var(--bg);color:var(--ink)}
+    html{height:100%;scroll-behavior:smooth}
+    body{height:100%;margin:0;font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,Arial,sans-serif;background:var(--bg);color:var(--ink)}
     a{color:var(--acc);text-decoration:none}
     a:hover{text-decoration:underline}
     img{max-width:100%;display:block}
@@ -44,11 +44,11 @@
     .title{font-size:clamp(28px,4.5vw,48px);line-height:1.1;margin:0}
     .lead{color:var(--muted);margin:0}
     .cta{display:flex;gap:12px;flex-wrap:wrap;margin-top:10px}
-    .blob{position:absolute;inset:-20% auto auto -10%;width:60vw;height:60vw;filter:blur(80px);background:radial-gradient(circle at 30% 30%,rgba(34,211,238,.25),transparent 60%),radial-gradient(circle at 70% 60%,rgba(167,139,250,.22),transparent 60%)}
+    .blob{position:absolute;inset:-20% auto auto -10%;width:60vw;height:60vw;filter:blur(80px);background:radial-gradient(circle at 30% 30%,rgba(34,211,238,.25),transparent 60%),radial-gradient(circle at 70% 60%,rgba(167,139,250,.22),transparent 60%);pointer-events:none}
     .avatar{width:140px;height:140px;border-radius:50%;border:2px solid var(--line);background:#0b1220;margin-left:auto}
 
     /* === Secciones === */
-    section{padding:28px 0}
+    section{padding:28px 0;scroll-margin-top:80px}
     h2{font-size:22px;margin:0 0 12px}
     .muted{color:var(--muted)}
     .panel{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:16px}
@@ -149,7 +149,7 @@
           <div style="display:flex;justify-content:space-between;align-items:center"><strong>MES / IMES (REST)</strong><span class="muted">Intermedio-Avanzado</span></div>
           <div class="bar"><i style="width:82%"></i></div>
         </div>
-		<div class="panel">
+        <div class="panel">
           <div style="display:flex;justify-content:space-between;align-items:center"><strong>Java / Python / C# / C++</strong><span class="muted">Intermedio-Avanzado</span></div>
           <div class="bar"><i style="width:75%"></i></div>
         </div>
@@ -195,25 +195,25 @@
             </div>
           </article>
           <!-- Registro de falla ICT -->
-          <article class="card" data-tags="testing ICT">
+          <article class="card" data-tags="testing ict">
             <img alt="ICT Proyecto Ticket Fallas" src="img/ICT-proyecto1-main.png" />
             <div class="body">
               <div><span class="badge" style="background:var(--ok)">Testing</span></div>
               <h3>ICT Ticket Fallas</h3>
-              <p class="muted">ICT, Disminucion de tiempos de analisis con tickets de falla automaticos.</p>
-              <div class="row"><span class="tag">ICT</span><span class="tag">Programacion</span><span class="tag">ICT</span><span class="tag">Keysight</span></div>
+              <p class="muted">ICT, Disminucion de tiempos de analisis con tickets de falla automáticos.</p>
+              <div class="row"><span class="tag">ICT</span><span class="tag">Programación</span><span class="tag">Keysight</span></div>
               <div class="actions"><a class="btn" href="proyectos/proyecto-ICT-1.html">Caso completo</a></div>
             </div>
           </article>
-		  <!-- Validacion Goldens ICT -->
-          <article class="card" data-tags="testing ICT">
+          <!-- Validación Goldens ICT -->
+          <article class="card" data-tags="testing ict">
             <img alt="ICT Proyecto Piezas de Confianza" src="img/ICT-proyecto2-main.png" />
             <div class="body">
               <div><span class="badge" style="background:var(--ok)">Testing</span></div>
-              <h3>ICT Validacion de Estacion</h3>
-              <p class="muted">ICT, Validacion de estacion con piezas de confianza.</p>
-              <div class="row"><span class="tag">ICT</span><span class="tag">Programacion</span><span class="tag">ICT</span><span class="tag">Keysight</span></div>
-              <div class="actions"><a class="btn" href="proyectos/proyecto-ICT-1.html">Caso completo</a></div>
+              <h3>ICT Validación de Estación</h3>
+              <p class="muted">ICT, Validación de estación con piezas de confianza.</p>
+              <div class="row"><span class="tag">ICT</span><span class="tag">Programación</span><span class="tag">Keysight</span></div>
+              <div class="actions"><a class="btn" href="proyectos/proyecto-ICT-2.html">Caso completo</a></div>
             </div>
           </article>
         </div>
@@ -242,7 +242,7 @@
           <time>2022</time>
           <div class="bubble">
             <strong>Tramec Querétaro — Programador PLC, Variadores de Frecuencia, Servomotores</strong>
-            <p class="muted">Programacion PLC Delta; Variadores de Frecuencia; Pruebas eléctricas finales.</p>
+            <p class="muted">Programación PLC Delta; Variadores de Frecuencia; Pruebas eléctricas finales.</p>
           </div>
         </div>
       </div>
