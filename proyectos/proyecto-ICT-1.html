@@ -4,74 +4,222 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Título del Proyecto — Portafolio</title>
+  <meta name="description" content="Caso completo del proyecto: tecnologías, arquitectura, resultados y aprendizajes." />
   <link rel="icon" href="../img/favicon.ico">
-  <link rel="stylesheet" href="../css/estilos.css"> <!-- Reutiliza tu CSS principal -->
   <style>
-    .hero-proyecto{
-      padding:60px 20px;
-      text-align:center;
-      border-bottom:1px solid var(--line);
+    /* === Diseño base y paleta (idéntico al index) === */
+    :root{
+      --bg:#0b1220;        /* fondo modo oscuro */
+      --panel:#0f172a;     /* paneles */
+      --ink:#e6edf3;       /* texto */
+      --muted:#98a2b3;     /* texto secundario */
+      --line:#22314c;      /* bordes */
+      --acc:#22d3ee;       /* cian */
+      --acc-2:#a78bfa;     /* violeta */
+      --warn:#f59e0b;      /* ámbar */
+      --ok:#34d399;        /* verde */
     }
-    .hero-proyecto h1{font-size:clamp(28px,5vw,42px);margin-bottom:10px}
-    .hero-proyecto p{color:var(--muted);max-width:600px;margin:0 auto}
-    .contenido{max-width:900px;margin:30px auto;padding:0 20px;display:grid;gap:24px}
-    .contenido img{border-radius:12px;border:1px solid var(--line)}
-    .volver{margin:30px auto;text-align:center}
-    .volver a{padding:10px 14px;border-radius:10px;background:var(--acc);color:#05131e;font-weight:600}
+    *{box-sizing:border-box}
+    html{height:100%;scroll-behavior:smooth}
+    body{height:100%;margin:0;font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,Arial,sans-serif;background:var(--bg);color:var(--ink)}
+    a{color:var(--acc);text-decoration:none}
+    a:hover{text-decoration:underline}
+    img{max-width:100%;display:block}
+    .wrap{max-width:1200px;margin:0 auto;padding:0 20px}
+
+    /* === Header sticky con blur (MINIMAL) === */
+    header{position:sticky;top:0;z-index:50;background:rgba(11,18,32,.6);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+    nav{display:flex;align-items:center;justify-content:space-between;height:64px}
+    .brand{display:flex;align-items:center;gap:10px;font-weight:800;letter-spacing:.3px}
+    .brand .dot{width:10px;height:10px;border-radius:50%;background:linear-gradient(90deg,var(--acc),var(--acc-2))}
+    .btn{display:inline-flex;align-items:center;gap:8px;padding:10px 14px;border-radius:12px;background:var(--acc);color:#05131e;font-weight:700;border:none}
+    .btn.ghost{background:transparent;border:1px solid var(--line);color:var(--ink)}
+    .mode{background:transparent;border:1px solid var(--line);color:var(--ink);padding:6px 10px;border-radius:10px;margin-left:8px}
+
+    /* === Hero (igual que index) === */
+    .hero{position:relative;overflow:hidden}
+    .hero .inner{display:grid;gap:24px;grid-template-columns:1.1fr .9fr;align-items:center;padding:36px 0 12px}
+    .title{font-size:clamp(28px,4.5vw,48px);line-height:1.1;margin:0}
+    .lead{color:var(--muted);margin:0}
+    .cta{display:flex;gap:12px;flex-wrap:wrap;margin-top:10px}
+    .blob{position:absolute;inset:-20% auto auto -10%;width:60vw;height:60vw;filter:blur(80px);background:
+      radial-gradient(circle at 30% 30%,rgba(34,211,238,.25),transparent 60%),
+      radial-gradient(circle at 70% 60%,rgba(167,139,250,.22),transparent 60%);
+      pointer-events:none}
+    .avatar{width:140px;height:140px;border-radius:12px;border:2px solid var(--line);background:#0b1220;margin-left:auto;object-fit:cover}
+
+    /* === Secciones y componentes === */
+    section{padding:28px 0;scroll-margin-top:80px}
+    h2{font-size:22px;margin:0 0 12px}
+    .muted{color:var(--muted)}
+    .panel{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:16px}
+    .row{display:flex;flex-wrap:wrap;gap:8px}
+    .tag{font-size:12px;color:var(--muted);border:1px solid var(--line);padding:6px 8px;border-radius:8px}
+    .grid{display:grid;gap:16px}
+    .cards{grid-template-columns:repeat(auto-fit,minmax(280px,1fr))}
+    .card{background:var(--panel);border:1px solid var(--line);border-radius:16px;overflow:hidden}
+    .card img{width:100%;height:280px;object-fit:cover}
+
+    /* Breadcrumb */
+    .crumbs{display:flex;align-items:center;gap:8px;font-size:14px;color:var(--muted)}
+    .crumbs a{color:var(--muted)}
+    .crumbs .sep{opacity:.6}
+
+    /* Footer */
+    footer{padding:28px 0 48px;color:var(--muted);border-top:1px solid var(--line)}
+
+    /* Botón subir */
+    #toTop{position:fixed;right:16px;bottom:16px;display:none;align-items:center;gap:6px;padding:10px 12px;border-radius:999px;border:1px solid var(--line);background:rgba(15,23,42,.75);color:var(--ink)}
   </style>
 </head>
 <body>
+  <!-- Header (solo marca, volver y tema) -->
   <header>
     <div class="wrap">
       <nav>
-        <div class="brand"><span class="dot"></span> <a href="../index.html">Marco A. Muñiz — Portafolio</a></div>
+        <div class="brand"><span class="dot"></span> <span>Marco A. Muñiz — Proyecto</span></div>
+        <div style="display:flex;align-items:center;gap:8px">
+          <a class="btn ghost" href="../index.html#proyectos">← Volver</a>
+          <button id="mode" class="mode" aria-label="Tema">☼</button>
+        </div>
       </nav>
     </div>
   </header>
 
-  <!-- Hero proyecto -->
-  <section class="hero-proyecto">
-    <h1>Nombre del Proyecto</h1>
-    <p>Breve descripción del proyecto: tecnologías usadas, objetivo y contexto.</p>
-  </section>
-
-  <!-- Contenido -->
-  <main class="contenido">
-    <h2>Descripción</h2>
-    <p>
-      Aquí puedes detallar el propósito del proyecto, problema que resolviste, tu rol
-      y el impacto que tuvo.
-    </p>
-
-    <h2>Características principales</h2>
-    <ul>
-      <li>Funcionalidad 1</li>
-      <li>Funcionalidad 2</li>
-      <li>Funcionalidad 3</li>
-    </ul>
-
-    <h2>Imágenes</h2>
-    <img src="../img/ejemplo1.jpg" alt="Vista previa del proyecto 1">
-    <img src="../img/ejemplo2.jpg" alt="Vista previa del proyecto 2">
-
-    <h2>Tecnologías utilizadas</h2>
-    <div class="row">
-      <span class="tag">ASP.NET</span>
-      <span class="tag">SQL Server</span>
-      <span class="tag">WPF</span>
-      <span class="tag">C#</span>
+  <!-- Hero del proyecto -->
+  <div class="hero">
+    <div class="blob" aria-hidden="true"></div>
+    <div class="wrap inner">
+      <div>
+        <span class="chip" style="border-radius:999px;padding:6px 10px;border:1px solid var(--line);color:var(--muted);display:inline-block">Proyecto</span>
+        <h1 class="title">Título del Proyecto</h1>
+        <p class="lead">Breve resumen del objetivo, alcance y resultados del proyecto.</p>
+        <div class="cta">
+          <a class="btn" href="../index.html#proyectos">← Volver</a>
+          <!-- Cambia esta URL si tienes repo público -->
+          <a class="btn ghost" href="https://github.com/tuusuario/tu-repo" target="_blank" rel="noopener">Ver en GitHub</a>
+        </div>
+      </div>
+      <div>
+        <img class="avatar" alt="Imagen representativa del proyecto" src="../img/proyecto_demo.png" />
+      </div>
     </div>
-  </main>
-
-  <!-- Volver -->
-  <div class="volver">
-    <a href="../index.html#proyectos">← Volver al portafolio</a>
   </div>
 
+  <!-- Breadcrumb -->
+  <div class="wrap" style="margin-top:10px">
+    <nav class="crumbs" aria-label="breadcrumb">
+      <a href="../index.html">Inicio</a>
+      <span class="sep">›</span>
+      <a href="../index.html#proyectos">Proyectos</a>
+      <span class="sep">›</span>
+      <span aria-current="page">Título del Proyecto</span>
+    </nav>
+  </div>
+
+  <!-- Contenido principal del proyecto -->
+  <main class="wrap">
+    <!-- Resumen / KPIs -->
+    <section>
+      <h2>Resumen</h2>
+      <div class="panel">
+        <p>
+          Describe el problema, tu solución, restricciones y el impacto (ej. mejora de FPY, reducción de MTTR, integración con MES/IMES, etc.).
+        </p>
+        <div class="row" style="margin-top:8px">
+          <span class="tag">ASP.NET</span>
+          <span class="tag">WPF</span>
+          <span class="tag">SQL Server</span>
+          <span class="tag">REST</span>
+          <span class="tag">ICT/FCT</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Arquitectura / Diagrama -->
+    <section>
+      <h2>Arquitectura</h2>
+      <div class="grid cards">
+        <div class="card"><img src="../img/arquitectura_1.png" alt="Arquitectura general"></div>
+        <div class="card"><img src="../img/flujo_datos_1.png" alt="Flujo de datos"></div>
+      </div>
+    </section>
+
+    <!-- Galería / Evidencia -->
+    <section>
+      <h2>Galería</h2>
+      <div class="grid cards">
+        <div class="card"><img src="../img/captura_1.png" alt="Captura 1"></div>
+        <div class="card"><img src="../img/captura_2.png" alt="Captura 2"></div>
+        <div class="card"><img src="../img/captura_3.png" alt="Captura 3"></div>
+      </div>
+    </section>
+
+    <!-- Detalles técnicos -->
+    <section>
+      <h2>Detalles técnicos</h2>
+      <div class="panel">
+        <ul>
+          <li>Lenguajes/Frameworks: C#, ASP.NET, WPF (MVVM), SQL Server/SQLite.</li>
+          <li>Integraciones: Endpoints REST con MES/IMES, autenticación, trazabilidad.</li>
+          <li>Testing: ICT/FCT, SPC, validación de <em>fixtures</em>, golden units.</li>
+          <li>Observabilidad: logs, métricas (MTTR/MTBF), dashboard Andon.</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- Resultados -->
+    <section>
+      <h2>Resultados</h2>
+      <div class="panel">
+        <p>Ejemplos: +X% FPY, –Y% MTTR, –Z% scrap, ahorro de N horas/semana con automatizaciones.</p>
+      </div>
+    </section>
+  </main>
+
+  <!-- Botón subir -->
+  <div id="toTop">▲ Arriba</div>
+
+  <!-- Footer -->
   <footer>
-    <div class="wrap">
-      <p>© 2025 Marco Antonio Muñiz Abad</p>
-    </div>
+    <div class="wrap">© <span id="year"></span> Marco Antonio Muñiz Abad · Hecho con HTML/CSS/JS · Publicado en GitHub Pages</div>
   </footer>
+
+  <script>
+    // Año dinámico
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // ===== Tema: por defecto CLARO; respeta preferencia guardada =====
+    const modeBtn = document.getElementById('mode');
+    function applyTheme(isDark){
+      document.documentElement.style.setProperty('--bg', isDark?'#0b1220':'#f8fafc');
+      document.documentElement.style.setProperty('--panel', isDark?'#0f172a':'#ffffff');
+      document.documentElement.style.setProperty('--ink', isDark?'#e6edf3':'#0b1220');
+      document.documentElement.style.setProperty('--muted', isDark?'#98a2b3':'#475569');
+      document.documentElement.style.setProperty('--line', isDark?'#22314c':'#cbd5e1');
+      document.documentElement.dataset.theme = isDark?'dark':'light';
+      if (modeBtn) modeBtn.textContent = isDark?'☾':'☼';
+    }
+    (function initTheme(){
+      const saved = localStorage.getItem('theme');
+      // Por defecto: claro (false). Si hay preferencia guardada, respétala.
+      const isDark = saved ? (saved === 'dark') : false;
+      applyTheme(isDark);
+    })();
+    if (modeBtn){
+      modeBtn.addEventListener('click', ()=>{
+        const nowDark = (document.documentElement.dataset.theme !== 'dark');
+        applyTheme(nowDark);
+        localStorage.setItem('theme', nowDark ? 'dark' : 'light');
+      });
+    }
+
+    // ===== Botón subir =====
+    const toTop = document.getElementById('toTop');
+    window.addEventListener('scroll', ()=>{
+      if (toTop) toTop.style.display = window.scrollY>500 ? 'inline-flex' : 'none';
+    });
+    if (toTop) toTop.addEventListener('click', ()=>window.scrollTo({top:0,behavior:'smooth'}));
+  </script>
 </body>
 </html>
