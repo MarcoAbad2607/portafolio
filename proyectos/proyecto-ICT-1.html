@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>ICT Ticket Fallas — Caso completo</title>
   <meta name="description" content="Caso completo: ICT Ticket Fallas. Arquitectura, procedimiento, resultados y detalles técnicos." />
+  <meta name="theme-color" content="#f8fafc" id="themeColor">
   <link rel="icon" href="../img/favicon.ico">
   <style>
     /* =========== Paleta base (igual al index) =========== */
@@ -62,6 +63,22 @@
     .btn.ghost{background:transparent;border:1px solid var(--line);color:var(--ink)}
     .mode{background:transparent;border:1px solid var(--line);color:var(--ink);padding:6px 10px;border-radius:10px;margin-left:8px;cursor:pointer}
 
+    /* Chips reutilizables */
+    .chip{
+      display:inline-flex;align-items:center;gap:6px;
+      padding:6px 10px;border-radius:999px;border:1px solid var(--line);
+      background:var(--chip-bg);color:var(--chip-ink);font-size:12.5px
+    }
+
+    /* Accesible focus */
+    :where(a,button).btn:focus-visible,
+    :where(.mode,.copy,#toTop,a,button):focus-visible{
+      outline:2px solid var(--acc);outline-offset:2px
+    }
+
+    .btn.ghost:hover{background:rgba(0,0,0,.04)}
+    html[data-theme="dark"] .btn.ghost:hover{background:rgba(255,255,255,.04)}
+
     /* =========== Hero (igual al index) =========== */
     .hero{position:relative;overflow:hidden}
     .hero .inner{display:grid;gap:24px;grid-template-columns:1.1fr .9fr;align-items:center;padding:36px 0 12px}
@@ -101,55 +118,59 @@
     /* =========== Código + botón copiar =========== */
     pre{
       position:relative;margin:0;padding:14px;border:1px solid var(--line);
-      background:var(--code-bg);border-radius:12px;overflow:auto
+      background:var(--code-bg);border-radius:12px;overflow:auto; padding-top:38px;
     }
-    code{font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono","Courier New",monospace;color:var(--code-ink);font-size:13.5px}
+    code{font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono","Courier New",monospace;color:var(--code-ink);font-size:13.5px;white-space:pre}
     .copy{
-      position:absolute;right:10px;top:10px;padding:7px 10px;border-radius:8px;border:1px solid var(--line);
-      background:var(--btn-copy-bg);color:var(--btn-copy-ink);cursor:pointer;font-size:12px
+      position:absolute;right:8px;top:8px;padding:7px 10px;border-radius:8px;border:1px solid var(--line);
+      background:var(--btn-copy-bg);color:var(--btn-copy-ink);cursor:pointer;font-size:12px;box-shadow:0 1px 2px rgba(0,0,0,.25)
     }
     .copy:hover{opacity:.9}
+    .copy:active{transform:scale(.98)}
 
     /* =========== Procedimiento realizado (steps) =========== */
-    .steps{display:grid;grid-template-columns:1fr 1fr;gap:16px}
-    .step{
-      position:relative;background:var(--panel);border:1px solid var(--line);
-      border-radius:16px;padding:16px
-    }
-    .step::before{
-      content:attr(data-step);
-      position:absolute;left:16px;top:16px;width:28px;height:28px;border-radius:999px;
-      display:grid;place-items:center;font-weight:700;background:linear-gradient(90deg,var(--acc),var(--acc-2));color:#05131e
-    }
-    .step h3{margin:0 0 8px 44px}
-    .figure{margin-top:8px;border:1px solid var(--line);border-radius:10px;overflow:hidden}
-    .figure figcaption{padding:8px 10px;color:var(--muted);font-size:13px;border-top:1px solid var(--line);background:rgba(0,0,0,.03)}
-    html[data-theme="dark"] .figure figcaption{ background:rgba(255,255,255,.03); }
+    /* ===== Procedimiento: 1 columna, alineado y sin desbordes ===== */
+.steps{
+  display:grid;
+  grid-template-columns:1fr;   /* siempre una columna */
+  gap:16px;
+  width:100%;                  /* igual que .wrap */
+  margin:0;                    /* nada de centrado extra */
+  box-sizing:border-box;
+}
 
-    /* =========== Footer & toTop =========== */
-    footer{padding:28px 0 48px;color:var(--muted);border-top:1px solid var(--line)}
-    #toTop{position:fixed;right:16px;bottom:16px;display:none;align-items:center;gap:6px;padding:10px 12px;border-radius:999px;border:1px solid var(--line);background:rgba(15,23,42,.75);color:#fff}
+.step{
+  position:relative;
+  background:var(--panel);
+  border:1px solid var(--line);
+  border-radius:16px;
+  padding:16px;                /* mismo “aire” que .panel */
+  box-sizing:border-box;
+  overflow:hidden;             /* evita que algo sobresalga (badge/shadows) */
+}
 
-    /* =========== Responsivo: móviles =========== */
-    @media (max-width: 900px){
-      .hero .inner{ grid-template-columns: 1fr; padding:24px 0 8px; }
-      .avatar{ margin: 12px auto 0; }
-      .cards{ grid-template-columns: 1fr; }
-      .steps{ grid-template-columns: 1fr; gap:12px; }
-      .step{ padding:12px 12px 12px 44px; }           /* espacio para el badge */
-      .step::before{ top:12px; left:12px; width:26px; height:26px; }
-      .step h3{ margin:0 0 8px 0; padding-left:0; font-size:17px; }
-      .figure{ margin-top:8px; border-radius:8px; }
-      pre{ padding:10px; border-radius:8px; }
-      code{ font-size:12.5px; white-space:pre-wrap; word-break:break-word; }
-      .copy{ padding:6px 9px; font-size:12px; right:6px; top:6px; }
-      .crumbs{ gap:6px; }
-    }
-    @media (max-width: 380px){
-      .step{ padding-left:40px; }
-      .step::before{ width:24px; height:24px; font-size:13px; }
-      code{ font-size:12px; }
-    }
+/* Badge dentro del contenedor, sin empujar el bloque */
+.step::before{
+  content:attr(data-step);
+  position:absolute;
+  left:16px;                   /* dentro del padding */
+  top:16px;
+  width:28px; height:28px; border-radius:999px;
+  display:grid; place-items:center; font-weight:700;
+  background:linear-gradient(90deg,var(--acc),var(--acc-2));
+  color:#05131e;
+}
+
+/* Solo el título se corre un poco para no pisar el badge */
+.step h3{ margin:0 0 8px 44px; }
+
+/* ===== Responsivo ===== */
+@media (max-width: 900px){
+  .steps{ gap:12px; }
+  .step{ padding:12px; }
+  .step::before{ left:12px; top:12px; width:26px; height:26px; }
+  .step h3{ margin:0 0 8px 44px; }
+}
   </style>
 </head>
 <body>
@@ -171,7 +192,7 @@
     <div class="blob" aria-hidden="true"></div>
     <div class="wrap inner">
       <div>
-        <span class="chip" style="border-radius:999px;padding:6px 10px;border:1px solid var(--line);color:var(--muted);display:inline-block">Proyecto</span>
+        <span class="chip">Proyecto</span>
         <h1 class="title">ICT Ticket Fallas</h1>
         <p class="lead">ICT, disminución de tiempos de análisis con tickets de falla automáticos.</p>
         <div class="cta">
@@ -181,7 +202,7 @@
         </div>
       </div>
       <div>
-        <img class="avatar" alt="Imagen representativa del proyecto" src="../img/ICT-proyecto1-main.png" />
+        <img class="avatar" loading="lazy" decoding="async" alt="Imagen representativa del proyecto" src="../img/ICT-proyecto1-main.png" />
       </div>
     </div>
   </div>
@@ -204,7 +225,10 @@
       <h2>Resumen</h2>
       <div class="panel">
         <p>
-          Describe el problema, la solución, restricciones y el impacto (p. ej., mejora de FPY, reducción de MTTR, integración con MES/IMES, etc.).
+          Normalmente, los equipos ICT Keysight i3070 imprimen los tickets de falla en una impresora física integrada.
+          Sin embargo, este proceso genera gasto de consumibles, requiere mantenimiento y complica la trazabilidad digital.
+          El objetivo del proyecto fue reemplazar la impresión física por una <strong>generación virtual de tickets</strong>,
+          almacenando las fallas en archivos accesibles desde cualquier PC.
         </p>
         <div class="row" style="margin-top:8px">
           <span class="tag">ASP.NET</span>
@@ -219,9 +243,15 @@
     <!-- Arquitectura -->
     <section>
       <h2>Arquitectura</h2>
+      <ul>
+        <li><strong>Equipo base:</strong> ICT Keysight i3070</li>
+        <li><strong>Scripts Batch:</strong> automatizan la apertura y limpieza de archivos de falla.</li>
+        <li><strong>Carpeta central:</strong> <code>C:/infoict</code> donde se concentran logs y tickets.</li>
+        <li><strong>Ajustes en Testplan:</strong> modificados para copiar, abrir y limpiar el archivo de fallas.</li>
+      </ul>
       <div class="grid cards">
-        <div class="card"><img src="../img/arquitectura_1.png" alt="Arquitectura general"></div>
-        <div class="card"><img src="../img/flujo_datos_1.png" alt="Flujo de datos"></div>
+        <div class="card"><img loading="lazy" decoding="async" src="../img/arquitectura_1.png" alt="Arquitectura general"></div>
+        <div class="card"><img loading="lazy" decoding="async" src="../img/flujo_datos_1.png" alt="Flujo de datos"></div>
       </div>
     </section>
 
@@ -234,41 +264,174 @@
           <h3>Definición del flujo e identificación de puntos de falla</h3>
           <p class="muted">Revisión de logs, mapeo de testplan ICT y tiempos de diagnóstico. Se definieron categorías de falla y severidades.</p>
           <figure class="figure">
-            <img src="../img/proc_1.png" alt="Mapa de flujo / Ishikawa" />
+            <img loading="lazy" decoding="async" src="../img/proc_1.png" alt="Mapa de flujo / Ishikawa" />
             <figcaption>Mapa de flujo y categorías priorizadas.</figcaption>
           </figure>
         </article>
+
         <!-- Paso 2 -->
         <article class="step" data-step="2">
-          <h3>Diseño del ticket y payload al backend</h3>
-          <p class="muted">Normalización de campos: línea, fixture, testpoint, operador, timestamp, etc.</p>
-          <pre><button class="copy" data-copy>Copiar</button><code>{
-  "station":"ICT-01",
-  "fixture":"FX-245",
-  "serial":"SN123456",
-  "testpoint":"TP_39",
-  "error":"Open on U5",
-  "severity":"H",
-  "timestamp":"2025-01-30T10:33:22Z"
-}</code></pre>
+          <h3>Testplan: registrar log de falla en archivo central</h3>
+          <p class="muted">Se escribe/adjunta el log de falla en <code>C:/infoict/falla.txt</code>.</p>
+          <pre><button class="copy" data-copy>Copiar</button><code>!Archivo log general
+Fallaruta$= "C:/infoict/falla.txt"
+append "Fail.txt" to Fallaruta$, Err</code></pre>
         </article>
+
         <!-- Paso 3 -->
         <article class="step" data-step="3">
-          <h3>Servicio de ingesta y persistencia</h3>
-          <p class="muted">Endpoint REST (.NET) → validación → inserción en SQL Server con índices por fecha/estación.</p>
-          <pre><button class="copy" data-copy>Copiar</button><code>POST /api/tickets
-Content-Type: application/json
-
-{ ...payload... }</code></pre>
+          <h3>Testplan: abrir ticket virtual al detectar panel fallido</h3>
+          <p class="muted">Cierra instancia previa y abre el TXT para el análisis inmediato.</p>
+          <pre><button class="copy" data-copy>Copiar</button><code>if panelfailed then
+  if Verificar_Panel &lt;&gt; Number_Boards_On_Panel then
+    !Cerrar y después abrir archivo fail.txt
+    execute "C:/infoict/cerrarfalla.bat"
+    execute "C:/infoict/abrirtxt.bat " &amp; "C:/infoict/falla.txt"
+  end if
+end if</code></pre>
         </article>
+
         <!-- Paso 4 -->
         <article class="step" data-step="4">
-          <h3>Dashboard Andon y alertas</h3>
-          <p class="muted">Panel con MTTR/MTBF, severidades, filtro por estación; alertas por Teams/Email.</p>
-          <figure class="figure">
-            <img src="../img/proc_4.png" alt="Dashboard Andon" />
-            <figcaption>Andon con métricas y filtros.</figcaption>
-          </figure>
+          <h3>Testplan: limpiar archivo de falla al finalizar</h3>
+          <p class="muted">Deja el ticket listo para el siguiente ciclo.</p>
+          <pre><button class="copy" data-copy>Copiar</button><code>!------Borrar contenido de archivo de falla general
+Fallaruta$= "C:/infoict/falla.txt"
+output Fallaruta$; ""</code></pre>
+        </article>
+
+        <!-- Paso 5 -->
+        <article class="step" data-step="5">
+          <h3>Conteo de ciclos por fixture (Failed/Passed)</h3>
+          <p class="muted">Incrementa contadores por fixture en carpetas <code>Conteos/Failed</code> y <code>Conteos/Passed</code>.</p>
+          <pre><button class="copy" data-copy>Copiar</button><code>!---File LOG Generator------------------------------------------------
+for I = 1 to Number_Boards_On_Panel
+  if Mes_Eneable = 1 and Verificar_Panel = Number_Boards_On_Panel then
+    if Status(I) &lt;&gt; 0 and Status(I) &lt;&gt; 13 then
+      Fix_Id_Auto$ = val$(autofile)
+      Cont$ = "C:\\infoict\\Conteos\\Failed\\" &amp; Fix_Id_Auto$ &amp; ".txt"
+      enter Cont$; Dato$
+      Inc = val(Dato$)
+      Inc = Inc + 1
+      output Cont$; Inc
+    end if
+    if Status(I) = 0 and Status(I) &lt;&gt; 13 then
+      Fix_Id_Auto$ = val$(autofile)
+      Cont$ = "C:\\infoict\\Conteos\\Passed\\" &amp; Fix_Id_Auto$ &amp; ".txt"
+      enter Cont$; Dato$
+      Inc = val(Dato$)
+      Inc = Inc + 1
+      output Cont$; Inc
+    end if
+  end if
+next I</code></pre>
+        </article>
+
+        <!-- Paso 6 -->
+        <article class="step" data-step="6">
+          <h3>Generación de reportes por tarjeta y logging de FAIL/PASS</h3>
+          <p class="muted">Crea el nombre de archivo de reporte, imprime encabezado y persiste logs; rutas genéricas (sin datos de empresa).</p>
+          <pre><button class="copy" data-copy>Copiar</button><code>for I = 1 to Number_Boards_On_Panel
+  if BRD_TEST(I) = 1 then
+    board number is I
+
+    Report_File$ = Board$(I) &amp; "_" &amp; System$ &amp; "_20" &amp; Dateandtime$[1;6] &amp; "log.txt"
+
+    if Status(I) &lt;&gt; 0 and Status(I) &lt;&gt; 13 then
+      if boardfailed then
+        report is Serial$(I)
+        report "========================================"
+        report "        Customer:  [REDACTED]"
+        report "Test Result: FAILED ICT"
+        report "Assy #: " &amp; Board$(I) &amp; " Rev. " &amp; Board_Rev$(I)
+        report Serial_Nr$ &amp; Serial$(I)
+        report "Tested " &amp; time$
+        report "System tested on: " ; System$
+        report "Employee ID: " ; Oper$
+        report "Test Time:" ; Test_Time ; " seconds"
+        report "========================================"
+        report out
+        report clear
+        report is Report_File$
+        report "Assy #: " &amp; Board$(I) &amp; " Rev. " &amp; Board_Rev$(I) &amp; "|Serial #: " &amp; Serial$(I) &amp; "|Test Result: FAILED ICT|Tested " &amp; time$ &amp; "|Employee ID: " &amp; Oper$ &amp; "| Test Time: " ; Test_Time ; " seconds"
+        report out
+        report is "test_result"
+
+        copy Serial$(I) over "Fail.txt"
+        ! Archivo log general
+        Fallaruta$ = "C:/infoict/falla.txt"
+        append "Fail.txt" to Fallaruta$, Err
+
+        Year$ = datetime$[1;2]
+        Month$ = datetime$[3;2]
+        Serial2$ = Serial$(I)[1;13] &amp; "#" &amp; Serial$(I)[15;15]
+        Assy$ = Serial$(I)[2;12]
+        Model$ = Assy$
+        Path_Log_Fail$ = "C:\\ICT_Log\\" &amp; Model$ &amp; "\\Log_Fail\" &amp; Year$ &amp; "_" &amp; Month$ &amp; "\\"
+        Path_Log_Fail_Server$ = "\\\\SERVIDOR\\RutaCompartida\\ICT_Log\\" &amp; Model$ &amp; "\\Log_Fail\" &amp; Year$ &amp; "_" &amp; Month$ &amp; "\\"
+
+        copy "Fail.txt" over Path_Log_Fail$ &amp; Serial2$ &amp; "_" &amp; Dateandtime$ &amp; "_" &amp; System$ &amp; "_Fail.txt"
+        copy "Fail.txt" over Path_Log_Fail_Server$ &amp; Serial2$ &amp; "_" &amp; Dateandtime$ &amp; "_" &amp; System$ &amp; "_Fail.txt"
+        unlink "Fail.txt"
+      else
+        report is Serial$(I)
+        report "========================================"
+        report "        Customer:  [REDACTED]"
+        report "Test Result: PASSED ICT"
+        report "Assy #: " &amp; Board$(I) &amp; " Rev. " &amp; Board_Rev$(I)
+        report Serial_Nr$ &amp; Serial$(I)
+        report "Tested " &amp; time$
+        report "System tested on: " ; System$
+        report "Employee ID: " ; Oper$
+        report "Test Time:" ; Test_Time ; " seconds"
+        report "========================================"
+        report ""
+        report using "40(""-"")"
+        report "[REDACTED]"
+        report "Board #" ; I ; ":  " ; Board$(I)
+        report "Board Revision% " &amp; Board_Rev$(I)
+        if Serializing then report Serial_Nr$ &amp; Serial$(I)
+        report using "40(""-"")"
+        report "                                        "
+        report "      ############################"
+        report "      ###  P A S S E D  I C T  ###"
+        report "      ############################"
+        report "                                        "
+        report using "40(""-"")"
+        report out
+        report clear
+        report is Report_File$
+        report "Assy #: " &amp; Board$(I) &amp; " Rev. " &amp; Board_Rev$(I) &amp; "|Serial #: " &amp; Serial$(I) &amp; "|Test Result: PASSED ICT|Tested " &amp; time$ &amp; "|Employee ID: " &amp; Oper$ &amp; "| Test Time: " ; Test_Time ; " seconds"
+        report out
+        report is "test_result"
+      end if
+
+      execute "trecord.sh " &amp; Report_File$ &amp; " " &amp; Serial$(I)
+      copy Serial$(I) over "/dev/tty"
+      if boardfailed then
+        copy Serial$(I) over btgetenv$("RPR" &amp; th$)
+      end if
+      unlink Serial$(I)
+    end if
+  end if
+next I
+
+SKIP_REPORT:
+! ---File LOG Generator------------------------------------------------</code></pre>
+          <p class="muted"><strong>Notas de anonimización:</strong> se removieron nombres de cliente, IPs y rutas internas. Sustituye <code>[REDACTED]</code>, <code>\\SERVIDOR\\RutaCompartida</code> y directorios por los de tu entorno.</p>
+        </article>
+
+        <!-- Paso 7 -->
+        <article class="step" data-step="7">
+          <h3>Script batch: abrir ticket local</h3>
+          <p class="muted">Abre el archivo que recibe como argumento (asociado al editor por defecto).</p>
+          <pre><button class="copy" data-copy>Copiar</button><code>@echo off
+set "archivo=%~1"
+if not exist "%archivo%" (
+  echo El archivo no existe: "%archivo%"
+  exit /b 1
+)
+start "" "%archivo%"</code></pre>
         </article>
       </div>
     </section>
@@ -277,9 +440,9 @@ Content-Type: application/json
     <section>
       <h2>Galería</h2>
       <div class="grid cards">
-        <div class="card"><img src="../img/captura_1.png" alt="Captura 1"></div>
-        <div class="card"><img src="../img/captura_2.png" alt="Captura 2"></div>
-        <div class="card"><img src="../img/captura_3.png" alt="Captura 3"></div>
+        <div class="card"><img loading="lazy" decoding="async" src="../img/captura_1.png" alt="Captura 1"></div>
+        <div class="card"><img loading="lazy" decoding="async" src="../img/captura_2.png" alt="Captura 2"></div>
+        <div class="card"><img loading="lazy" decoding="async" src="../img/captura_3.png" alt="Captura 3"></div>
       </div>
     </section>
 
@@ -300,7 +463,12 @@ Content-Type: application/json
     <section>
       <h2>Resultados</h2>
       <div class="panel">
-        <p>Ejemplos: +X% FPY, –Y% MTTR, –Z% scrap, ahorro de N horas/semana con automatizaciones.</p>
+        <ul>
+          <li>–100% consumo de papel/insumos de impresión.</li>
+          <li>–10–20 min/día en atención de issues de impresora.</li>
+          <li>+Accesibilidad: tickets consultables en red para auditoría y FA.</li>
+          <li>+Velocidad de diagnóstico (dependiente de línea/equipo).</li>
+        </ul>
       </div>
     </section>
   </main>
@@ -319,9 +487,11 @@ Content-Type: application/json
 
     // ===== Tema: claro por defecto; respeta preferencia guardada =====
     const modeBtn = document.getElementById('mode');
+    const themeMeta = document.getElementById('themeColor');
     function applyTheme(isDark){
       document.documentElement.dataset.theme = isDark ? 'dark' : 'light';
       if (modeBtn) modeBtn.textContent = isDark ? '🌙' : '☀️';
+      if (themeMeta) themeMeta.setAttribute('content', isDark ? '#0b1220' : '#f8fafc');
     }
     (function initTheme(){
       const saved = localStorage.getItem('theme');
