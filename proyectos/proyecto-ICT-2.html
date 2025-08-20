@@ -3,12 +3,12 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>ICT Proyecto Piezas de Confianza — Caso completo</title>
-  <meta name="description" content="Caso completo: ICT Ticket Fallas. Arquitectura, procedimiento, resultados y detalles técnicos." />
+  <title>ICT Proyecto Piezas de Confianza — Golden & Red</title>
+  <meta name="description" content="Caso completo: validación automática con Golden & Red al inicio de cada turno en ICT Keysight i3070." />
   <meta name="theme-color" content="#f8fafc" id="themeColor">
   <link rel="icon" href="../img/favicon.ico">
   <style>
-    /* =========== Paleta base (igual al index) =========== */
+    /* =========== Paleta base =========== */
     :root{
       --bg:#f8fafc;           /* claro por defecto */
       --panel:#ffffff;
@@ -33,7 +33,7 @@
       --ink:#e6edf3;
       --muted:#98a2b3;
       --line:#22314c;
-      --btn-copy-bg:#1f2937;  /* fondo botón copiar en oscuro */
+      --btn-copy-bg:#1f2937;
       --btn-copy-ink:#e5e7eb;
       --code-bg:#0a0f1a;
       --code-ink:#e6edf3;
@@ -79,7 +79,7 @@
     .btn.ghost:hover{background:rgba(0,0,0,.04)}
     html[data-theme="dark"] .btn.ghost:hover{background:rgba(255,255,255,.04)}
 
-    /* =========== Hero (igual al index) =========== */
+    /* =========== Hero =========== */
     .hero{position:relative;overflow:hidden}
     .hero .inner{display:grid;gap:24px;grid-template-columns:1.1fr .9fr;align-items:center;padding:36px 0 12px}
     .title{font-size:clamp(28px,4.5vw,48px);line-height:1.1;margin:0}
@@ -118,7 +118,7 @@
     /* =========== Código + botón copiar =========== */
     pre{
       position:relative;margin:0;padding:14px;border:1px solid var(--line);
-      background:var(--code-bg);border-radius:12px;overflow:auto; padding-top:38px;
+      background:var(--code-bg);border-radius:12px;overflow:auto;padding-top:38px
     }
     code{font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono","Courier New",monospace;color:var(--code-ink);font-size:13.5px;white-space:pre}
     .copy{
@@ -128,49 +128,59 @@
     .copy:hover{opacity:.9}
     .copy:active{transform:scale(.98)}
 
-    /* =========== Procedimiento realizado (steps) =========== */
-    /* ===== Procedimiento: 1 columna, alineado y sin desbordes ===== */
-.steps{
-  display:grid;
-  grid-template-columns:1fr;   /* siempre una columna */
-  gap:16px;
-  width:100%;                  /* igual que .wrap */
-  margin:0;                    /* nada de centrado extra */
-  box-sizing:border-box;
-}
+    /* =========== Procedimiento: 1 columna y alineado =========== */
+    .steps{
+      display:grid;
+      grid-template-columns:1fr;
+      gap:16px;
+      width:100%;
+      margin:0;
+      box-sizing:border-box;
+    }
+    .step{
+      position:relative;
+      background:var(--panel);
+      border:1px solid var(--line);
+      border-radius:16px;
+      padding:16px;
+      box-sizing:border-box;
+      overflow:hidden;
+    }
+    .step::before{
+      content:attr(data-step);
+      position:absolute;left:16px;top:16px;width:28px;height:28px;border-radius:999px;
+      display:grid;place-items:center;font-weight:700;
+      background:linear-gradient(90deg,var(--acc),var(--acc-2));color:#05131e
+    }
+    .step h3{margin:0 0 8px 44px}
+    .figure{margin-top:8px;border:1px solid var(--line);border-radius:10px;overflow:hidden}
+    .figure figcaption{padding:8px 10px;color:var(--muted);font-size:13px;border-top:1px solid var(--line);background:rgba(0,0,0,.03)}
+    html[data-theme="dark"] .figure figcaption{ background:rgba(255,255,255,.03); }
 
-.step{
-  position:relative;
-  background:var(--panel);
-  border:1px solid var(--line);
-  border-radius:16px;
-  padding:16px;                /* mismo “aire” que .panel */
-  box-sizing:border-box;
-  overflow:hidden;             /* evita que algo sobresalga (badge/shadows) */
-}
+    /* =========== Footer & toTop =========== */
+    footer{padding:28px 0 48px;color:var(--muted);border-top:1px solid var(--line)}
+    #toTop{position:fixed;right:16px;bottom:16px;display:none;align-items:center;gap:6px;padding:10px 12px;border-radius:999px;border:1px solid var(--line);background:rgba(15,23,42,.75);color:#fff}
 
-/* Badge dentro del contenedor, sin empujar el bloque */
-.step::before{
-  content:attr(data-step);
-  position:absolute;
-  left:16px;                   /* dentro del padding */
-  top:16px;
-  width:28px; height:28px; border-radius:999px;
-  display:grid; place-items:center; font-weight:700;
-  background:linear-gradient(90deg,var(--acc),var(--acc-2));
-  color:#05131e;
-}
-
-/* Solo el título se corre un poco para no pisar el badge */
-.step h3{ margin:0 0 8px 44px; }
-
-/* ===== Responsivo ===== */
-@media (max-width: 900px){
-  .steps{ gap:12px; }
-  .step{ padding:12px; }
-  .step::before{ left:12px; top:12px; width:26px; height:26px; }
-  .step h3{ margin:0 0 8px 44px; }
-}
+    /* =========== Responsivo =========== */
+    @media (max-width: 900px){
+      .hero .inner{ grid-template-columns: 1fr; padding:24px 0 8px; }
+      .avatar{ margin: 12px auto 0; }
+      .cards{ grid-template-columns: 1fr; }
+      .steps{ gap:12px; }
+      .step{ padding:12px; }
+      .step::before{ top:12px; left:12px; width:26px; height:26px; }
+      .step h3{ margin:0 0 8px 44px; }
+      .figure{ margin-top:8px; border-radius:8px; }
+      pre{ padding:10px; border-radius:8px; }
+      code{ font-size:12.5px; white-space:pre-wrap; word-break:break-word; }
+      .copy{ padding:6px 9px; font-size:12px; right:6px; top:6px; }
+      .crumbs{ gap:6px; }
+    }
+    @media (max-width: 380px){
+      .step{ padding-left:12px; }
+      .step::before{ width:24px; height:24px; font-size:13px; }
+      code{ font-size:12px; }
+    }
   </style>
 </head>
 <body>
@@ -193,16 +203,15 @@
     <div class="wrap inner">
       <div>
         <span class="chip">Proyecto</span>
-        <h1 class="title">ICT Ticket Fallas</h1>
-        <p class="lead">ICT, disminución de tiempos de análisis con tickets de falla automáticos.</p>
+        <h1 class="title">ICT Piezas de Confianza — Golden & Pieza Red</h1>
+        <p class="lead">Validación automática al inicio de cada turno para asegurar que el ICT opera correctamente.</p>
         <div class="cta">
           <a class="btn" href="../index.html#proyectos">← Volver</a>
-          <!-- Cambia esta URL si tienes repo público -->
           <a class="btn ghost" href="https://github.com/tuusuario/tu-repo" target="_blank" rel="noopener">Ver en GitHub</a>
         </div>
       </div>
       <div>
-        <img class="avatar" loading="lazy" decoding="async" alt="Imagen representativa del proyecto" src="../img/ICT-proyecto1-main.png" />
+        <img class="avatar" loading="lazy" decoding="async" alt="Imagen representativa del proyecto 2" src="../img/ICT-proyecto2-main.png" />
       </div>
     </div>
   </div>
@@ -214,7 +223,7 @@
       <span class="sep">›</span>
       <a href="../index.html#proyectos">Proyectos</a>
       <span class="sep">›</span>
-      <span aria-current="page">ICT Ticket Fallas</span>
+      <span aria-current="page">ICT Piezas de Confianza</span>
     </nav>
   </div>
 
@@ -225,17 +234,16 @@
       <h2>Resumen</h2>
       <div class="panel">
         <p>
-          Normalmente, los equipos ICT Keysight i3070 imprimen los tickets de falla en una impresora física integrada.
-          Sin embargo, este proceso genera gasto de consumibles, requiere mantenimiento y complica la trazabilidad digital.
-          El objetivo del proyecto fue reemplazar la impresión física por una <strong>generación virtual de tickets</strong>,
-          almacenando las fallas en archivos accesibles desde cualquier PC.
+          Antes, el proceso ICT no validaba automáticamente con <strong>Golden</strong> ni <strong>Red</strong> al inicio de turno.
+          Se implementó una función en el <em>testplan</em> para exigir estas liberaciones por <strong>fixture</strong> y turno,
+          bloqueando la serialización hasta completar ambas validaciones.
         </p>
         <div class="row" style="margin-top:8px">
-          <span class="tag">ASP.NET</span>
-          <span class="tag">WPF</span>
-          <span class="tag">SQL Server</span>
-          <span class="tag">REST</span>
-          <span class="tag">ICT/FCT</span>
+          <span class="tag">ICT Keysight i3070</span>
+          <span class="tag">Golden Unit</span>
+          <span class="tag">Red</span>
+          <span class="tag">Testplan</span>
+          <span class="tag">Automatización</span>
         </div>
       </div>
     </section>
@@ -244,14 +252,14 @@
     <section>
       <h2>Arquitectura</h2>
       <ul>
-        <li><strong>Equipo base:</strong> ICT Keysight i3070</li>
-        <li><strong>Scripts Batch:</strong> automatizan la apertura y limpieza de archivos de falla.</li>
-        <li><strong>Carpeta central:</strong> <code>C:/infoict</code> donde se concentran logs y tickets.</li>
-        <li><strong>Ajustes en Testplan:</strong> modificados para copiar, abrir y limpiar el archivo de fallas.</li>
+        <li><strong>Equipo base:</strong> ICT Keysight i3070.</li>
+        <li><strong>Rutas por fixture:</strong> <code>C:\infoict\Golden\{fixture}.txt</code> y <code>C:\infoict\RedRabbit\{fixture}.txt</code>.</li>
+        <li><strong>Marcadores de estado:</strong> cada archivo contiene <code>OK</code> para liberar el turno.</li>
+        <li><strong>Bloqueo de serialización:</strong> se desactiva hasta que Golden y Red pasen.</li>
       </ul>
       <div class="grid cards">
-        <div class="card"><img loading="lazy" decoding="async" src="../img/ICT-proyecto1-arquitectura.png" alt="Arquitectura general"></div>
-        <div class="card"><img loading="lazy" decoding="async" src="../img/ICT-proyecto1-diagramadeflujo.png" alt="Flujo de datos"></div>
+        <div class="card"><img loading="lazy" decoding="async" src="../img/ICT-proyecto2-arquitectura.png" alt="Arquitectura general Proyecto 2"></div>
+        <div class="card"><img loading="lazy" decoding="async" src="../img/ICT-proyecto2-flujo.png" alt="Flujo de validación"></div>
       </div>
     </section>
 
@@ -262,176 +270,278 @@
         <!-- Paso 1 -->
         <article class="step" data-step="1">
           <h3>Definición del flujo e identificación de puntos de falla</h3>
-          <p class="muted">Revisión de logs, mapeo de testplan ICT y tiempos de diagnóstico. Se definieron categorías de falla y severidades.</p>
+          <p class="muted">Revisión de logs, mapeo del testplan ICT y tiempos de diagnóstico. Se definieron categorías y severidades.</p>
           <figure class="figure">
-            <img loading="lazy" decoding="async" src="../img/ICT-proyecto1-diagramadeflujo.png" alt="Mapa de flujo / Ishikawa" />
+            <img loading="lazy" decoding="async" src="../img/ICT-proyecto2-ishikawa.png" alt="Mapa de flujo / Ishikawa" />
             <figcaption>Mapa de flujo y categorías priorizadas.</figcaption>
           </figure>
         </article>
 
         <!-- Paso 2 -->
         <article class="step" data-step="2">
-          <h3>Testplan: registrar log de falla en archivo central</h3>
-          <p class="muted">Se escribe/adjunta el log de falla en <code>C:/infoict/falla.txt</code>.</p>
-          <pre><button class="copy" data-copy>Copiar</button><code>!Archivo log general
-Fallaruta$= "C:/infoict/falla.txt"
-append "Fail.txt" to Fallaruta$, Err</code></pre>
+          <h3>Parámetros y variables globales</h3>
+          <p class="muted">Se declaran globales y seriales de referencia para Golden y Red.</p>
+          <pre><button class="copy" data-copy>Copiar</button><code>sub Golden (Pedir_Golden, Checar_Serial, Validacion_Golden)
+global Imprimir_Golden, Panel_Serial$, Fix_Id_Auto$, Validacion, Serializing
+Validacion = 0
+Serial_Golden$ = "P1811198-01-C:SC7R24227S22501"
+Serial_Red_Rabbit$ = "P1811198-01-C:SC7R24093S45401"</code></pre>
         </article>
 
         <!-- Paso 3 -->
         <article class="step" data-step="3">
-          <h3>Testplan: abrir ticket virtual al detectar panel fallido</h3>
-          <p class="muted">Cierra instancia previa y abre el TXT para el análisis inmediato.</p>
-          <pre><button class="copy" data-copy>Copiar</button><code>if panelfailed then
-  if Verificar_Panel &lt;&gt; Number_Boards_On_Panel then
-    !Cerrar y después abrir archivo fail.txt
-    execute "C:/infoict/cerrarfalla.bat"
-    execute "C:/infoict/abrirtxt.bat " &amp; "C:/infoict/falla.txt"
+          <h3>Solicitud de liberación por turno (Pedir_Golden)</h3>
+          <p class="muted">Si los archivos del fixture no contienen <code>OK</code>, se bloquea serialización y se pide correr Golden/Red.</p>
+          <pre><button class="copy" data-copy>Copiar</button><code>if Pedir_Golden then
+  Fixt$ = "C:\\infoict\\Golden\\" &amp; Fix_Id_Auto$ &amp; ".txt"
+  enter Fixt$; Liberacion$
+  if Liberacion$ &lt;&gt; "OK" then
+    Serializing = 0
+    print using "@"
+    L$ = chr$(27) &amp; "&amp;v3S"
+    print tab(8); L$ &amp; "*********CAMBIO DE TURNO O FIXTURE**********"
+    print tab(8); L$ &amp; "**********LIBERE CON PIEZA GOLDEN***********"
+  end if
+
+  Fixt$ = "C:\\infoict\\RedRabbit\\" &amp; Fix_Id_Auto$ &amp; ".txt"
+  enter Fixt$; Dato$
+  if Dato$ &lt;&gt; "OK" and Liberacion$ = "OK" then
+    Serializing = 0
+    L$ = chr$(27) &amp; "&amp;v3S"
+    print using "@"
+    print tab(8); L$ &amp; "********LIBERE CON PIEZA Red**********"
   end if
 end if</code></pre>
         </article>
 
         <!-- Paso 4 -->
         <article class="step" data-step="4">
-          <h3>Testplan: limpiar archivo de falla al finalizar</h3>
-          <p class="muted">Deja el ticket listo para el siguiente ciclo.</p>
-          <pre><button class="copy" data-copy>Copiar</button><code>!------Borrar contenido de archivo de falla general
-Fallaruta$= "C:/infoict/falla.txt"
-output Fallaruta$; ""</code></pre>
+          <h3>Verificación de serial en línea (Checar_Serial)</h3>
+          <p class="muted">Si el archivo no es <code>OK</code>, se exige que la pieza en estación coincida con el serial Golden/Red.</p>
+          <pre><button class="copy" data-copy>Copiar</button><code>if Checar_Serial then
+  !---Liberacion Golden &amp; RedRabbit Boards-----------OOB
+
+  Fixt$ = "C:\\infoict\\Golden\\" &amp; Fix_Id_Auto$ &amp; ".txt"
+  enter Fixt$; Liberacion$
+  if Liberacion$ &lt;&gt; "OK" then
+    if Panel_Serial$ = Serial_Golden$ then
+      print using "@": L$ = chr$(27) &amp; "&amp;v2S"
+      print tab(8); L$ &amp; "PIEZA GOLDEN ENCONTRADA, ESPERE A QUE TERMINE LA PRUEBA"
+      wait 3
+    else
+      print using "@": L$ = chr$(27) &amp; "&amp;v1S"
+      print tab(8); L$ &amp; "LIBERACION RECHAZADA: NO ES LA GOLDEN"
+      print tab(8); L$ &amp; "******LIBERE CON PIEZA GOLDEN*********"
+      wait 3
+      Validacion = 1
+    end if
+  end if
+
+  Fixt$ = "C:\\infoict\\RedRabbit\\" &amp; Fix_Id_Auto$ &amp; ".txt"
+  enter Fixt$; Dato$
+  if Dato$ &lt;&gt; "OK" and Liberacion$ = "OK" then
+    if Panel_Serial$ = Serial_Red_Rabbit$ then
+      print using "@": L$ = chr$(27) &amp; "&amp;v2S"
+      print tab(8); L$ &amp; "PIEZA RED ENCONTRADA, ESPERE A QUE TERMINE LA PRUEBA"
+      wait 5
+    else
+      print using "@": L$ = chr$(27) &amp; "&amp;v1S"
+      print tab(8); L$ &amp; "LIBERACION RECHAZADA: NO ES LA PIEZA RED "
+      print tab(8); L$ &amp; "*******LIBERE CON PIEZA RED ********"
+      Validacion = 1
+    end if
+  end if
+
+  !---Liberacion Golden &amp; RedRabbit Boards-----------OOB
+end if</code></pre>
         </article>
 
         <!-- Paso 5 -->
         <article class="step" data-step="5">
-          <h3>Conteo de ciclos por fixture (Failed/Passed)</h3>
-          <p class="muted">Incrementa contadores por fixture en carpetas <code>Conteos/Failed</code> y <code>Conteos/Passed</code>.</p>
-          <pre><button class="copy" data-copy>Copiar</button><code>!---File LOG Generator------------------------------------------------
-for I = 1 to Number_Boards_On_Panel
-  if Mes_Eneable = 1 and Verificar_Panel = Number_Boards_On_Panel then
-    if Status(I) &lt;&gt; 0 and Status(I) &lt;&gt; 13 then
-      Fix_Id_Auto$ = val$(autofile)
-      Cont$ = "C:\\infoict\\Conteos\\Failed\\" &amp; Fix_Id_Auto$ &amp; ".txt"
-      enter Cont$; Dato$
-      Inc = val(Dato$)
-      Inc = Inc + 1
-      output Cont$; Inc
-    end if
-    if Status(I) = 0 and Status(I) &lt;&gt; 13 then
-      Fix_Id_Auto$ = val$(autofile)
-      Cont$ = "C:\\infoict\\Conteos\\Passed\\" &amp; Fix_Id_Auto$ &amp; ".txt"
-      enter Cont$; Dato$
-      Inc = val(Dato$)
-      Inc = Inc + 1
-      output Cont$; Inc
+          <h3>Validación y marcado de estado (Validacion_Golden)</h3>
+          <p class="muted">Se escribe <code>C:\infoict\Validacion.txt</code> con el tipo de pieza y se muestra estatus.</p>
+          <pre><button class="copy" data-copy>Copiar</button><code>if Validacion_Golden then
+  !----------------------INICIO VALIDACION GOLDEN-------------------------------
+  if Panel_Serial$ = Serial_Golden$ then
+    Liberacion$ = "C:\\infoict\\Validacion.txt"
+    output Liberacion$; "Golden"
+    ChecarGold$ = "C:\\infoict\\Golden\\" &amp; Fix_Id_Auto$ &amp; ".txt"
+    L$ = chr$(27) &amp; "&amp;v3S"
+    print tab(8); L$ &amp; "Verificando Golden..."
+    wait 5
+    enter ChecarGold$; Dato$
+    if Dato$ = "OK" then
+      L$ = chr$(27) &amp; "&amp;v2S"
+      print tab(8); L$ &amp; "************GOLDEN OK************"
+      wait 4
+    else
+      L$ = chr$(27) &amp; "&amp;v1S"
+      print tab(8); L$ &amp; "**********PIEZA GOLDEN FALLO**********"
+      L$ = chr$(27) &amp; "&amp;v3S"
+      print tab(8); L$ &amp; "*******LLAME AL ING. DE PRUEBAS*******"
+      wait 4
     end if
   end if
-next I</code></pre>
+  !-----------------------FINAL VALIDACION GOLDEN--------------------------------
+
+  !---------------------INICIO VALIDACION RED-----------------------------
+  if Panel_Serial$ = Serial_Red_Rabbit$ then
+    Liberacion$ = "C:\\infoict\\Validacion.txt"
+    output Liberacion$; "RedRabbit"
+    ChecarRed$ = "C:\\infoict\\RedRabbit\\" &amp; Fix_Id_Auto$ &amp; ".txt"
+    L$ = chr$(27) &amp; "&amp;v3S"
+    print tab(8); L$ &amp; "Verificando Pieza Red..."
+    wait 5
+    enter ChecarRed$; Dato$
+    if Dato$ = "OK" then
+      L$ = chr$(27) &amp; "&amp;v2S"
+      print tab(8); L$ &amp; "************Red OK************"
+      wait 4
+    else
+      FallasrRed$ = "C:\\infoict\\FallaMasters.txt"
+      enter FallasrRed$; RedRabbit$
+      L$ = chr$(27) &amp; "&amp;v3S"
+      print tab(8); L$ &amp; RedRabbit$
+      wait 5
+      L$ = chr$(27) &amp; "&amp;v1S"
+      print tab(8); L$ &amp; "**********PIEZA Red FALLO**********"
+      L$ = chr$(27) &amp; "&amp;v3S"
+      print tab(8); L$ &amp; "*********LLAME AL ING. DE PRUEBAS*********"
+      wait 4
+    end if
+  end if
+  !---------------------FINAL VALIDACION Red-----------------------------
+end if</code></pre>
         </article>
 
         <!-- Paso 6 -->
         <article class="step" data-step="6">
-          <h3>Generación de reportes por tarjeta y logging de FAIL/PASS</h3>
-          <p class="muted">Crea el nombre de archivo de reporte, imprime encabezado y persiste logs; rutas genéricas (sin datos de empresa).</p>
-          <pre><button class="copy" data-copy>Copiar</button><code>for I = 1 to Number_Boards_On_Panel
-  if BRD_TEST(I) = 1 then
-    board number is I
+          <h3>Función completa del testplan</h3>
+          <p class="muted">Pega tal cual en tu testplan. Ajusta seriales y rutas a tu entorno.</p>
+          <pre><button class="copy" data-copy>Copiar</button><code>sub Golden (Pedir_Golden, Checar_Serial, Validacion_Golden)
+global Imprimir_Golden
+global Panel_Serial$
+global Fix_Id_Auto$
+global Validacion
+global Serializing
+Validacion = 0
+Serial_Golden$ = "P202020-C-20202020"! SN omitido debido a derechos de cliente
+Serial_Red_Rabbit$ = "P202020-C-20202020"! SN omitido debido a derechos de cliente
 
-    Report_File$ = Board$(I) &amp; "_" &amp; System$ &amp; "_20" &amp; Dateandtime$[1;6] &amp; "log.txt"
+if Pedir_Golden then
+Fixt$=  "C:\\infoict\\Golden\\" &amp; Fix_Id_Auto$ &amp; ".txt"
+enter Fixt$; Liberacion$
+if Liberacion$ &lt;&gt; "OK" then
+  Serializing = 0
+  print using "@"
+  L$= chr$ (27)&amp; "&amp;v3S"
+  print tab (8); L$ &amp;"*********CAMBIO DE TURNO O FIXTURE**********"
+  print tab (8); L$ &amp;"**********LIBERE CON PIEZA GOLDEN***********"
+end if
 
-    if Status(I) &lt;&gt; 0 and Status(I) &lt;&gt; 13 then
-      if boardfailed then
-        report is Serial$(I)
-        report "========================================"
-        report "        Customer:  [REDACTED]"
-        report "Test Result: FAILED ICT"
-        report "Assy #: " &amp; Board$(I) &amp; " Rev. " &amp; Board_Rev$(I)
-        report Serial_Nr$ &amp; Serial$(I)
-        report "Tested " &amp; time$
-        report "System tested on: " ; System$
-        report "Employee ID: " ; Oper$
-        report "Test Time:" ; Test_Time ; " seconds"
-        report "========================================"
-        report out
-        report clear
-        report is Report_File$
-        report "Assy #: " &amp; Board$(I) &amp; " Rev. " &amp; Board_Rev$(I) &amp; "|Serial #: " &amp; Serial$(I) &amp; "|Test Result: FAILED ICT|Tested " &amp; time$ &amp; "|Employee ID: " &amp; Oper$ &amp; "| Test Time: " ; Test_Time ; " seconds"
-        report out
-        report is "test_result"
+Fixt$=  "C:\\infoict\\RedRabbit\\" &amp; Fix_Id_Auto$ &amp; ".txt"
+enter Fixt$; Dato$
+if Dato$ &lt;&gt; "OK"and Liberacion$ = "OK" then
+  Serializing = 0
+  L$= chr$ (27)&amp; "&amp;v3S"
+  print using "@"
+  print tab (8); L$ &amp;"********LIBERE CON PIEZA Red**********"
+else
+end if
+end if
 
-        copy Serial$(I) over "Fail.txt"
-        ! Archivo log general
-        Fallaruta$ = "C:/infoict/falla.txt"
-        append "Fail.txt" to Fallaruta$, Err
-
-        Year$ = datetime$[1;2]
-        Month$ = datetime$[3;2]
-        Serial2$ = Serial$(I)[1;13] &amp; "#" &amp; Serial$(I)[15;15]
-        Assy$ = Serial$(I)[2;12]
-        Model$ = Assy$
-        Path_Log_Fail$ = "C:\\ICT_Log\\" &amp; Model$ &amp; "\\Log_Fail\" &amp; Year$ &amp; "_" &amp; Month$ &amp; "\\"
-        Path_Log_Fail_Server$ = "\\\\SERVIDOR\\RutaCompartida\\ICT_Log\\" &amp; Model$ &amp; "\\Log_Fail\" &amp; Year$ &amp; "_" &amp; Month$ &amp; "\\"
-
-        copy "Fail.txt" over Path_Log_Fail$ &amp; Serial2$ &amp; "_" &amp; Dateandtime$ &amp; "_" &amp; System$ &amp; "_Fail.txt"
-        copy "Fail.txt" over Path_Log_Fail_Server$ &amp; Serial2$ &amp; "_" &amp; Dateandtime$ &amp; "_" &amp; System$ &amp; "_Fail.txt"
-        unlink "Fail.txt"
-      else
-        report is Serial$(I)
-        report "========================================"
-        report "        Customer:  [REDACTED]"
-        report "Test Result: PASSED ICT"
-        report "Assy #: " &amp; Board$(I) &amp; " Rev. " &amp; Board_Rev$(I)
-        report Serial_Nr$ &amp; Serial$(I)
-        report "Tested " &amp; time$
-        report "System tested on: " ; System$
-        report "Employee ID: " ; Oper$
-        report "Test Time:" ; Test_Time ; " seconds"
-        report "========================================"
-        report ""
-        report using "40(""-"")"
-        report "[REDACTED]"
-        report "Board #" ; I ; ":  " ; Board$(I)
-        report "Board Revision% " &amp; Board_Rev$(I)
-        if Serializing then report Serial_Nr$ &amp; Serial$(I)
-        report using "40(""-"")"
-        report "                                        "
-        report "      ############################"
-        report "      ###  P A S S E D  I C T  ###"
-        report "      ############################"
-        report "                                        "
-        report using "40(""-"")"
-        report out
-        report clear
-        report is Report_File$
-        report "Assy #: " &amp; Board$(I) &amp; " Rev. " &amp; Board_Rev$(I) &amp; "|Serial #: " &amp; Serial$(I) &amp; "|Test Result: PASSED ICT|Tested " &amp; time$ &amp; "|Employee ID: " &amp; Oper$ &amp; "| Test Time: " ; Test_Time ; " seconds"
-        report out
-        report is "test_result"
-      end if
-
-      execute "trecord.sh " &amp; Report_File$ &amp; " " &amp; Serial$(I)
-      copy Serial$(I) over "/dev/tty"
-      if boardfailed then
-        copy Serial$(I) over btgetenv$("RPR" &amp; th$)
-      end if
-      unlink Serial$(I)
-    end if
+if Checar_Serial then
+!---Liberacion Golden &amp; RedRabbit Boards-----------OOB
+Fixt$=  "C:\\infoict\\Golden\\" &amp; Fix_Id_Auto$ &amp; ".txt"
+enter Fixt$; Liberacion$
+if Liberacion$ &lt;&gt; "OK" then
+  if  Panel_Serial$=Serial_Golden$ then
+     print using "@"
+     L$= chr$ (27)&amp; "&amp;v2S"
+    print tab (8); L$ &amp;"PIEZA GOLDEN ENCONTRADA, ESPERE A QUE TERMINE LA PRUEBA"
+    wait 3
+  else
+      print using "@"
+      L$= chr$ (27)&amp; "&amp;v1S"
+     print tab (8); L$ &amp;"LIBERACION RECHAZADA: NO ES LA GOLDEN"
+     print tab (8); L$ &amp;"******LIBERE CON PIEZA GOLDEN*********"
+      wait 3
+     Validacion = 1
   end if
-next I
+end if
 
-SKIP_REPORT:
-! ---File LOG Generator------------------------------------------------</code></pre>
-          <p class="muted"><strong>Notas de anonimización:</strong> se removieron nombres de cliente, IPs y rutas internas. Sustituye <code>[REDACTED]</code>, <code>\\SERVIDOR\\RutaCompartida</code> y directorios por los de tu entorno.</p>
-        </article>
+Fixt$=  "C:\\infoict\\RedRabbit\\" &amp; Fix_Id_Auto$ &amp; ".txt"
+enter Fixt$; Dato$
+if Dato$ &lt;&gt; "OK"and Liberacion$ = "OK" then
+  if Panel_Serial$=Serial_Red_Rabbit$ then
+    print using "@"
+    L$= chr$ (27)&amp; "&amp;v2S"
+    print tab (8); L$ &amp;"PIEZA RED ENCONTRADA, ESPERE A QUE TERMINE LA PRUEBA"
+     wait 5
+  else
+     print using "@"
+      L$= chr$ (27)&amp; "&amp;v1S"
+     print tab (8); L$ &amp;"LIBERACION RECHAZADA: NO ES LA PIEZA RED"
+     print tab (8); L$ &amp;"*******LIBERE CON PIEZA RED************"
+     Validacion = 1
+  end if
+end if
+!---Liberacion Golden &amp; RedRabbit Boards-----------OOB
+end if
 
-        <!-- Paso 7 -->
-        <article class="step" data-step="7">
-          <h3>Script batch: abrir ticket local</h3>
-          <p class="muted">Abre el archivo que recibe como argumento (asociado al editor por defecto).</p>
-          <pre><button class="copy" data-copy>Copiar</button><code>@echo off
-set "archivo=%~1"
-if not exist "%archivo%" (
-  echo El archivo no existe: "%archivo%"
-  exit /b 1
-)
-start "" "%archivo%"</code></pre>
+if Validacion_Golden then
+!----------------------INICIO VALIDACION GOLDEN-------------------------------
+if Panel_Serial$=Serial_Golden$ then
+     Liberacion$=  "C:\\infoict\\Validacion.txt"
+     output Liberacion$; "Golden"
+     ChecarGold$= "C:\\infoict\\Golden\\" &amp; Fix_Id_Auto$ &amp; ".txt"
+     L$= chr$ (27)&amp; "&amp;v3S"
+     print tab (8); L$ &amp; "Verificando Golden..."
+     wait 5
+     enter ChecarGold$; Dato$
+     if Dato$ = "OK" then
+        L$= chr$ (27)&amp; "&amp;v2S"
+         print tab (8); L$ &amp;"************GOLDEN OK************"
+        wait 4
+     else
+        L$= chr$ (27)&amp; "&amp;v1S"
+        print tab (8); L$ &amp; "**********PIEZA GOLDEN FALLO**********"
+        L$= chr$ (27)&amp; "&amp;v3S"
+        print tab (8); L$ &amp; "*******LLAME AL ING. DE PRUEBAS*******"
+        wait 4
+     end if
+end if
+!-----------------------FINAL VALIDACION GOLDEN--------------------------------
+
+!---------------------INICIO VALIDACION RED-----------------------------
+if Panel_Serial$=Serial_Red_Rabbit$ then
+     Liberacion$=  "C:\\infoict\\Validacion.txt"
+     output Liberacion$; "RedRabbit"
+     ChecarRed$= "C:\\infoict\\RedRabbit\\" &amp; Fix_Id_Auto$ &amp; ".txt"
+     L$= chr$ (27)&amp; "&amp;v3S"
+     print tab (8); L$ &amp; "Verificando Pieza Red..."
+     wait 5
+     enter ChecarRed$; Dato$
+     if Dato$ = "OK" then
+        L$= chr$ (27)&amp; "&amp;v2S"
+        print tab (8); L$ &amp;"************PIEZA RED OK************"
+        wait 4
+     else
+        FallasrRed$= "C:\\infoict\\FallaMasters.txt"
+        enter FallasrRed$; RedRabbit$
+        L$= chr$ (27)&amp; "&amp;v3S"
+        print tab (8); L$ &amp; RedRabbit$
+        wait 5
+        L$= chr$ (27)&amp; "&amp;v1S"
+        print tab (8); L$ &amp; "**********PIEZA RED FALLO**********"
+        L$= chr$ (27)&amp; "&amp;v3S"
+        print tab (8); L$ &amp; "*********LLAME AL ING. DE PRUEBAS*********"
+        wait 4
+     end if
+end if
+!---------------------FINAL VALIDACION Pieza Red-----------------------------
+end if
+subend</code></pre>
         </article>
       </div>
     </section>
@@ -440,8 +550,8 @@ start "" "%archivo%"</code></pre>
     <section>
       <h2>Galería</h2>
       <div class="grid cards">
-        <div class="card"><img loading="lazy" decoding="async" src="../img/ICT-proyecto1-captura1.png" alt="Captura 1"></div>
-        <div class="card"><img loading="lazy" decoding="async" src="../img/ICT-proyecto1-captura2.png" alt="Captura 2"></div>
+        <div class="card"><img loading="lazy" decoding="async" src="../img/ICT-proyecto2-captura1.png" alt="Captura 1"></div>
+        <div class="card"><img loading="lazy" decoding="async" src="../img/ICT-proyecto2-captura2.png" alt="Captura 2"></div>
       </div>
     </section>
 
@@ -450,10 +560,10 @@ start "" "%archivo%"</code></pre>
       <h2>Detalles técnicos</h2>
       <div class="panel">
         <ul>
-          <li>Lenguajes/Frameworks: C#, ASP.NET, WPF (MVVM), SQL Server/SQLite.</li>
-          <li>Integraciones: Endpoints REST con MES/IMES, testplan ICT Keysight.</li>
-          <li>Testing: ICT/FCT, SPC, validación de fixtures, golden units.</li>
-          <li>Observabilidad: logs, métricas (MTTR/MTBF), dashboard Andon.</li>
+          <li>Lenguajes/Frameworks: lenguaje de testplan i3070, shells/prints.</li>
+          <li>Integraciones: archivos de control por fixture, bloqueo de serialización.</li>
+          <li>Validaciones: Golden y Pieza Red al inicio de turno/fixture.</li>
+          <li>Mensajería al operador vía <code>print</code> con niveles de severidad (v1/v2/v3).</li>
         </ul>
       </div>
     </section>
@@ -463,10 +573,9 @@ start "" "%archivo%"</code></pre>
       <h2>Resultados</h2>
       <div class="panel">
         <ul>
-          <li>–100% consumo de papel/insumos de impresión.</li>
-          <li>–10–20 min/día en atención de issues de impresora.</li>
-          <li>+Accesibilidad: tickets consultables en red para auditoría y FA.</li>
-          <li>+Velocidad de diagnóstico (dependiente de línea/equipo).</li>
+          <li>+Confiabilidad: detección temprana de descalibraciones/derivas.</li>
+          <li>–Repruebas por setups incorrectos al inicio de turno.</li>
+          <li>+Trazabilidad por fixture gracias a marcadores <code>OK</code> en disco.</li>
         </ul>
       </div>
     </section>
@@ -484,7 +593,7 @@ start "" "%archivo%"</code></pre>
     // Año dinámico
     document.getElementById('year').textContent = new Date().getFullYear();
 
-    // ===== Tema: claro por defecto; respeta preferencia guardada =====
+    // ===== Tema claro/oscuro =====
     const modeBtn = document.getElementById('mode');
     const themeMeta = document.getElementById('themeColor');
     function applyTheme(isDark){
@@ -494,7 +603,7 @@ start "" "%archivo%"</code></pre>
     }
     (function initTheme(){
       const saved = localStorage.getItem('theme');
-      const isDark = saved ? (saved === 'dark') : false; // claro por defecto
+      const isDark = saved ? (saved === 'dark') : false;
       applyTheme(isDark);
     })();
     if (modeBtn){
