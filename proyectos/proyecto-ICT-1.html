@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Título del Proyecto — Portafolio</title>
+  <link rel="icon" href="../img/favicon.ico">
+  <link rel="stylesheet" href="../css/estilos.css"> <!-- Reutiliza tu CSS principal -->
+  <style>
+    .hero-proyecto{
+      padding:60px 20px;
+      text-align:center;
+      border-bottom:1px solid var(--line);
+    }
+    .hero-proyecto h1{font-size:clamp(28px,5vw,42px);margin-bottom:10px}
+    .hero-proyecto p{color:var(--muted);max-width:600px;margin:0 auto}
+    .contenido{max-width:900px;margin:30px auto;padding:0 20px;display:grid;gap:24px}
+    .contenido img{border-radius:12px;border:1px solid var(--line)}
+    .volver{margin:30px auto;text-align:center}
+    .volver a{padding:10px 14px;border-radius:10px;background:var(--acc);color:#05131e;font-weight:600}
+  </style>
+</head>
+<body>
+  <header>
+    <div class="wrap">
+      <nav>
+        <div class="brand"><span class="dot"></span> <a href="../index.html">Marco A. Muñiz — Portafolio</a></div>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Hero proyecto -->
+  <section class="hero-proyecto">
+    <h1>Nombre del Proyecto</h1>
+    <p>Breve descripción del proyecto: tecnologías usadas, objetivo y contexto.</p>
+  </section>
+
+  <!-- Contenido -->
+  <main class="contenido">
+    <h2>Descripción</h2>
+    <p>
+      Aquí puedes detallar el propósito del proyecto, problema que resolviste, tu rol
+      y el impacto que tuvo.
+    </p>
+
+    <h2>Características principales</h2>
+    <ul>
+      <li>Funcionalidad 1</li>
+      <li>Funcionalidad 2</li>
+      <li>Funcionalidad 3</li>
+    </ul>
+
+    <h2>Imágenes</h2>
+    <img src="../img/ejemplo1.jpg" alt="Vista previa del proyecto 1">
+    <img src="../img/ejemplo2.jpg" alt="Vista previa del proyecto 2">
+
+    <h2>Tecnologías utilizadas</h2>
+    <div class="row">
+      <span class="tag">ASP.NET</span>
+      <span class="tag">SQL Server</span>
+      <span class="tag">WPF</span>
+      <span class="tag">C#</span>
+    </div>
+  </main>
+
+  <!-- Volver -->
+  <div class="volver">
+    <a href="../index.html#proyectos">← Volver al portafolio</a>
+  </div>
+
+  <footer>
+    <div class="wrap">
+      <p>© 2025 Marco Antonio Muñiz Abad</p>
+    </div>
+  </footer>
+</body>
+</html>
