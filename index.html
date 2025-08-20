@@ -3,189 +3,313 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Marco Abad — Portafolio</title>
-  <meta name="description" content="Portafolio técnico de ingeniería mecatrónica: C#, ASP.NET, Arduino, pruebas ICT/Funcionales, trazabilidad, automatización." />
-  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='0.9em' font-size='90'>🛠️</text></svg>">
+  <title>Marco Antonio Muñiz Abad — Portafolio</title>
+  <meta name="description" content="Test & Automation Engineer: ICT/FCT, ASP.NET, WPF, SQL Server, MES/IMES, automatización y trazabilidad." />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='0.9em' font-size='90'>⚙️</text></svg>">
   <style>
-    :root { --bg:#0e0e12; --card:#171720; --ink:#f7f7fb; --muted:#aab0bf; --acc:#ffd54d; --line:#272737; }
+    /* === Diseño base y paleta === */
+    :root{
+      --bg:#0b1220;        /* fondo principal (azul noche) */
+      --panel:#0f172a;     /* paneles (slate-900) */
+      --ink:#e6edf3;       /* texto principal */
+      --muted:#98a2b3;     /* texto secundario */
+      --line:#22314c;      /* líneas/bordes */
+      --acc:#22d3ee;       /* cian */
+      --acc-2:#a78bfa;     /* violeta */
+      --warn:#f59e0b;      /* ámbar */
+      --ok:#34d399;        /* verde */
+    }
     *{box-sizing:border-box}
     html,body{height:100%}
-    body{margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,Arial,sans-serif;background:var(--bg);color:var(--ink)}
+    body{margin:0;font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,Arial,sans-serif;background:var(--bg);color:var(--ink)}
     a{color:var(--acc);text-decoration:none}
     a:hover{text-decoration:underline}
-    header{padding:24px 20px}
-    .wrap{max-width:1080px;margin:0 auto;padding:0 20px}
-    .hero{display:grid;gap:18px;grid-template-columns:1fr;align-items:center;padding:28px 0 8px}
-    .hero h1{font-size:clamp(28px,4.5vw,48px);margin:0;line-height:1.1}
-    .hero p{margin:0;color:var(--muted)}
-    .pill{display:inline-flex;gap:8px;align-items:center;background:var(--card);border:1px solid var(--line);padding:8px 12px;border-radius:999px;font-size:14px}
-    .grid{display:grid;gap:16px}
-    .cards{grid-template-columns:repeat(auto-fit,minmax(260px,1fr))}
-    .card{background:var(--card);border:1px solid var(--line);border-radius:16px;overflow:hidden;display:flex;flex-direction:column}
-    .card img{width:100%;height:160px;object-fit:cover;background:#0b0b0f}
-    .card .body{padding:16px}
-    .card h3{margin:0 0 6px;font-size:18px}
-    .badge{display:inline-block;font-size:12px;color:#111;background:var(--acc);padding:2px 8px;border-radius:999px;margin-right:6px}
-    .row{display:flex;flex-wrap:wrap;gap:8px}
-    .row .tag{font-size:12px;color:var(--muted);border:1px solid var(--line);padding:6px 8px;border-radius:8px}
+    img{max-width:100%;display:block}
+    .wrap{max-width:1200px;margin:0 auto;padding:0 20px}
+
+    /* === Header sticky con blur === */
+    header{position:sticky;top:0;z-index:50;background:rgba(11,18,32,.6);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+    nav{display:flex;align-items:center;justify-content:space-between;height:64px}
+    .brand{display:flex;align-items:center;gap:10px;font-weight:800;letter-spacing:.3px}
+    .brand .dot{width:10px;height:10px;border-radius:50%;background:linear-gradient(90deg,var(--acc),var(--acc-2))}
+    .links{display:flex;gap:18px;align-items:center}
+    .btn{display:inline-flex;align-items:center;gap:8px;padding:10px 14px;border-radius:12px;background:var(--acc);color:#05131e;font-weight:700;border:none}
+    .btn.ghost{background:transparent;border:1px solid var(--line);color:var(--ink)}
+    .chip{display:inline-flex;align-items:center;padding:6px 10px;border:1px solid var(--line);border-radius:999px;font-size:12px;color:var(--muted)}
+    .lang, .mode{background:transparent;border:1px solid var(--line);color:var(--ink);padding:6px 10px;border-radius:10px}
+
+    /* === Hero === */
+    .hero{position:relative;overflow:hidden}
+    .hero .inner{display:grid;gap:24px;grid-template-columns:1.1fr .9fr;align-items:center;padding:36px 0 12px}
+    .title{font-size:clamp(28px,4.5vw,48px);line-height:1.1;margin:0}
+    .lead{color:var(--muted);margin:0}
+    .cta{display:flex;gap:12px;flex-wrap:wrap;margin-top:10px}
+    .blob{position:absolute;inset:-20% auto auto -10%;width:60vw;height:60vw;filter:blur(80px);background:radial-gradient(circle at 30% 30%,rgba(34,211,238,.25),transparent 60%),radial-gradient(circle at 70% 60%,rgba(167,139,250,.22),transparent 60%)}
+    .avatar{width:140px;height:140px;border-radius:50%;border:2px solid var(--line);background:#0b1220;margin-left:auto}
+
+    /* === Secciones === */
     section{padding:28px 0}
     h2{font-size:22px;margin:0 0 12px}
     .muted{color:var(--muted)}
-    .bar{height:1px;background:var(--line);margin:24px 0}
-    .footer{padding:28px 0 48px;color:var(--muted);font-size:14px}
-    .btn{display:inline-flex;align-items:center;justify-content:center;padding:10px 14px;border-radius:10px;background:var(--acc);color:#111;font-weight:600;border:none}
-    nav{display:flex;gap:16px;align-items:center;justify-content:flex-end}
-    .lang{background:var(--card);border:1px solid var(--line);color:var(--ink);padding:6px 10px;border-radius:10px}
-    .two{display:grid;grid-template-columns:1fr;gap:16px}
-    @media (min-width:860px){
-      .hero{grid-template-columns:1.2fr .8fr}
-      .two{grid-template-columns:1fr 1fr}
-    }
-    .avatar{width:120px;height:120px;border-radius:50%;border:2px solid var(--line);background:#111;display:block}
-    .mono{font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;}
-    .kbd{border:1px solid var(--line);padding:2px 6px;border-radius:6px;background:var(--card)}
-    .card .actions{margin-top:10px;display:flex;gap:10px;flex-wrap:wrap}
+    .panel{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:16px}
+
+    /* === Skills con barras === */
+    .skills{display:grid;gap:16px;grid-template-columns:1fr}
+    @media(min-width:960px){.skills{grid-template-columns:1fr 1fr}}
+    .bar{height:10px;background:#0b1220;border:1px solid var(--line);border-radius:999px;overflow:hidden}
+    .bar>i{display:block;height:100%;background:linear-gradient(90deg,var(--acc),var(--acc-2));width:0}
+
+    /* === Projects: filtros + cards === */
+    .filters{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:12px}
+    .filters button{border:1px solid var(--line);background:transparent;color:var(--ink);padding:6px 10px;border-radius:999px;cursor:pointer}
+    .filters button.active{background:var(--acc);color:#05131e;border-color:transparent}
+    .search{display:flex;gap:10px;flex-wrap:wrap;margin:10px 0}
+    .search input{flex:1;min-width:220px;padding:10px 12px;border-radius:10px;border:1px solid var(--line);background:#0b1220;color:var(--ink)}
+    .grid{display:grid;gap:16px}
+    .cards{grid-template-columns:repeat(auto-fit,minmax(280px,1fr))}
+    .card{background:var(--panel);border:1px solid var(--line);border-radius:16px;overflow:hidden;display:flex;flex-direction:column}
+    .card img{width:100%;height:170px;object-fit:cover}
+    .card .body{padding:16px;display:flex;flex-direction:column;gap:8px}
+    .badge{display:inline-block;font-size:12px;color:#05131e;background:var(--ok);padding:2px 8px;border-radius:999px;margin-right:6px}
+    .row{display:flex;flex-wrap:wrap;gap:8px}
+    .tag{font-size:12px;color:var(--muted);border:1px solid var(--line);padding:6px 8px;border-radius:8px}
+    .actions{margin-top:8px;display:flex;gap:10px;flex-wrap:wrap}
+
+    /* === Timeline === */
+    .timeline{display:grid;gap:14px}
+    .item{display:grid;grid-template-columns:120px 1fr;gap:14px;align-items:start}
+    .item time{color:var(--muted)}
+    .item .bubble{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:12px}
+
+    /* === Footer === */
+    footer{padding:28px 0 48px;color:var(--muted);border-top:1px solid var(--line)}
+
+    /* === Botón subir === */
+    #toTop{position:fixed;right:16px;bottom:16px;display:none;align-items:center;gap:6px;padding:10px 12px;border-radius:999px;border:1px solid var(--line);background:rgba(15,23,42,.75);color:var(--ink)}
   </style>
 </head>
 <body>
-  <header class="wrap">
-    <nav>
-      <a href="#proyectos">Proyectos</a>
-      <a href="#experiencia">Experiencia</a>
-      <a href="#contacto">Contacto</a>
-      <button id="lang" class="lang" aria-label="Switch language">ES</button>
-    </nav>
+  <header>
+    <div class="wrap">
+      <nav>
+        <div class="brand"><span class="dot"></span> <span>Marco A. Muñiz — Portafolio</span></div>
+        <div class="links">
+          <a href="#proyectos">Proyectos</a>
+          <a href="#habilidades">Habilidades</a>
+          <a href="#experiencia">Experiencia</a>
+          <a href="#contacto">Contacto</a>
+          <button id="lang" class="lang" aria-label="Cambiar idioma">ES</button>
+          <button id="mode" class="mode" aria-label="Tema">☾</button>
+          <a class="btn" href="cv/Marco_Antonio_Muniz_Abad_CV.pdf" target="_blank" rel="noopener">Descargar CV</a>
+        </div>
+      </nav>
+    </div>
   </header>
 
-  <main class="wrap">
-    <section class="hero">
+  <div class="hero">
+    <div class="blob" aria-hidden="true"></div>
+    <div class="wrap inner">
       <div>
-        <span class="pill">🧭 Portafolio técnico</span>
-        <h1 id="t1">Marco Abad — Ingeniero en Mecatrónica</h1>
-        <p id="t2">C#, ASP.NET, Arduino, pruebas ICT/funcional, automatización de manufactura, trazabilidad y optimización de procesos.</p>
-        <div style="margin-top:14px;display:flex;gap:10px;flex-wrap:wrap">
+        <span class="chip">Test & Automation Engineer</span>
+        <h1 class="title" id="t1">Marco Antonio Muñiz Abad</h1>
+        <p class="lead" id="t2">ICT/FCT, ASP.NET & WPF, SQL Server/SQLite, endpoints MES/IMES, automatización y trazabilidad. Enfoque en FPY, SPC y mejora continua.</p>
+        <div class="cta">
           <a class="btn" href="#proyectos" id="t3">Ver proyectos</a>
-          <a class="btn" href="cv/Marco_Abad_CV.pdf" target="_blank" rel="noopener" id="t4">Descargar CV</a>
+          <a class="btn ghost" href="#contacto" id="t4">Contactar</a>
         </div>
       </div>
       <div>
-        <img class="avatar" alt="Foto o avatar" src="img/me.jpg" />
-        <p class="muted" style="margin-top:10px" id="t5">¿Buscas ejemplos de código? <a href="https://github.com/" target="_blank" rel="noopener">GitHub</a></p>
+        <img class="avatar" alt="Avatar" src="https://picsum.photos/seed/avatar/300/300" />
       </div>
-    </section>
+    </div>
+  </div>
 
-    <section class="two" id="sobre">
-      <div>
-        <h2 id="t6">Sobre mí</h2>
-        <p id="t7">Ingeniero en Mecatrónica con enfoque en pruebas de producción, desarrollo de herramientas en C#/ASP.NET y sistemas automatizados. Experiencia integrando bases de datos (SQLite/SQL Server), reportes en Excel y comunicación con sistemas de trazabilidad. Me interesan la calidad, la confiabilidad y la mejora continua.</p>
-      </div>
-      <div>
-        <h2 id="t8">Habilidades</h2>
-        <div class="row">
-          <span class="tag">C#, .NET / ASP.NET / Python / Java Scripts</span>
-          <span class="tag">SQLite / SQL Server</span>
-          <span class="tag">ICT Inline / Functional Test (FCT, FVT) / Flying Probe</span>
-		  <span class="tag">Keysight / Digital Test/ Automatización</span>
-          <span class="tag">Sistemas de Trazabilidad / ICT Offline  </span>
+  <main class="wrap">
+    <!-- Habilidades -->
+    <section id="habilidades">
+      <h2 id="t5">Habilidades principales</h2>
+      <div class="skills">
+        <div class="panel">
+          <div style="display:flex;justify-content:space-between;align-items:center"><strong>ICT / FCT / FVT / Hi-Pot</strong><span class="muted">Avanzado</span></div>
+          <div class="bar"><i style="width:92%"></i></div>
+        </div>
+        <div class="panel">
+          <div style="display:flex;justify-content:space-between;align-items:center"><strong>ASP.NET / C#</strong><span class="muted">Avanzado</span></div>
+          <div class="bar"><i style="width:90%"></i></div>
+        </div>
+        <div class="panel">
+          <div style="display:flex;justify-content:space-between;align-items:center"><strong>WPF / MVVM</strong><span class="muted">Avanzado</span></div>
+          <div class="bar"><i style="width:85%"></i></div>
+        </div>
+        <div class="panel">
+          <div style="display:flex;justify-content:space-between;align-items:center"><strong>SQL Server / SQLite</strong><span class="muted">Avanzado</span></div>
+          <div class="bar"><i style="width:88%"></i></div>
+        </div>
+        <div class="panel">
+          <div style="display:flex;justify-content:space-between;align-items:center"><strong>MES / IMES (REST)</strong><span class="muted">Intermedio-Avanzado</span></div>
+          <div class="bar"><i style="width:82%"></i></div>
         </div>
       </div>
     </section>
 
+    <!-- Proyectos -->
     <section id="proyectos">
-      <h2 id="t9">Proyectos destacados</h2>
-      <p class="muted" id="t10">*Las imágenes y datos están anonimizados para proteger la confidencialidad.*</p>
-      <div class="grid cards">
-        <!-- Proyecto 1 -->
-        <article class="card">
-          <img alt="Captura de app ASP.NET" src="https://picsum.photos/seed/aspnet/800/400" />
-          <div class="body">
-            <div><span class="badge">Caso de estudio</span></div>
-            <h3>Registro de Operadores (ASP.NET)</h3>
-            <p class="muted">Control de entradas/salidas, pausas y reportes a SQL Server. Turnos automáticos y tablero en tiempo real.</p>
-            <div class="row"><span class="tag">ASP.NET</span><span class="tag">SQLite</span><span class="tag">SQL Server</span></div>
-            <div class="actions"><a class="btn" href="proyectos/registro-operadores.html">Caso completo</a></div>
-          </div>
-        </article>
-
-        <!-- Proyecto 2 -->
-        <article class="card">
-          <img alt="Arduino y conveyor" src="https://picsum.photos/seed/arduino/800/400" />
-          <div class="body">
-            <div><span class="badge">Hardware</span></div>
-            <h3>Interlock de Conveyor</h3>
-            <p class="muted">Validación de seriales y control de paso de piezas interfiriendo señal al conveyor; protección con diodo y transistor 2N2222.</p>
-            <div class="row"><span class="tag">Arduino</span><span class="tag">2N2222</span><span class="tag">Trazabilidad</span></div>
-            <div class="actions"><a class="btn" href="proyectos/control-conveyor-wpf.html">Caso completo</a></div>
-          </div>
-        </article>
-
-        <!-- Proyecto 3 -->
-        <article class="card">
-          <img alt="Pruebas eléctricas" src="https://picsum.photos/seed/ict/800/400" />
-          <div class="body">
-            <div><span class="badge">Testing</span></div>
-            <h3>Pruebas de Fuente de Poder</h3>
-            <p class="muted">ICT, Funcional Voltage Test. Mantenimiento/calibración, SPC y mejora continua para elevar FPY.</p>
-            <div class="row"><span class="tag">ICT</span><span class="tag">Hi-Pot</span><span class="tag">SPC</span></div>
-            <div class="actions"><a class="btn" href="proyectos/pruebas-fuente-poder.html">Caso completo</a></div>
-          </div>
-        </article>
+      <h2 id="t6">Proyectos destacados</h2>
+      <div class="panel">
+        <div class="search">
+          <input id="q" type="search" placeholder="Buscar proyecto (ej. SQL, WPF, ICT)" aria-label="Buscar proyecto" />
+        </div>
+        <div class="filters" role="tablist" aria-label="Filtros de proyectos">
+          <button class="active" data-filter="all">Todos</button>
+          <button data-filter="aspnet">ASP.NET</button>
+          <button data-filter="wpf">WPF</button>
+          <button data-filter="testing">Testing</button>
+          <button data-filter="sql">SQL</button>
+          <button data-filter="mes">MES/IMES</button>
+        </div>
+        <div class="grid cards" id="cards">
+          <!-- Registro de Operadores -->
+          <article class="card" data-tags="aspnet sql mes">
+            <img alt="ASP.NET y SQL Server" src="https://picsum.photos/seed/aspnet/800/400" />
+            <div class="body">
+              <div><span class="badge">Software</span></div>
+              <h3>Registro de Operadores (ASP.NET + SQL Server)</h3>
+              <p class="muted">Entradas/salidas, pausas, turnos automáticos, tablero en tiempo real y reportes (EPPlus).</p>
+              <div class="row"><span class="tag">ASP.NET</span><span class="tag">SQL Server</span><span class="tag">EPPlus</span></div>
+              <div class="actions"><a class="btn" href="proyectos/registro-operadores.html">Caso completo</a></div>
+            </div>
+          </article>
+          <!-- Control Conveyor WPF -->
+          <article class="card" data-tags="wpf mes">
+            <img alt="WPF Conveyor" src="https://picsum.photos/seed/wpf/800/400" />
+            <div class="body">
+              <div><span class="badge" style="background:var(--warn)">Desktop</span></div>
+              <h3>Control de Conveyor — App WPF (C#)</h3>
+              <p class="muted">Validación y control de flujo; endpoints hacia MES/IMES; reglas de negocio y estados.</p>
+              <div class="row"><span class="tag">WPF</span><span class="tag">C#</span><span class="tag">MES/IMES</span></div>
+              <div class="actions"><a class="btn" href="proyectos/control-conveyor-wpf.html">Caso completo</a></div>
+            </div>
+          </article>
+          <!-- Pruebas Fuente de Poder -->
+          <article class="card" data-tags="testing spc">
+            <img alt="Pruebas eléctricas" src="https://picsum.photos/seed/ict/800/400" />
+            <div class="body">
+              <div><span class="badge" style="background:var(--ok)">Testing</span></div>
+              <h3>Pruebas de Fuente de Poder</h3>
+              <p class="muted">ICT/FCT/FVT/Hi-Pot/Burn-In, SPC y mejora continua orientada a FPY.</p>
+              <div class="row"><span class="tag">ICT</span><span class="tag">Hi-Pot</span><span class="tag">SPC</span></div>
+              <div class="actions"><a class="btn" href="proyectos/pruebas-fuente-poder.html">Caso completo</a></div>
+            </div>
+          </article>
+        </div>
       </div>
     </section>
 
+    <!-- Experiencia (timeline) -->
     <section id="experiencia">
-      <h2 id="t11">Experiencia</h2>
-      <ul class="muted">
-        <li>Soporte ICT: verificación HW/SW de estaciones y *fixtures* de prueba; coordinación con proveedores y R&D.</li>
-        <li>Desarrollo de proyectos ASP NET y SQL Server databases.</li>
-        <li>Colaboración multifuncional para análisis de fallas y calidad.</li>
-      </ul>
+      <h2 id="t7">Experiencia</h2>
+      <div class="timeline">
+        <div class="item">
+          <time>2024 — Actual</time>
+          <div class="bubble">
+            <strong>BCS Automotive Interface Solutions — Test Engineer</strong>
+            <p class="muted">ICT/FCT en producción, sistema Andon automatizado (MTTR/MTBF), scripts de tickets y soporte a proveedores.</p>
+          </div>
+        </div>
+        <div class="item">
+          <time>2023 — 2024</time>
+          <div class="bubble">
+            <strong>Kostal Mexicana — Soporte/Desarrollo</strong>
+            <p class="muted">Bases de datos y trazabilidad en ASP.NET/SQL; estación flexible para microcontroladores.</p>
+          </div>
+        </div>
+        <div class="item">
+          <time>2022</time>
+          <div class="bubble">
+            <strong>Tramec Querétaro — Técnico en Mantenimiento</strong>
+            <p class="muted">Mantenimiento ICT; PLC Beckhoff/Siemens; robots KUKA; pruebas eléctricas finales.</p>
+          </div>
+        </div>
+      </div>
     </section>
 
+    <!-- Contacto -->
     <section id="contacto">
-      <h2 id="t12">Contacto</h2>
-      <p class="muted" id="t13">¿Te interesa colaborar? Escríbeme a <a href="mailto:marcomunizabad@yahoo.com">marcomunizabad@yahoo.com</a> o vía <a href="https://www.linkedin.com/in/marco-antonio-mu%C3%B1iz-abad-37b94721a/" target="_blank" rel="noopener">LinkedIn</a>.</p>
+      <h2 id="t8">Contacto</h2>
+      <div class="panel" style="display:grid;gap:12px;grid-template-columns:1fr;max-width:760px">
+        <p class="muted">¿Te interesa colaborar? Escríbeme o agenda una llamada.</p>
+        <div style="display:flex;gap:10px;flex-wrap:wrap">
+          <a class="btn" href="mailto:marcomunizabad@yahoo.com">Email</a>
+          <a class="btn ghost" href="https://www.linkedin.com/in/marco-antonio-mu%C3%B1iz-abad-37b94721a/" target="_blank" rel="noopener">LinkedIn</a>
+        </div>
+      </div>
     </section>
-
-    <div class="bar"></div>
-
-    <footer class="footer">
-      <div>© <span id="year"></span> Marco Abad. Construido con HTML estático y desplegado en GitHub Pages.</div>
-      <div class="mono">Tip: presiona <span class="kbd">/</span> para cambiar idioma.</div>
-    </footer>
   </main>
+
+  <div id="toTop">▲ Arriba</div>
+
+  <footer>
+    <div class="wrap">© <span id="year"></span> Marco Antonio Muñiz Abad · Hecho con HTML/CSS/JS · Publicado en GitHub Pages</div>
+  </footer>
 
   <script>
     // Año dinámico
     document.getElementById('year').textContent = new Date().getFullYear();
 
-    // Toggle de idioma ES/EN (texto mínimo)
-    const es = {
-      t1: 'Marco Abad — Ingeniero en Mecatrónica',
-      t2: 'C#, ASP.NET, Arduino, pruebas ICT/funcional, automatización de manufactura, trazabilidad y optimización de procesos.',
-      t3: 'Ver proyectos',
-      t4: 'Descargar CV',
-      t5: '¿Buscas ejemplos de código? ',
-      t6: 'Sobre mí', t7: 'Ingeniero en Mecatrónica con enfoque en pruebas de producción, desarrollo de herramientas en C#/ASP.NET y sistemas con Arduino. Experiencia integrando bases de datos (SQLite/SQL Server), reportes en Excel (EPPlus) y comunicación con MES/IMES. Me interesan la calidad, la confiabilidad y la mejora continua.',
-      t8: 'Habilidades', t9:'Proyectos destacados', t10:'*Las imágenes y datos están anonimizados para proteger la confidencialidad.*',
-      t11:'Experiencia', t12:'Contacto', t13:'¿Te interesa colaborar? Escríbeme a ',
-    };
-    const en = {
-      t1: 'Marco Abad — Mechatronics Engineer',
-      t2: 'C#, ASP.NET, Arduino, ICT/functional testing, manufacturing automation, traceability and process optimization.',
-      t3: 'See projects',
-      t4: 'Download CV',
-      t5: 'Looking for code samples? ',
-      t6: 'About me', t7: 'Mechatronics engineer focused on production testing, C#/ASP.NET tools and Arduino systems. Experience with databases (SQLite/SQL Server), Excel reports (EPPlus) and MES/IMES integration. Passionate about quality, reliability and continuous improvement.',
-      t8: 'Skills', t9:'Featured projects', t10:'*Images and data are anonymized to protect confidentiality.*',
-      t11:'Experience', t12:'Contact', t13:'Interested in working together? Email me at ',
+    // Modo claro/oscuro (solo invierte fondos y acentos básicos)
+    const modeBtn = document.getElementById('mode');
+    let dark = true;
+    modeBtn.addEventListener('click', ()=>{
+      dark = !dark;
+      document.documentElement.style.setProperty('--bg', dark?'#0b1220':'#f8fafc');
+      document.documentElement.style.setProperty('--panel', dark?'#0f172a':'#ffffff');
+      document.documentElement.style.setProperty('--ink', dark?'#e6edf3':'#0b1220');
+      document.documentElement.style.setProperty('--muted', dark?'#98a2b3':'#475569');
+      document.documentElement.style.setProperty('--line', dark?'#22314c':'#cbd5e1');
+      modeBtn.textContent = dark?'☾':'☼';
+    });
+
+    // Búsqueda y filtros de proyectos
+    const q = document.getElementById('q');
+    const cards = Array.from(document.querySelectorAll('#cards .card'));
+    const filterBtns = Array.from(document.querySelectorAll('.filters button'));
+    let currentFilter = 'all';
+
+    function applyFilters(){
+      const term = (q.value||'').toLowerCase();
+      cards.forEach(card=>{
+        const tags = (card.dataset.tags||'').toLowerCase();
+        const text = card.innerText.toLowerCase();
+        const matchFilter = currentFilter==='all' || tags.includes(currentFilter);
+        const matchTerm = !term || text.includes(term);
+        card.style.display = matchFilter && matchTerm ? '' : 'none';
+      });
+    }
+    q.addEventListener('input', applyFilters);
+    filterBtns.forEach(btn=>btn.addEventListener('click', ()=>{
+      filterBtns.forEach(b=>b.classList.remove('active'));
+      btn.classList.add('active');
+      currentFilter = btn.dataset.filter;
+      applyFilters();
+    }));
+
+    // Botón subir
+    const toTop = document.getElementById('toTop');
+    window.addEventListener('scroll', ()=>{
+      toTop.style.display = window.scrollY>500 ? 'inline-flex' : 'none';
+    });
+    toTop.addEventListener('click', ()=>window.scrollTo({top:0,behavior:'smooth'}));
+
+    // Idioma ES/EN (mínimo)
+    const langBtn = document.getElementById('lang');
+    const dict = {
+      es: {t1:'Marco Antonio Muñiz Abad',t2:'ICT/FCT, ASP.NET & WPF, SQL Server/SQLite, endpoints MES/IMES, automatización y trazabilidad. Enfoque en FPY, SPC y mejora continua.',t3:'Ver proyectos',t4:'Contactar',t5:'Habilidades principales',t6:'Proyectos destacados',t7:'Experiencia',t8:'Contacto'},
+      en: {t1:'Marco Antonio Muñiz Abad',t2:'ICT/FCT, ASP.NET & WPF, SQL Server/SQLite, MES/IMES endpoints, automation and traceability. Focus on FPY, SPC and continuous improvement.',t3:'See projects',t4:'Contact',t5:'Core skills',t6:'Featured projects',t7:'Experience',t8:'Contact'}
     };
     let lang = 'es';
-    const ids = ['t1','t2','t3','t4','t5','t6','t7','t8','t9','t10','t11','t12','t13'];
-    function applyLang(dict){ ids.forEach(id=>{ const el=document.getElementById(id); if(!el) return; if(id==='t5' || id==='t13'){ const parts = el.innerHTML.split('</a>'); el.innerHTML = dict[id] + parts[0].split('>')[0] + '>' + parts[0].split('>')[1] + '</a>'; } else { el.textContent = dict[id]; } }); }
-    function toggleLang(){ lang = (lang==='es')?'en':'es'; applyLang(lang==='es'?es:en); document.getElementById('lang').textContent = lang.toUpperCase(); }
-    document.getElementById('lang').addEventListener('click', toggleLang);
-    document.addEventListener('keydown', (e)=>{ if(e.key === '/') toggleLang(); });
+    function applyLang(){ const d=dict[lang]; ['t1','t2','t3','t4','t5','t6','t7','t8'].forEach(id=>{ const el=document.getElementById(id); if(el) el.textContent=d[id]; }); }
+    langBtn.addEventListener('click', ()=>{ lang = (lang==='es')?'en':'es'; langBtn.textContent = lang.toUpperCase(); applyLang(); });
+    applyLang();
   </script>
 </body>
 </html>
