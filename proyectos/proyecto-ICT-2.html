@@ -10,21 +10,21 @@
   <style>
     /* =========== Paleta base =========== */
     :root{
-      --bg:#f8fafc;           /* claro por defecto */
+      --bg:#f8fafc;
       --panel:#ffffff;
       --ink:#0b1220;
       --muted:#475569;
       --line:#cbd5e1;
-      --acc:#22d3ee;          /* cian */
-      --acc-2:#a78bfa;        /* violeta */
-      --warn:#f59e0b;         /* ámbar */
-      --ok:#34d399;           /* verde */
+      --acc:#22d3ee;
+      --acc-2:#a78bfa;
+      --warn:#f59e0b;
+      --ok:#34d399;
       /* Copiar */
-      --btn-copy-bg:#0f172a;  /* fondo botón copiar (claro) */
-      --btn-copy-ink:#e6edf3; /* texto botón copiar (claro) */
-      --code-bg:#0b1220;      /* fondo code en claro (oscuro suave) */
+      --btn-copy-bg:#0f172a;
+      --btn-copy-ink:#e6edf3;
+      --code-bg:#0b1220;
       --code-ink:#e6edf3;
-      --chip-bg:#eef2ff;      /* chips breadcrumb claros */
+      --chip-bg:#eef2ff;
       --chip-ink:#1e293b;
     }
     html[data-theme="dark"]{
@@ -59,7 +59,7 @@
     nav{display:flex;align-items:center;justify-content:space-between;height:64px}
     .brand{display:flex;align-items:center;gap:10px;font-weight:800;letter-spacing:.3px}
     .brand .dot{width:10px;height:10px;border-radius:50%;background:linear-gradient(90deg,var(--acc),var(--acc-2))}
-    .btn{display:inline-flex;align-items:center;gap:8px;padding:10px 14px;border-radius:12px;background:var(--acc);color:#05131e;font-weight:700;border:none}
+    .btn{display:inline-flex;align-items:center;gap:8px;padding:10px 14px;border-radius:12px;background:var(--acc);color:#05131e;font-weight:700;border:none;cursor:pointer}
     .btn.ghost{background:transparent;border:1px solid var(--line);color:var(--ink)}
     .mode{background:transparent;border:1px solid var(--line);color:var(--ink);padding:6px 10px;border-radius:10px;margin-left:8px;cursor:pointer}
 
@@ -101,8 +101,40 @@
     .panel{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:16px}
     .grid{display:grid;gap:16px}
     .cards{grid-template-columns:repeat(auto-fit,minmax(280px,1fr))}
-    .card{background:var(--panel);border:1px solid var(--line);border-radius:16px;overflow:hidden}
-    .card img{width:100%;height:280px;object-fit:cover}
+    .card{background:var(--panel);border:1px solid var(--line);border-radius:16px;overflow:hidden;position:relative}
+
+    /* === Miniaturas sin recorte (contain) === */
+    .thumb{
+      width:100%;
+      /* altura responsiva: no afecta el layout general */
+      height:clamp(200px, 28vw, 320px);
+      display:grid;place-items:center;
+      background:linear-gradient(180deg, rgba(0,0,0,.02), rgba(0,0,0,.04));
+    }
+    html[data-theme="dark"] .thumb{ background:linear-gradient(180deg, rgba(255,255,255,.03), rgba(255,255,255,.06)); }
+    .thumb img{
+      width:100%;
+      height:100%;
+      object-fit:contain; /* <- muestra TODO sin recortar */
+      object-position:center;
+    }
+
+    /* Botón "Ver completa" sobre la miniatura */
+    .view-full{
+      position:absolute;right:10px;bottom:10px;
+      padding:6px 10px;font-size:12.5px;border-radius:10px;
+      border:1px solid var(--line);background:rgba(15,23,42,.65);color:#fff;backdrop-filter:blur(4px);
+      display:inline-flex;gap:6px;align-items:center;opacity:0;transform:translateY(4px);
+      transition:.2s ease; cursor:pointer;
+    }
+    .card:hover .view-full{opacity:1;transform:none}
+    .view-full:focus-visible{opacity:1;transform:none;outline:2px solid var(--acc)}
+
+    /* Tarjetas antiguas de imágenes (arquitectura) mantienen altura fija y cover */
+    .card img.arch{
+      width:100%;height:280px;object-fit:cover;
+    }
+
     .row{display:flex;flex-wrap:wrap;gap:8px}
     .tag{font-size:12px;color:var(--muted);border:1px solid var(--line);padding:6px 8px;border-radius:8px}
 
@@ -129,23 +161,8 @@
     .copy:active{transform:scale(.98)}
 
     /* =========== Procedimiento: 1 columna y alineado =========== */
-    .steps{
-      display:grid;
-      grid-template-columns:1fr;
-      gap:16px;
-      width:100%;
-      margin:0;
-      box-sizing:border-box;
-    }
-    .step{
-      position:relative;
-      background:var(--panel);
-      border:1px solid var(--line);
-      border-radius:16px;
-      padding:16px;
-      box-sizing:border-box;
-      overflow:hidden;
-    }
+    .steps{display:grid;grid-template-columns:1fr;gap:16px;width:100%;margin:0;box-sizing:border-box}
+    .step{position:relative;background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:16px;box-sizing:border-box;overflow:hidden}
     .step::before{
       content:attr(data-step);
       position:absolute;left:16px;top:16px;width:28px;height:28px;border-radius:999px;
@@ -160,6 +177,31 @@
     /* =========== Footer & toTop =========== */
     footer{padding:28px 0 48px;color:var(--muted);border-top:1px solid var(--line)}
     #toTop{position:fixed;right:16px;bottom:16px;display:none;align-items:center;gap:6px;padding:10px 12px;border-radius:999px;border:1px solid var(--line);background:rgba(15,23,42,.75);color:#fff}
+
+    /* =========== Lightbox (dialog) =========== */
+    dialog#lightbox{
+      border:none;padding:0;margin:0;
+      width:min(96vw,1200px);max-width:96vw;
+      background:transparent;
+    }
+    dialog#lightbox::backdrop{
+      background:rgba(0,0,0,.65);
+      backdrop-filter:blur(2px);
+    }
+    .lb-wrap{
+      position:relative;background:var(--panel);border:1px solid var(--line);border-radius:14px;overflow:hidden;
+    }
+    .lb-toolbar{
+      position:absolute;top:8px;right:8px;display:flex;gap:8px;
+    }
+    .lb-btn{
+      background:rgba(15,23,42,.8);color:#fff;border:1px solid var(--line);
+      border-radius:10px;padding:8px 10px;font-size:13px;cursor:pointer
+    }
+    .lb-img{
+      width:100%;height:80vh;max-height:80vh;object-fit:contain;background:#000;
+    }
+    .lb-caption{padding:10px 12px;font-size:13px;color:var(--muted);border-top:1px solid var(--line);background:var(--panel)}
 
     /* =========== Responsivo =========== */
     @media (max-width: 900px){
@@ -258,8 +300,8 @@
         <li><strong>Bloqueo de serialización:</strong> se desactiva hasta que Golden y Red pasen.</li>
       </ul>
       <div class="grid cards">
-        <div class="card"><img loading="lazy" decoding="async" src="../img/ICT-proyecto2-arquitectura.png" alt="Arquitectura general Proyecto 2"></div>
-        <div class="card"><img loading="lazy" decoding="async" src="../img/ICT-proyecto2-flujo.png" alt="Flujo de validación"></div>
+        <div class="card"><img class="arch" loading="lazy" decoding="async" src="../img/ICT-proyecto2-arquitectura.png" alt="Arquitectura general Proyecto 2"></div>
+        <div class="card"><img class="arch" loading="lazy" decoding="async" src="../img/ICT-proyecto2-flujo.png" alt="Flujo de validación"></div>
       </div>
     </section>
 
@@ -549,9 +591,40 @@ subend</code></pre>
     <!-- Galería -->
     <section>
       <h2>Galería</h2>
-      <div class="grid cards">
-        <div class="card"><img loading="lazy" decoding="async" src="../img/ICT-proyecto2-captura1.png" alt="Captura 1"></div>
-        <div class="card"><img loading="lazy" decoding="async" src="../img/ICT-proyecto2-captura2.png" alt="Captura 2"></div>
+      <div class="grid cards" id="galeria">
+        <!-- Cada tarjeta usa .thumb (object-fit:contain) y botón "Ver completa" -->
+        <div class="card">
+          <div class="thumb"><img loading="lazy" decoding="async" src="../img/ICT-proyecto2-captura1.png" alt="Captura 1"></div>
+          <button class="view-full" data-full="../img/ICT-proyecto2-captura1.png" aria-label="Ver imagen completa">🔎 Ver completa</button>
+        </div>
+        <div class="card">
+          <div class="thumb"><img loading="lazy" decoding="async" src="../img/ICT-proyecto2-captura2.png" alt="Captura 2"></div>
+          <button class="view-full" data-full="../img/ICT-proyecto2-captura2.png" aria-label="Ver imagen completa">🔎 Ver completa</button>
+        </div>
+        <div class="card">
+          <div class="thumb"><img loading="lazy" decoding="async" src="../img/ICT-proyecto2-captura1.png" alt="Captura 3"></div>
+          <button class="view-full" data-full="../img/ICT-proyecto2-captura1.png" aria-label="Ver imagen completa">🔎 Ver completa</button>
+        </div>
+        <div class="card">
+          <div class="thumb"><img loading="lazy" decoding="async" src="../img/ICT-proyecto2-captura2.png" alt="Captura 4"></div>
+          <button class="view-full" data-full="../img/ICT-proyecto2-captura2.png" aria-label="Ver imagen completa">🔎 Ver completa</button>
+        </div>
+        <div class="card">
+          <div class="thumb"><img loading="lazy" decoding="async" src="../img/ICT-proyecto2-captura1.png" alt="Captura 5"></div>
+          <button class="view-full" data-full="../img/ICT-proyecto2-captura1.png" aria-label="Ver imagen completa">🔎 Ver completa</button>
+        </div>
+        <div class="card">
+          <div class="thumb"><img loading="lazy" decoding="async" src="../img/ICT-proyecto2-captura2.png" alt="Captura 6"></div>
+          <button class="view-full" data-full="../img/ICT-proyecto2-captura2.png" aria-label="Ver imagen completa">🔎 Ver completa</button>
+        </div>
+        <div class="card">
+          <div class="thumb"><img loading="lazy" decoding="async" src="../img/ICT-proyecto2-captura1.png" alt="Captura 7"></div>
+          <button class="view-full" data-full="../img/ICT-proyecto2-captura1.png" aria-label="Ver imagen completa">🔎 Ver completa</button>
+        </div>
+        <div class="card">
+          <div class="thumb"><img loading="lazy" decoding="async" src="../img/ICT-proyecto2-captura2.png" alt="Captura 8"></div>
+          <button class="view-full" data-full="../img/ICT-proyecto2-captura2.png" aria-label="Ver imagen completa">🔎 Ver completa</button>
+        </div>
       </div>
     </section>
 
@@ -583,6 +656,18 @@ subend</code></pre>
 
   <!-- Botón subir -->
   <div id="toTop">▲ Arriba</div>
+
+  <!-- Lightbox -->
+  <dialog id="lightbox" aria-label="Visor de imagen completa">
+    <div class="lb-wrap">
+      <div class="lb-toolbar">
+        <a class="lb-btn" id="lb-download" download>⬇ Descargar</a>
+        <button class="lb-btn" id="lb-close" aria-label="Cerrar">✕</button>
+      </div>
+      <img class="lb-img" id="lb-img" alt="">
+      <div class="lb-caption" id="lb-caption"></div>
+    </div>
+  </dialog>
 
   <!-- Footer -->
   <footer>
@@ -632,6 +717,53 @@ subend</code></pre>
       toTop.style.display = window.scrollY > 500 ? 'inline-flex' : 'none';
     });
     toTop.addEventListener('click', ()=>window.scrollTo({top:0,behavior:'smooth'}));
+
+    // ===== Lightbox para la galería =====
+    const lightbox = document.getElementById('lightbox');
+    const lbImg = document.getElementById('lb-img');
+    const lbCaption = document.getElementById('lb-caption');
+    const lbClose = document.getElementById('lb-close');
+    const lbDownload = document.getElementById('lb-download');
+
+    function openLightbox(src, alt){
+      lbImg.src = src;
+      lbImg.alt = alt || '';
+      lbCaption.textContent = alt || '';
+      lbDownload.href = src;
+      lbDownload.setAttribute('download', (alt || 'imagen') + '.png');
+      if (typeof lightbox.showModal === 'function') {
+        lightbox.showModal();
+      } else {
+        // Fallback browsers antiguos
+        lightbox.setAttribute('open','');
+      }
+    }
+    function closeLightbox(){
+      if (typeof lightbox.close === 'function') lightbox.close();
+      else lightbox.removeAttribute('open');
+      // Limpia la imagen para liberar memoria en móviles
+      lbImg.src = '';
+    }
+
+    // Click en miniatura o en el botón "Ver completa"
+    document.getElementById('galeria').addEventListener('click', (e)=>{
+      const card = e.target.closest('.card');
+      if (!card) return;
+
+      const img = card.querySelector('.thumb img');
+      const btn = e.target.closest('.view-full');
+
+      if (img && (e.target === img || btn)) {
+        const src = btn?.dataset.full || img.currentSrc || img.src;
+        const alt = img.alt || 'Imagen';
+        openLightbox(src, alt);
+      }
+    });
+
+    // Cerrar por botón, fondo o tecla Esc
+    lbClose.addEventListener('click', closeLightbox);
+    lightbox.addEventListener('click', (e)=>{ if (e.target === lightbox) closeLightbox(); });
+    document.addEventListener('keydown', (e)=>{ if (e.key === 'Escape' && lightbox.open) closeLightbox(); });
   </script>
 </body>
 </html>
