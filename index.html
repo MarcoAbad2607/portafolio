@@ -3,22 +3,21 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Marco Antonio Muñiz Abad — Portafolio</title>
-  <meta name="description" content="Test & Automation Engineer: ICT/FCT, ASP.NET, WPF, SQL Server, MES/IMES, automatización y trazabilidad." />
+  <title data-i18n="meta.title">Marco Antonio Muñiz Abad — Portafolio</title>
+  <meta name="description" data-i18n-content="meta.desc" content="Test & Automation Engineer: ICT/FCT, ASP.NET, WPF, SQL Server, MES/IMES, automatización y trazabilidad." />
   <link rel="icon" href="img/favicon.ico">
   <style>
     /* === Diseño base y paleta === */
     :root{
-      --bg:#f8fafc;        /* fondo principal (azul noche) */
-      --panel:#ffffff;     /* paneles (slate-900) */
-      --ink:#0b1220;       /* texto principal */
-      --muted:#475569;     /* texto secundario */
-      --line:#cbd5e1;      /* líneas/bordes */
-      --acc:#22d3ee;       /* cian */
-      --acc-2:#a78bfa;     /* violeta */
-      --warn:#f59e0b;      /* ámbar */
-      --ok:#34d399;        /* verde */
-	  
+      --bg:#f8fafc;
+      --panel:#ffffff;
+      --ink:#0b1220;
+      --muted:#475569;
+      --line:#cbd5e1;
+      --acc:#22d3ee;
+      --acc-2:#a78bfa;
+      --warn:#f59e0b;
+      --ok:#34d399;
     }
     *{box-sizing:border-box}
     html{height:100%;scroll-behavior:smooth}
@@ -108,27 +107,28 @@
   <header>
     <div class="wrap">
       <nav>
-        <div class="brand"><span class="dot"></span> <span>Marco A. Muñiz — Portafolio</span></div>
-        <button id="menuToggle" class="burger" aria-label="Abrir menú" aria-expanded="false" aria-controls="mobileMenu">☰</button>
+        <div class="brand">
+          <span class="dot"></span>
+          <span data-i18n="brand.title">Marco A. Muñiz — Portafolio</span>
+        </div>
+        <button id="menuToggle" class="burger" aria-label="Abrir menú" data-i18n-aria-label="aria.open_menu" aria-expanded="false" aria-controls="mobileMenu">☰</button>
         <div class="links">
-  <a href="#proyectos" data-i18n="nav.projects">Proyectos</a>
-  <a href="#habilidades" data-i18n="nav.skills">Habilidades</a>
-  <a href="#experiencia" data-i18n="nav.experience">Experiencia</a>
-  <a href="#contacto" data-i18n="nav.contact">Contacto</a>
-  <button id="lang" class="lang" aria-label="Cambiar idioma" data-i18n="nav.lang">ES</button>
-  <button id="mode" class="mode" aria-label="Tema" data-i18n="nav.theme">🌙</button>
-  <a class="btn" href="cv/CV_Marco Antonio Muniz Abad.pdf" target="_blank" rel="noopener" data-i18n="nav.download_cv">Descargar CV</a>
+          <a href="#proyectos" data-i18n="nav.projects">Proyectos</a>
+          <a href="#habilidades" data-i18n="nav.skills">Habilidades</a>
+          <a href="#experiencia" data-i18n="nav.experience">Experiencia</a>
+          <a href="#contacto" data-i18n="nav.contact">Contacto</a>
+          <button id="lang" class="lang" aria-label="Cambiar idioma" data-i18n-aria-label="aria.lang">ES</button>
+          <button id="mode" class="mode" aria-label="Tema" data-i18n-aria-label="aria.theme">🌙</button>
+          <a class="btn" href="cv/CV_Marco Antonio Muniz Abad.pdf" target="_blank" rel="noopener" data-i18n="nav.download_cv">Descargar CV</a>
         </div>
       </nav>
-      <!-- Menú móvil -->
+      <!-- Menú móvil (sin ids duplicados) -->
       <div id="mobileMenu" class="mobile-menu" hidden>
         <a href="#proyectos" data-i18n="nav.projects">Proyectos</a>
-  <a href="#habilidades" data-i18n="nav.skills">Habilidades</a>
-  <a href="#experiencia" data-i18n="nav.experience">Experiencia</a>
-  <a href="#contacto" data-i18n="nav.contact">Contacto</a>
-  <button id="lang" class="lang" aria-label="Cambiar idioma" data-i18n="nav.lang">ES</button>
-  <button id="mode" class="mode" aria-label="Tema" data-i18n="nav.theme">🌙</button>
-  <a class="btn" href="cv/Marco_Antonio_Muniz_Abad_CV.pdf" target="_blank" rel="noopener" data-i18n="nav.download_cv">Descargar CV</a>
+        <a href="#habilidades" data-i18n="nav.skills">Habilidades</a>
+        <a href="#experiencia" data-i18n="nav.experience">Experiencia</a>
+        <a href="#contacto" data-i18n="nav.contact">Contacto</a>
+        <a class="btn" href="cv/Marco_Antonio_Muniz_Abad_CV.pdf" target="_blank" rel="noopener" data-i18n="nav.download_cv">Descargar CV</a>
       </div>
     </div>
   </header>
@@ -138,15 +138,15 @@
     <div class="wrap inner">
       <div>
         <span class="chip" data-i18n="hero.role">Test & Automation Engineer</span>
-<h1 class="title" id="t1" data-i18n="hero.name">Marco Antonio Muñiz Abad</h1>
-<p class="lead" id="t2" data-i18n="hero.lead">ICT/FCT, ASP.NET & WPF, SQL Server/SQLite, endpoints MES/IMES, automatización y trazabilidad. Enfoque en FPY, SPC y mejora continua.</p>
-<div class="cta">
-  <a class="btn" href="#proyectos" id="t3" data-i18n="hero.cta.projects">Ver proyectos</a>
-  <a class="btn ghost" href="#contacto" id="t4" data-i18n="hero.cta.contact">Contactar</a>
+        <h1 class="title" id="t1" data-i18n="hero.name">Marco Antonio Muñiz Abad</h1>
+        <p class="lead" id="t2" data-i18n="hero.lead">ICT/FCT, ASP.NET & WPF, SQL Server/SQLite, endpoints MES/IMES, automatización y trazabilidad. Enfoque en FPY, SPC y mejora continua.</p>
+        <div class="cta">
+          <a class="btn" href="#proyectos" id="t3" data-i18n="hero.cta.projects">Ver proyectos</a>
+          <a class="btn ghost" href="#contacto" id="t4" data-i18n="hero.cta.contact">Contactar</a>
         </div>
       </div>
       <div>
-        <img class="avatar" alt="Avatar" src="img/avatar.png" />
+        <img class="avatar" data-i18n-alt="alt.avatar" alt="Avatar" src="img/avatar.png" />
       </div>
     </div>
   </div>
@@ -154,30 +154,48 @@
   <main class="wrap">
     <!-- Habilidades -->
     <section id="habilidades">
-      <h2 id="t5">Habilidades principales</h2>
+      <h2 id="t5" data-i18n="sections.skills">Habilidades principales</h2>
       <div class="skills">
         <div class="panel">
-          <div style="display:flex;justify-content:space-between;align-items:center"><strong>ICT / FCT / FVT </strong><span class="muted">Intermedio-Avanzado</span></div>
+          <div style="display:flex;justify-content:space-between;align-items:center">
+            <strong>ICT / FCT / FVT</strong>
+            <span class="muted" data-i18n="level.mid_advanced">Intermedio-Avanzado</span>
+          </div>
           <div class="bar"><i style="width:75%"></i></div>
         </div>
         <div class="panel">
-          <div style="display:flex;justify-content:space-between;align-items:center"><strong>ASP.NET / C#</strong><span class="muted">Avanzado</span></div>
+          <div style="display:flex;justify-content:space-between;align-items:center">
+            <strong>ASP.NET / C#</strong>
+            <span class="muted" data-i18n="level.advanced">Avanzado</span>
+          </div>
           <div class="bar"><i style="width:85%"></i></div>
         </div>
         <div class="panel">
-          <div style="display:flex;justify-content:space-between;align-items:center"><strong>WPF / MVVM</strong><span class="muted">Avanzado</span></div>
+          <div style="display:flex;justify-content:space-between;align-items:center">
+            <strong>WPF / MVVM</strong>
+            <span class="muted" data-i18n="level.advanced">Avanzado</span>
+          </div>
           <div class="bar"><i style="width:90%"></i></div>
         </div>
         <div class="panel">
-          <div style="display:flex;justify-content:space-between;align-items:center"><strong>SQL Server / SQLite</strong><span class="muted">Intermedio-Avanzado</span></div>
+          <div style="display:flex;justify-content:space-between;align-items:center">
+            <strong>SQL Server / SQLite</strong>
+            <span class="muted" data-i18n="level.mid_advanced">Intermedio-Avanzado</span>
+          </div>
           <div class="bar"><i style="width:75%"></i></div>
         </div>
         <div class="panel">
-          <div style="display:flex;justify-content:space-between;align-items:center"><strong>MES / IMES (REST)</strong><span class="muted">Intermedio</span></div>
+          <div style="display:flex;justify-content:space-between;align-items:center">
+            <strong>MES / IMES (REST)</strong>
+            <span class="muted" data-i18n="level.mid">Intermedio</span>
+          </div>
           <div class="bar"><i style="width:65%"></i></div>
         </div>
         <div class="panel">
-          <div style="display:flex;justify-content:space-between;align-items:center"><strong>Java / Python / C# / C++</strong><span class="muted">Intermedio-Avanzado</span></div>
+          <div style="display:flex;justify-content:space-between;align-items:center">
+            <strong>Java / Python / C# / C++</strong>
+            <span class="muted" data-i18n="level.mid_advanced">Intermedio-Avanzado</span>
+          </div>
           <div class="bar"><i style="width:75%"></i></div>
         </div>
       </div>
@@ -185,113 +203,148 @@
 
     <!-- Proyectos -->
     <section id="proyectos">
-      <h2 id="t6">Proyectos destacados</h2>
+      <h2 id="t6" data-i18n="sections.projects">Proyectos destacados</h2>
       <div class="panel">
         <div class="search">
-          <input id="q" type="search" placeholder="Buscar proyecto (ej. SQL, WPF, ICT)" aria-label="Buscar proyecto" />
+          <input id="q" type="search"
+            placeholder="Buscar proyecto (ej. SQL, WPF, ICT)"
+            aria-label="Buscar proyecto"
+            data-i18n-placeholder="search.placeholder"
+            data-i18n-aria-label="search.aria" />
         </div>
-        <div class="filters" role="tablist" aria-label="Filtros de proyectos">
-          <button class="active" data-filter="all">Todos</button>
-          <button data-filter="aspnet">ASP.NET</button>
-          <button data-filter="wpf">WPF</button>
-          <button data-filter="testing">Testing</button>
-          <button data-filter="sql">SQL</button>
-          <button data-filter="mes">MES/IMES</button>
+        <div class="filters" role="tablist" aria-label="Filtros de proyectos" data-i18n-aria-label="filters.aria">
+          <button class="active" data-filter="all" data-i18n="filters.all">Todos</button>
+          <button data-filter="aspnet" data-i18n="filters.aspnet">ASP.NET</button>
+          <button data-filter="wpf" data-i18n="filters.wpf">WPF</button>
+          <button data-filter="testing" data-i18n="filters.testing">Testing</button>
+          <button data-filter="sql" data-i18n="filters.sql">SQL</button>
+          <button data-filter="mes" data-i18n="filters.mes">MES/IMES</button>
         </div>
+
         <div class="grid cards" id="cards">
           <!-- Registro de falla ICT -->
           <article class="card" data-tags="testing ict">
-            <img alt="ICT Proyecto Ticket Fallas" src="img/ICT-proyecto1-main.png" />
+            <img data-i18n-alt="alt.ict1" alt="ICT Proyecto Ticket Fallas" src="img/ICT-proyecto1-main.png" />
             <div class="body">
-              <div><span class="badge" style="background:var(--ok)">Testing</span></div>
-              <h3>ICT Ticket Fallas</h3>
-              <p class="muted">ICT, Disminucion de tiempos de analisis con tickets de falla automáticos.</p>
-              <div class="row"><span class="tag">ICT</span><span class="tag">Programación</span><span class="tag">Keysight</span></div>
-              <div class="actions"><a class="btn" href="proyectos/proyecto-ICT-1.html">Caso completo</a></div>
+              <div><span class="badge" style="background:var(--ok)" data-i18n="cards.testing.badge">Testing</span></div>
+              <h3 data-i18n="cards.ict1.title">ICT Ticket Fallas</h3>
+              <p class="muted" data-i18n="cards.ict1.desc">ICT, Disminucion de tiempos de analisis con tickets de falla automáticos.</p>
+              <div class="row">
+                <span class="tag" data-i18n="tags.ict">ICT</span>
+                <span class="tag" data-i18n="tags.programming">Programación</span>
+                <span class="tag" data-i18n="tags.keysight">Keysight</span>
+              </div>
+              <div class="actions"><a class="btn" href="proyectos/proyecto-ICT-1.html" data-i18n="cards.cta">Caso completo</a></div>
             </div>
           </article>
+
           <!-- Validación Goldens ICT -->
           <article class="card" data-tags="testing ict">
-            <img alt="ICT Proyecto Piezas de Confianza" src="img/ICT-proyecto2-main.png" />
+            <img data-i18n-alt="alt.ict2" alt="ICT Proyecto Piezas de Confianza" src="img/ICT-proyecto2-main.png" />
             <div class="body">
-              <div><span class="badge" style="background:var(--ok)">Testing</span></div>
-              <h3>ICT Validación de Estación</h3>
-              <p class="muted">ICT, Validación de estación con piezas de confianza.</p>
-              <div class="row"><span class="tag">ICT</span><span class="tag">Programación</span><span class="tag">Keysight</span></div>
-              <div class="actions"><a class="btn" href="proyectos/proyecto-ICT-2.html">Caso completo</a></div>
+              <div><span class="badge" style="background:var(--ok)" data-i18n="cards.testing.badge">Testing</span></div>
+              <h3 data-i18n="cards.ict2.title">ICT Validación de Estación</h3>
+              <p class="muted" data-i18n="cards.ict2.desc">ICT, Validación de estación con piezas de confianza.</p>
+              <div class="row">
+                <span class="tag" data-i18n="tags.ict">ICT</span>
+                <span class="tag" data-i18n="tags.programming">Programación</span>
+                <span class="tag" data-i18n="tags.keysight">Keysight</span>
+              </div>
+              <div class="actions"><a class="btn" href="proyectos/proyecto-ICT-2.html" data-i18n="cards.cta">Caso completo</a></div>
             </div>
           </article>
-		  <!-- Escaneo Digital Test ICT -->
+
+          <!-- Escaneo Digital Test ICT -->
           <article class="card" data-tags="testing ict">
-            <img alt="ICT Proyecto Piezas de Confianza" src="img/ICT-proyecto3-main.png" />
+            <img data-i18n-alt="alt.ict3" alt="ICT Proyecto Piezas de Confianza" src="img/ICT-proyecto3-main.png" />
             <div class="body">
-              <div><span class="badge" style="background:var(--ok)">Testing</span></div>
-              <h3>Escaneo Automatico ICT</h3>
-              <p class="muted">ICT, Escaneo automatico y manual ICT.</p>
-              <div class="row"><span class="tag">ICT</span><span class="tag">Programación</span><span class="tag">Keysight</span></div>
-              <div class="actions"><a class="btn" href="proyectos/proyecto-ICT-3.html">Caso completo</a></div>
+              <div><span class="badge" style="background:var(--ok)" data-i18n="cards.testing.badge">Testing</span></div>
+              <h3 data-i18n="cards.ict3.title">Escaneo Automatico ICT</h3>
+              <p class="muted" data-i18n="cards.ict3.desc">ICT, Escaneo automatico y manual ICT.</p>
+              <div class="row">
+                <span class="tag" data-i18n="tags.ict">ICT</span>
+                <span class="tag" data-i18n="tags.programming">Programación</span>
+                <span class="tag" data-i18n="tags.keysight">Keysight</span>
+              </div>
+              <div class="actions"><a class="btn" href="proyectos/proyecto-ICT-3.html" data-i18n="cards.cta">Caso completo</a></div>
             </div>
           </article>
-		  <!-- Ejemplo depuracion ICT -->
+
+          <!-- Ejemplo depuración ICT -->
           <article class="card" data-tags="testing ict">
-            <img alt="ICT Ejemplo de depuracion" src="img/ICT-depuracion-main.png" />
+            <img data-i18n-alt="alt.ictdebug" alt="ICT Ejemplo de depuracion" src="img/ICT-depuracion-main.png" />
             <div class="body">
-              <div><span class="badge" style="background:var(--ok)">Testing</span></div>
-              <h3>ICT Ejemplo de Depuracion</h3>
-              <p class="muted">ICT, Ejemplo de Depuracion.</p>
-              <div class="row"><span class="tag">ICT</span><span class="tag">Programación</span><span class="tag">Keysight</span></div>
-              <div class="actions"><a class="btn" href="proyectos/proyecto-ICT-depuracion.html">Caso completo</a></div>
+              <div><span class="badge" style="background:var(--ok)" data-i18n="cards.testing.badge">Testing</span></div>
+              <h3 data-i18n="cards.ictdebug.title">ICT Ejemplo de Depuracion</h3>
+              <p class="muted" data-i18n="cards.ictdebug.desc">ICT, Ejemplo de Depuracion.</p>
+              <div class="row">
+                <span class="tag" data-i18n="tags.ict">ICT</span>
+                <span class="tag" data-i18n="tags.programming">Programación</span>
+                <span class="tag" data-i18n="tags.keysight">Keysight</span>
+              </div>
+              <div class="actions"><a class="btn" href="proyectos/proyecto-ICT-depuracion.html" data-i18n="cards.cta">Caso completo</a></div>
             </div>
           </article>
-		  <!-- Control Conveyor WPF -->
+
+          <!-- Control Conveyor WPF -->
           <article class="card" data-tags="wpf mes">
-            <img alt="WPF Conveyor" src="img/proyecto4-main.png" />
+            <img data-i18n-alt="alt.conveyor" alt="WPF Conveyor" src="img/proyecto4-main.png" />
             <div class="body">
-              <div><span class="badge" style="background:var(--warn)">Desktop</span></div>
-              <h3>Control de Conveyor — App WPF (C#)</h3>
-              <p class="muted">Validación y control de flujo; endpoints hacia MES/IMES; reglas y estados.</p>
-              <div class="row"><span class="tag">WPF</span><span class="tag">C#</span><span class="tag">MES/IMES</span></div>
-              <div class="actions"><a class="btn" href="proyectos/control-conveyor-wpf.html">Caso completo</a></div>
+              <div><span class="badge" style="background:var(--warn)" data-i18n="cards.desktop.badge">Desktop</span></div>
+              <h3 data-i18n="cards.conveyor.title">Control de Conveyor — App WPF (C#)</h3>
+              <p class="muted" data-i18n="cards.conveyor.desc">Validación y control de flujo; endpoints hacia MES/IMES; reglas y estados.</p>
+              <div class="row">
+                <span class="tag" data-i18n="tags.wpf">WPF</span>
+                <span class="tag" data-i18n="tags.csharp">C#</span>
+                <span class="tag" data-i18n="tags.mesimes">MES/IMES</span>
+              </div>
+              <div class="actions"><a class="btn" href="proyectos/control-conveyor-wpf.html" data-i18n="cards.cta">Caso completo</a></div>
             </div>
           </article>
-		  <!-- Registro de Operadores -->
+
+          <!-- Registro de Operadores -->
           <article class="card" data-tags="aspnet sql mes">
-            <img alt="ASP.NET y SQL Server" src="img/proyecto5-main.png" />
+            <img data-i18n-alt="alt.operators" alt="ASP.NET y SQL Server" src="img/proyecto5-main.png" />
             <div class="body">
-              <div><span class="badge">Software</span></div>
-              <h3>Registro de Operadores (ASP.NET + SQL Server)</h3>
-              <p class="muted">Entradas/salidas, pausas, turnos automáticos, tablero en tiempo real y reportes (EPPlus).</p>
-              <div class="row"><span class="tag">ASP.NET</span><span class="tag">SQL Server</span><span class="tag">EPPlus</span></div>
-              <div class="actions"><a class="btn" href="proyectos/registro-operadores.html">Caso completo</a></div>
+              <div><span class="badge" data-i18n="cards.software.badge">Software</span></div>
+              <h3 data-i18n="cards.operators.title">Registro de Operadores (ASP.NET + SQL Server)</h3>
+              <p class="muted" data-i18n="cards.operators.desc">Entradas/salidas, pausas, turnos automáticos, tablero en tiempo real y reportes (EPPlus).</p>
+              <div class="row">
+                <span class="tag">ASP.NET</span>
+                <span class="tag" data-i18n="tags.sqlserver">SQL Server</span>
+                <span class="tag" data-i18n="tags.epplus">EPPlus</span>
+              </div>
+              <div class="actions"><a class="btn" href="proyectos/registro-operadores.html" data-i18n="cards.cta">Caso completo</a></div>
             </div>
           </article>
+
         </div>
       </div>
     </section>
 
     <!-- Experiencia (timeline) -->
     <section id="experiencia">
-      <h2 id="t7">Experiencia</h2>
+      <h2 id="t7" data-i18n="sections.experience">Experiencia</h2>
       <div class="timeline">
         <div class="item">
           <time>2024 — Actual</time>
           <div class="bubble">
-            <strong>BCS Automotive Interface Solutions — Test Engineer</strong>
-            <p class="muted">ICT/FCT en producción, sistema Andon automatizado (MTTR/MTBF), scripts de tickets y soporte a proveedores.</p>
+            <strong data-i18n="exp.bcs.title">BCS Automotive Interface Solutions — Test Engineer</strong>
+            <p class="muted" data-i18n="exp.bcs.desc">ICT/FCT en producción, sistema Andon automatizado (MTTR/MTBF), scripts de tickets y soporte a proveedores.</p>
           </div>
         </div>
         <div class="item">
           <time>2023 — 2024</time>
           <div class="bubble">
-            <strong>Kostal Mexicana — Soporte/Desarrollo</strong>
-            <p class="muted">Bases de datos y trazabilidad en ASP.NET/SQL; estación flexible para microcontroladores.</p>
+            <strong data-i18n="exp.kostal.title">Kostal Mexicana — Soporte/Desarrollo</strong>
+            <p class="muted" data-i18n="exp.kostal.desc">Bases de datos y trazabilidad en ASP.NET/SQL; estación flexible para microcontroladores.</p>
           </div>
         </div>
         <div class="item">
           <time>2022</time>
           <div class="bubble">
-            <strong>Tramec Querétaro — Programador PLC, Variadores de Frecuencia, Servomotores</strong>
-            <p class="muted">Programación PLC Delta; Variadores de Frecuencia; Pruebas eléctricas finales.</p>
+            <strong data-i18n="exp.tramec.title">Tramec Querétaro — Programador PLC, Variadores de Frecuencia, Servomotores</strong>
+            <p class="muted" data-i18n="exp.tramec.desc">Programación PLC Delta; Variadores de Frecuencia; Pruebas eléctricas finales.</p>
           </div>
         </div>
       </div>
@@ -299,21 +352,21 @@
 
     <!-- Contacto -->
     <section id="contacto">
-      <h2 id="t8">Contacto</h2>
+      <h2 id="t8" data-i18n="sections.contact">Contacto</h2>
       <div class="panel" style="display:grid;gap:12px;grid-template-columns:1fr;max-width:760px">
-        <p class="muted">¿Te interesa colaborar? Escríbeme o agenda una llamada.</p>
+        <p class="muted" data-i18n="contact.pitch">¿Te interesa colaborar? Escríbeme o agenda una llamada.</p>
         <div style="display:flex;gap:10px;flex-wrap:wrap">
-          <a class="btn" href="mailto:marcomunizabad@outlook.com">Email</a>
-          <a class="btn ghost" href="https://www.linkedin.com/in/marco-antonio-mu%C3%B1iz-abad-37b94721a/" target="_blank" rel="noopener">LinkedIn</a>
+          <a class="btn" href="mailto:marcomunizabad@outlook.com" data-i18n="contact.email">Email</a>
+          <a class="btn ghost" href="https://www.linkedin.com/in/marco-antonio-mu%C3%B1iz-abad-37b94721a/" target="_blank" rel="noopener" data-i18n="contact.linkedin">LinkedIn</a>
         </div>
       </div>
     </section>
   </main>
 
-  <div id="toTop">▲ Arriba</div>
+  <div id="toTop" data-i18n="ui.toTop">▲ Arriba</div>
 
   <footer>
-    <div class="wrap">© <span id="year"></span> Marco Antonio Muñiz Abad · Hecho con HTML/CSS/JS · Publicado en GitHub Pages</div>
+    <div class="wrap">© <span id="year"></span> <span data-i18n="footer.name">Marco Antonio Muñiz Abad</span> · <span data-i18n="footer.made">Hecho con HTML/CSS/JS</span> · <span data-i18n="footer.host">Publicado en GitHub Pages</span></div>
   </footer>
 
   <script>
@@ -380,124 +433,171 @@
     });
     if (toTop) toTop.addEventListener('click', ()=>window.scrollTo({top:0,behavior:'smooth'}));
 
-    
-	// ===== i18n =====
-  const i18n = {
-    es: {
-      // NAV + Hero + Sections
-      "nav.projects":"Proyectos","nav.skills":"Habilidades","nav.experience":"Experiencia","nav.contact":"Contacto","nav.download_cv":"Descargar CV","nav.lang":"ES","nav.theme":"☾",
-      "hero.role":"Test & Automation Engineer","hero.name":"Marco Antonio Muñiz Abad",
-      "hero.lead":"ICT/FCT, ASP.NET & WPF, SQL Server/SQLite, endpoints MES/IMES, automatización y trazabilidad. Enfoque en FPY, SPC y mejora continua.",
-      "hero.cta.projects":"Ver proyectos","hero.cta.contact":"Contactar",
-      "sections.skills":"Habilidades principales","sections.projects":"Proyectos destacados","sections.experience":"Experiencia","sections.contact":"Contacto",
+    // ===== i18n =====
+    const i18n = {
+      es: {
+        // Meta & brand
+        "meta.title":"Marco Antonio Muñiz Abad — Portafolio",
+        "meta.desc":"Test & Automation Engineer: ICT/FCT, ASP.NET, WPF, SQL Server, MES/IMES, automatización y trazabilidad.",
+        "brand.title":"Marco A. Muñiz — Portafolio",
 
-      // Search + Filters
-      "search.placeholder":"Buscar proyecto (ej. SQL, WPF, ICT)","search.aria":"Buscar proyecto",
-      "filters.aria":"Filtros de proyectos","filters.all":"Todos","filters.aspnet":"ASP.NET","filters.wpf":"WPF","filters.testing":"Testing","filters.sql":"SQL","filters.mes":"MES/IMES",
+        // NAV + Hero + Sections
+        "nav.projects":"Proyectos","nav.skills":"Habilidades","nav.experience":"Experiencia","nav.contact":"Contacto","nav.download_cv":"Descargar CV",
+        "hero.role":"Test & Automation Engineer","hero.name":"Marco Antonio Muñiz Abad",
+        "hero.lead":"ICT/FCT, ASP.NET & WPF, SQL Server/SQLite, endpoints MES/IMES, automatización y trazabilidad. Enfoque en FPY, SPC y mejora continua.",
+        "hero.cta.projects":"Ver proyectos","hero.cta.contact":"Contactar",
+        "sections.skills":"Habilidades principales","sections.projects":"Proyectos destacados","sections.experience":"Experiencia","sections.contact":"Contacto",
 
-      // Tags (reusables)
-      "tags.ict":"ICT","tags.programming":"Programación","tags.keysight":"Keysight","tags.wpf":"WPF","tags.csharp":"C#","tags.mesimes":"MES/IMES","tags.sqlserver":"SQL Server","tags.epplus":"EPPlus",
+        // Levels
+        "level.mid_advanced":"Intermedio-Avanzado","level.advanced":"Avanzado","level.mid":"Intermedio",
 
-      // Cards
-      "cards.testing.badge":"Testing","cards.desktop.badge":"Desktop","cards.software.badge":"Software",
-      "cards.ict1.title":"ICT Ticket Fallas","cards.ict1.desc":"ICT, Disminucion de tiempos de analisis con tickets de falla automáticos.",
-      "cards.ict2.title":"ICT Validación de Estación","cards.ict2.desc":"ICT, Validación de estación con piezas de confianza.",
-      "cards.ict3.title":"Escaneo Automatico ICT","cards.ict3.desc":"ICT, Escaneo automatico y manual ICT.",
-      "cards.ictdebug.title":"ICT Ejemplo de Depuracion","cards.ictdebug.desc":"ICT, Ejemplo de Depuracion.",
-      "cards.conveyor.title":"Control de Conveyor — App WPF (C#)","cards.conveyor.desc":"Validación y control de flujo; endpoints hacia MES/IMES; reglas y estados.",
-      "cards.operators.title":"Registro de Operadores (ASP.NET + SQL Server)","cards.operators.desc":"Entradas/salidas, pausas, turnos automáticos, tablero en tiempo real y reportes (EPPlus).",
-      "cards.cta":"Caso completo",
+        // Search + Filters + ARIA
+        "search.placeholder":"Buscar proyecto (ej. SQL, WPF, ICT)","search.aria":"Buscar proyecto",
+        "filters.aria":"Filtros de proyectos","filters.all":"Todos","filters.aspnet":"ASP.NET","filters.wpf":"WPF","filters.testing":"Testing","filters.sql":"SQL","filters.mes":"MES/IMES",
+        "aria.open_menu":"Abrir menú","aria.theme":"Tema","aria.lang":"Cambiar idioma",
 
-      // Experience
-      "exp.bcs.title":"BCS Automotive Interface Solutions — Test Engineer",
-      "exp.bcs.desc":"ICT/FCT en producción, sistema Andon automatizado (MTTR/MTBF), scripts de tickets y soporte a proveedores.",
-      "exp.kostal.title":"Kostal Mexicana — Soporte/Desarrollo",
-      "exp.kostal.desc":"Bases de datos y trazabilidad en ASP.NET/SQL; estación flexible para microcontroladores.",
-      "exp.tramec.title":"Tramec Querétaro — Programador PLC, Variadores de Frecuencia, Servomotores",
-      "exp.tramec.desc":"Programación PLC Delta; Variadores de Frecuencia; Pruebas eléctricas finales.",
+        // Tags
+        "tags.ict":"ICT","tags.programming":"Programación","tags.keysight":"Keysight","tags.wpf":"WPF","tags.csharp":"C#","tags.mesimes":"MES/IMES","tags.sqlserver":"SQL Server","tags.epplus":"EPPlus",
 
-      // Contact + UI + Footer
-      "contact.pitch":"¿Te interesa colaborar? Escríbeme o agenda una llamada.","contact.email":"Email","contact.linkedin":"LinkedIn",
-      "ui.toTop":"▲ Arriba",
-      "footer.name":"Marco Antonio Muñiz Abad","footer.made":"Hecho con HTML/CSS/JS","footer.host":"Publicado en GitHub Pages"
-    },
-    en: {
-      // NAV + Hero + Sections
-      "nav.projects":"Projects","nav.skills":"Skills","nav.experience":"Experience","nav.contact":"Contact","nav.download_cv":"Download CV","nav.lang":"EN","nav.theme":"☾",
-      "hero.role":"Test & Automation Engineer","hero.name":"Marco Antonio Muñiz Abad",
-      "hero.lead":"ICT/FCT, ASP.NET & WPF, SQL Server/SQLite, MES/IMES endpoints, automation and traceability. Focus on FPY, SPC and continuous improvement.",
-      "hero.cta.projects":"See projects","hero.cta.contact":"Contact",
-      "sections.skills":"Core skills","sections.projects":"Featured projects","sections.experience":"Experience","sections.contact":"Contact",
+        // Cards
+        "cards.testing.badge":"Testing","cards.desktop.badge":"Desktop","cards.software.badge":"Software",
+        "cards.ict1.title":"ICT Ticket Fallas","cards.ict1.desc":"ICT, Disminucion de tiempos de analisis con tickets de falla automáticos.",
+        "cards.ict2.title":"ICT Validación de Estación","cards.ict2.desc":"ICT, Validación de estación con piezas de confianza.",
+        "cards.ict3.title":"Escaneo Automatico ICT","cards.ict3.desc":"ICT, Escaneo automatico y manual ICT.",
+        "cards.ictdebug.title":"ICT Ejemplo de Depuracion","cards.ictdebug.desc":"ICT, Ejemplo de Depuracion.",
+        "cards.conveyor.title":"Control de Conveyor — App WPF (C#)","cards.conveyor.desc":"Validación y control de flujo; endpoints hacia MES/IMES; reglas y estados.",
+        "cards.operators.title":"Registro de Operadores (ASP.NET + SQL Server)","cards.operators.desc":"Entradas/salidas, pausas, turnos automáticos, tablero en tiempo real y reportes (EPPlus).",
+        "cards.cta":"Caso completo",
 
-      // Search + Filters
-      "search.placeholder":"Search project (e.g., SQL, WPF, ICT)","search.aria":"Search project",
-      "filters.aria":"Project filters","filters.all":"All","filters.aspnet":"ASP.NET","filters.wpf":"WPF","filters.testing":"Testing","filters.sql":"SQL","filters.mes":"MES/IMES",
+        // Alts
+        "alt.avatar":"Avatar",
+        "alt.ict1":"ICT Proyecto Ticket Fallas",
+        "alt.ict2":"ICT Proyecto Piezas de Confianza",
+        "alt.ict3":"ICT Escaneo Automático",
+        "alt.ictdebug":"ICT Ejemplo de Depuración",
+        "alt.conveyor":"WPF Conveyor",
+        "alt.operators":"ASP.NET y SQL Server",
 
-      // Tags
-      "tags.ict":"ICT","tags.programming":"Programming","tags.keysight":"Keysight","tags.wpf":"WPF","tags.csharp":"C#","tags.mesimes":"MES/IMES","tags.sqlserver":"SQL Server","tags.epplus":"EPPlus",
+        // Experience
+        "exp.bcs.title":"BCS Automotive Interface Solutions — Test Engineer",
+        "exp.bcs.desc":"ICT/FCT en producción, sistema Andon automatizado (MTTR/MTBF), scripts de tickets y soporte a proveedores.",
+        "exp.kostal.title":"Kostal Mexicana — Soporte/Desarrollo",
+        "exp.kostal.desc":"Bases de datos y trazabilidad en ASP.NET/SQL; estación flexible para microcontroladores.",
+        "exp.tramec.title":"Tramec Querétaro — Programador PLC, Variadores de Frecuencia, Servomotores",
+        "exp.tramec.desc":"Programación PLC Delta; Variadores de Frecuencia; Pruebas eléctricas finales.",
 
-      // Cards
-      "cards.testing.badge":"Testing","cards.desktop.badge":"Desktop","cards.software.badge":"Software",
-      "cards.ict1.title":"ICT Failure Tickets","cards.ict1.desc":"ICT, Reduced analysis time with automatic failure tickets.",
-      "cards.ict2.title":"ICT Station Validation","cards.ict2.desc":"ICT, Station validation with golden units.",
-      "cards.ict3.title":"Automatic ICT Scanning","cards.ict3.desc":"ICT, Automatic and manual ICT scanning.",
-      "cards.ictdebug.title":"ICT Debug Example","cards.ictdebug.desc":"ICT, Debug example.",
-      "cards.conveyor.title":"Conveyor Control — WPF App (C#)","cards.conveyor.desc":"Flow validation & control; MES/IMES endpoints; rules and states.",
-      "cards.operators.title":"Operator Registry (ASP.NET + SQL Server)","cards.operators.desc":"Check-in/out, breaks, auto shifts, real-time board & reports (EPPlus).",
-      "cards.cta":"Case study",
+        // Contact + UI + Footer
+        "contact.pitch":"¿Te interesa colaborar? Escríbeme o agenda una llamada.","contact.email":"Email","contact.linkedin":"LinkedIn",
+        "ui.toTop":"▲ Arriba",
+        "footer.name":"Marco Antonio Muñiz Abad","footer.made":"Hecho con HTML/CSS/JS","footer.host":"Publicado en GitHub Pages"
+      },
+      en: {
+        // Meta & brand
+        "meta.title":"Marco Antonio Muñiz Abad — Portfolio",
+        "meta.desc":"Test & Automation Engineer: ICT/FCT, ASP.NET, WPF, SQL Server, MES/IMES, automation and traceability.",
+        "brand.title":"Marco A. Muñiz — Portfolio",
 
-      // Experience
-      "exp.bcs.title":"BCS Automotive Interface Solutions — Test Engineer",
-      "exp.bcs.desc":"ICT/FCT in production, automated Andon system (MTTR/MTBF), ticket scripts and supplier support.",
-      "exp.kostal.title":"Kostal Mexicana — Support/Development",
-      "exp.kostal.desc":"Databases and traceability in ASP.NET/SQL; flexible microcontroller station.",
-      "exp.tramec.title":"Tramec Querétaro — PLC, VFDs, Servomotors Programmer",
-      "exp.tramec.desc":"Delta PLC programming; VFDs; final electrical tests.",
+        // NAV + Hero + Sections
+        "nav.projects":"Projects","nav.skills":"Skills","nav.experience":"Experience","nav.contact":"Contact","nav.download_cv":"Download CV",
+        "hero.role":"Test & Automation Engineer","hero.name":"Marco Antonio Muñiz Abad",
+        "hero.lead":"ICT/FCT, ASP.NET & WPF, SQL Server/SQLite, MES/IMES endpoints, automation and traceability. Focus on FPY, SPC and continuous improvement.",
+        "hero.cta.projects":"See projects","hero.cta.contact":"Contact",
+        "sections.skills":"Core skills","sections.projects":"Featured projects","sections.experience":"Experience","sections.contact":"Contact",
 
-      // Contact + UI + Footer
-      "contact.pitch":"Interested in collaborating? Email me or schedule a call.","contact.email":"Email","contact.linkedin":"LinkedIn",
-      "ui.toTop":"▲ Top",
-      "footer.name":"Marco Antonio Muñiz Abad","footer.made":"Built with HTML/CSS/JS","footer.host":"Hosted on GitHub Pages"
-    }
-  };
+        // Levels
+        "level.mid_advanced":"Intermediate-Advanced","level.advanced":"Advanced","level.mid":"Intermediate",
 
-  // Aplica texto a elementos y atributos
-  function applyI18nText(root=document){
-    root.querySelectorAll('[data-i18n]').forEach(el=>{
-      const key = el.getAttribute('data-i18n');
-      if (i18n[lang][key]) el.textContent = i18n[lang][key];
-    });
-    // atributos comunes
-    const attrKeys = ['title','placeholder','aria-label'];
-    attrKeys.forEach(attr=>{
-      root.querySelectorAll(`[data-i18n-${attr}]`).forEach(el=>{
-        const key = el.getAttribute(`data-i18n-${attr}`);
-        if (i18n[lang][key]) el.setAttribute(attr, i18n[lang][key]);
+        // Search + Filters + ARIA
+        "search.placeholder":"Search project (e.g., SQL, WPF, ICT)","search.aria":"Search project",
+        "filters.aria":"Project filters","filters.all":"All","filters.aspnet":"ASP.NET","filters.wpf":"WPF","filters.testing":"Testing","filters.sql":"SQL","filters.mes":"MES/IMES",
+        "aria.open_menu":"Open menu","aria.theme":"Theme","aria.lang":"Change language",
+
+        // Tags
+        "tags.ict":"ICT","tags.programming":"Programming","tags.keysight":"Keysight","tags.wpf":"WPF","tags.csharp":"C#","tags.mesimes":"MES/IMES","tags.sqlserver":"SQL Server","tags.epplus":"EPPlus",
+
+        // Cards
+        "cards.testing.badge":"Testing","cards.desktop.badge":"Desktop","cards.software.badge":"Software",
+        "cards.ict1.title":"ICT Failure Tickets","cards.ict1.desc":"ICT, Reduced analysis time with automatic failure tickets.",
+        "cards.ict2.title":"ICT Station Validation","cards.ict2.desc":"ICT, Station validation with golden units.",
+        "cards.ict3.title":"Automatic ICT Scanning","cards.ict3.desc":"ICT, Automatic and manual ICT scanning.",
+        "cards.ictdebug.title":"ICT Debug Example","cards.ictdebug.desc":"ICT, Debug example.",
+        "cards.conveyor.title":"Conveyor Control — WPF App (C#)","cards.conveyor.desc":"Flow validation & control; MES/IMES endpoints; rules and states.",
+        "cards.operators.title":"Operator Registry (ASP.NET + SQL Server)","cards.operators.desc":"Check-in/out, breaks, auto shifts, real-time board & reports (EPPlus).",
+        "cards.cta":"Case study",
+
+        // Alts
+        "alt.avatar":"Avatar",
+        "alt.ict1":"ICT Failure Tickets",
+        "alt.ict2":"ICT Golden Units Validation",
+        "alt.ict3":"Automatic ICT Scanning",
+        "alt.ictdebug":"ICT Debug Example",
+        "alt.conveyor":"WPF Conveyor",
+        "alt.operators":"ASP.NET & SQL Server",
+
+        // Experience
+        "exp.bcs.title":"BCS Automotive Interface Solutions — Test Engineer",
+        "exp.bcs.desc":"ICT/FCT in production, automated Andon system (MTTR/MTBF), ticket scripts and supplier support.",
+        "exp.kostal.title":"Kostal Mexicana — Support/Development",
+        "exp.kostal.desc":"Databases and traceability in ASP.NET/SQL; flexible microcontroller station.",
+        "exp.tramec.title":"Tramec Querétaro — PLC, VFDs, Servomotors Programmer",
+        "exp.tramec.desc":"Delta PLC programming; VFDs; final electrical tests.",
+
+        // Contact + UI + Footer
+        "contact.pitch":"Interested in collaborating? Email me or schedule a call.","contact.email":"Email","contact.linkedin":"LinkedIn",
+        "ui.toTop":"▲ Top",
+        "footer.name":"Marco Antonio Muñiz Abad","footer.made":"Built with HTML/CSS/JS","footer.host":"Hosted on GitHub Pages"
+      }
+    };
+
+    // Aplica texto a elementos y atributos
+    function applyI18nText(root=document){
+      // Element text
+      root.querySelectorAll('[data-i18n]').forEach(el=>{
+        const key = el.getAttribute('data-i18n');
+        if (i18n[lang][key]) el.textContent = i18n[lang][key];
       });
-    });
-  }
+      // Common attributes
+      const attrKeys = ['title','placeholder','aria-label','content','alt'];
+      attrKeys.forEach(attr=>{
+        root.querySelectorAll(`[data-i18n-${attr}]`).forEach(el=>{
+          const key = el.getAttribute(`data-i18n-${attr}`);
+          if (i18n[lang][key]) el.setAttribute(attr, i18n[lang][key]);
+        });
+      });
+      // Actualiza <title> del documento si tiene data-i18n
+      const t = document.querySelector('title[data-i18n]');
+      if (t && i18n[lang][t.getAttribute('data-i18n')]) {
+        document.title = i18n[lang][t.getAttribute('data-i18n')];
+      }
+      // Actualiza meta description
+      const md = document.querySelector('meta[name="description"][data-i18n-content]');
+      if (md) {
+        const key = md.getAttribute('data-i18n-content');
+        if (i18n[lang][key]) md.setAttribute('content', i18n[lang][key]);
+      }
+    }
 
-  // Estado de idioma
-  const langBtn = document.getElementById('lang');
-  let lang = localStorage.getItem('lang') || 'es';
+    // Estado de idioma
+    const langBtn = document.getElementById('lang');
+    let lang = localStorage.getItem('lang') || 'es';
 
-  function updateLangUI(){
-    // Cambia etiqueta del botón a ES/EN
-    if (langBtn) langBtn.textContent = (lang === 'es' ? 'ES' : 'EN');
-    applyI18nText(document);
-  }
+    function updateLangUI(){
+      document.documentElement.setAttribute('lang', lang);
+      if (langBtn) langBtn.textContent = (lang === 'es' ? 'ES' : 'EN');
+      applyI18nText(document);
+    }
 
-  // Inicializa
-  updateLangUI();
+    // Inicializa
+    updateLangUI();
 
-  // Toggle idioma
-  if (langBtn){
-    langBtn.addEventListener('click', ()=>{
-      lang = (lang === 'es') ? 'en' : 'es';
-      localStorage.setItem('lang', lang);
-      updateLangUI();
-    });
-  }
+    // Toggle idioma
+    if (langBtn){
+      langBtn.addEventListener('click', ()=>{
+        lang = (lang === 'es') ? 'en' : 'es';
+        localStorage.setItem('lang', lang);
+        updateLangUI();
+      });
+    }
 
     // ===== Menú móvil (toggle + autocerrar) =====
     const menuBtn = document.getElementById('menuToggle');
