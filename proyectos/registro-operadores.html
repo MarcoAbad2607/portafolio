@@ -3,105 +3,526 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Case Study — Registro de Operadores</title>
-  <meta name="description" content="Caso de estudio de proyecto: contexto, arquitectura, implementación, resultados y lecciones." />
-  <link rel="icon" href="../favicon.ico">
+  <title>ICT Ticket Fallas — Caso completo</title>
+  <meta name="description" content="Caso completo: ICT Ticket Fallas. Arquitectura, procedimiento, resultados y detalles técnicos." />
+  <meta name="theme-color" content="#f8fafc" id="themeColor">
+  <link rel="icon" href="../img/favicon.ico">
   <style>
-    :root { --bg:#0e0e12; --card:#171720; --ink:#f7f7fb; --muted:#aab0bf; --acc:#ffd54d; --line:#272737; }
+    /* =========== Paleta base (igual al index) =========== */
+    :root{
+      --bg:#f8fafc;           /* claro por defecto */
+      --panel:#ffffff;
+      --ink:#0b1220;
+      --muted:#475569;
+      --line:#cbd5e1;
+      --acc:#22d3ee;          /* cian */
+      --acc-2:#a78bfa;        /* violeta */
+      --warn:#f59e0b;         /* ámbar */
+      --ok:#34d399;           /* verde */
+      /* Copiar */
+      --btn-copy-bg:#0f172a;  /* fondo botón copiar (claro) */
+      --btn-copy-ink:#e6edf3; /* texto botón copiar (claro) */
+      --code-bg:#0b1220;      /* fondo code en claro (oscuro suave) */
+      --code-ink:#e6edf3;
+      --chip-bg:#eef2ff;      /* chips breadcrumb claros */
+      --chip-ink:#1e293b;
+    }
+    html[data-theme="dark"]{
+      --bg:#0b1220;
+      --panel:#0f172a;
+      --ink:#e6edf3;
+      --muted:#98a2b3;
+      --line:#22314c;
+      --btn-copy-bg:#1f2937;  /* fondo botón copiar en oscuro */
+      --btn-copy-ink:#e5e7eb;
+      --code-bg:#0a0f1a;
+      --code-ink:#e6edf3;
+      --chip-bg:#111827;
+      --chip-ink:#e5e7eb;
+    }
+
     *{box-sizing:border-box}
-    html,body{height:100%}
-    body{margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,Arial,sans-serif;background:var(--bg);color:var(--ink)}
+    html{height:100%;scroll-behavior:smooth}
+    body{
+      height:100%;margin:0;
+      font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,Arial,sans-serif;
+      background:var(--bg);color:var(--ink)
+    }
     a{color:var(--acc);text-decoration:none}
     a:hover{text-decoration:underline}
-    .wrap{max-width:1080px;margin:0 auto;padding:24px}
-    h1{margin:8px 0}
+    img{max-width:100%;display:block}
+    .wrap{max-width:1200px;margin:0 auto;padding:0 20px}
+
+    /* =========== Header minimal, sticky =========== */
+    header{position:sticky;top:0;z-index:50;background:rgba(248,250,252,.7);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+    html[data-theme="dark"] header{ background:rgba(11,18,32,.6); }
+    nav{display:flex;align-items:center;justify-content:space-between;height:64px}
+    .brand{display:flex;align-items:center;gap:10px;font-weight:800;letter-spacing:.3px}
+    .brand .dot{width:10px;height:10px;border-radius:50%;background:linear-gradient(90deg,var(--acc),var(--acc-2))}
+    .btn{display:inline-flex;align-items:center;gap:8px;padding:10px 14px;border-radius:12px;background:var(--acc);color:#05131e;font-weight:700;border:none}
+    .btn.ghost{background:transparent;border:1px solid var(--line);color:var(--ink)}
+    .mode{background:transparent;border:1px solid var(--line);color:var(--ink);padding:6px 10px;border-radius:10px;margin-left:8px;cursor:pointer}
+
+    /* Chips reutilizables */
+    .chip{
+      display:inline-flex;align-items:center;gap:6px;
+      padding:6px 10px;border-radius:999px;border:1px solid var(--line);
+      background:var(--chip-bg);color:var(--chip-ink);font-size:12.5px
+    }
+
+    /* Accesible focus */
+    :where(a,button).btn:focus-visible,
+    :where(.mode,.copy,#toTop,a,button):focus-visible{
+      outline:2px solid var(--acc);outline-offset:2px
+    }
+
+    .btn.ghost:hover{background:rgba(0,0,0,.04)}
+    html[data-theme="dark"] .btn.ghost:hover{background:rgba(255,255,255,.04)}
+
+    /* =========== Hero (igual al index) =========== */
+    .hero{position:relative;overflow:hidden}
+    .hero .inner{display:grid;gap:24px;grid-template-columns:1.1fr .9fr;align-items:center;padding:36px 0 12px}
+    .title{font-size:clamp(28px,4.5vw,48px);line-height:1.1;margin:0}
+    .lead{color:var(--muted);margin:0}
+    .cta{display:flex;gap:12px;flex-wrap:wrap;margin-top:10px}
+    .blob{
+      position:absolute;inset:-20% auto auto -10%;width:60vw;height:60vw;filter:blur(80px);
+      background:
+        radial-gradient(circle at 30% 30%,rgba(34,211,238,.25),transparent 60%),
+        radial-gradient(circle at 70% 60%,rgba(167,139,250,.22),transparent 60%);
+      pointer-events:none
+    }
+    .avatar{width:140px;height:140px;border-radius:12px;border:2px solid var(--line);background:#0b1220;margin-left:auto;object-fit:cover}
+
+    /* =========== Secciones y básicos =========== */
+    section{padding:28px 0;scroll-margin-top:80px}
+    h2{font-size:22px;margin:0 0 12px}
     .muted{color:var(--muted)}
-    .grid{display:grid;gap:16px;grid-template-columns:1fr}
-    @media(min-width:920px){.grid{grid-template-columns:1.2fr .8fr}}
-    .card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:16px}
-    img{width:100%;border-radius:12px;background:#0b0b0f}
-    pre{background:#0b0b0f;color:#f7f7fb;padding:12px;border-radius:12px;overflow:auto}
-    code{font-family:ui-monospace,Menlo,Consolas,monospace}
+    .panel{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:16px}
+    .grid{display:grid;gap:16px}
+    .cards{grid-template-columns:repeat(auto-fit,minmax(280px,1fr))}
+    .card{background:var(--panel);border:1px solid var(--line);border-radius:16px;overflow:hidden}
+    .card img{width:100%;height:280px;object-fit:cover}
     .row{display:flex;flex-wrap:wrap;gap:8px}
     .tag{font-size:12px;color:var(--muted);border:1px solid var(--line);padding:6px 8px;border-radius:8px}
-    .back{display:inline-block;margin:12px 0}
-    .gallery{display:grid;gap:10px;grid-template-columns:1fr}
-    @media(min-width:720px){.gallery{grid-template-columns:1fr 1fr}}
+
+    /* =========== Breadcrumb con chips =========== */
+    .crumbs{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin:12px 0}
+    .crumbs a, .crumbs span[aria-current="page"]{
+      display:inline-flex;align-items:center;gap:6px;
+      padding:6px 12px;border-radius:999px;border:1px solid var(--line);
+      background:var(--chip-bg);color:var(--chip-ink);text-decoration:none
+    }
+    .crumbs .sep{opacity:.5;color:var(--muted);padding:0 2px}
+
+    /* =========== Código + botón copiar =========== */
+    pre{
+      position:relative;margin:0;padding:14px;border:1px solid var(--line);
+      background:var(--code-bg);border-radius:12px;overflow:auto; padding-top:38px;
+    }
+    code{font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono","Courier New",monospace;color:var(--code-ink);font-size:13.5px;white-space:pre}
+    .copy{
+      position:absolute;right:8px;top:8px;padding:7px 10px;border-radius:8px;border:1px solid var(--line);
+      background:var(--btn-copy-bg);color:var(--btn-copy-ink);cursor:pointer;font-size:12px;box-shadow:0 1px 2px rgba(0,0,0,.25)
+    }
+    .copy:hover{opacity:.9}
+    .copy:active{transform:scale(.98)}
+
+    /* =========== Procedimiento realizado (steps) =========== */
+    /* ===== Procedimiento: 1 columna, alineado y sin desbordes ===== */
+.steps{
+  display:grid;
+  grid-template-columns:1fr;   /* siempre una columna */
+  gap:16px;
+  width:100%;                  /* igual que .wrap */
+  margin:0;                    /* nada de centrado extra */
+  box-sizing:border-box;
+}
+
+.step{
+  position:relative;
+  background:var(--panel);
+  border:1px solid var(--line);
+  border-radius:16px;
+  padding:16px;                /* mismo “aire” que .panel */
+  box-sizing:border-box;
+  overflow:hidden;             /* evita que algo sobresalga (badge/shadows) */
+}
+
+/* Badge dentro del contenedor, sin empujar el bloque */
+.step::before{
+  content:attr(data-step);
+  position:absolute;
+  left:16px;                   /* dentro del padding */
+  top:16px;
+  width:28px; height:28px; border-radius:999px;
+  display:grid; place-items:center; font-weight:700;
+  background:linear-gradient(90deg,var(--acc),var(--acc-2));
+  color:#05131e;
+}
+
+/* Solo el título se corre un poco para no pisar el badge */
+.step h3{ margin:0 0 8px 44px; }
+
+/* ===== Responsivo ===== */
+@media (max-width: 900px){
+  .steps{ gap:12px; }
+  .step{ padding:12px; }
+  .step::before{ left:12px; top:12px; width:26px; height:26px; }
+  .step h3{ margin:0 0 8px 44px; }
+}
   </style>
 </head>
 <body>
-  <div class="wrap">
-    <a class="back" href="../index.html">← Volver al portafolio</a>
-    <h1>Título del Proyecto</h1>
-    <p class="muted">Resumen breve del objetivo, alcance y resultados (2–3 líneas). Datos e imágenes anonimizados.</p>
+  <!-- Header minimal -->
+  <header>
+    <div class="wrap">
+      <nav>
+        <div class="brand"><span class="dot"></span> <span>Marco A. Muñiz — Proyecto</span></div>
+        <div style="display:flex;align-items:center;gap:8px">
+          <a class="btn ghost" href="../index.html#proyectos">← Volver</a>
+          <button id="mode" class="mode" aria-label="Tema">☼</button>
+        </div>
+      </nav>
+    </div>
+  </header>
 
-    <div class="grid">
-      <!-- Columna principal -->
-      <main class="card">
-        <h2>Contexto</h2>
-        <p>No se tenia un control del manejo del personal dentro del area de produccion, esto aumentaba los tiempos de trabajo y un mal manejo de personal.</p>
+  <!-- Hero del proyecto -->
+  <div class="hero">
+    <div class="blob" aria-hidden="true"></div>
+    <div class="wrap inner">
+      <div>
+        <span class="chip">Proyecto</span>
+        <h1 class="title">ICT Ticket Fallas</h1>
+        <p class="lead">ICT, disminución de tiempos de análisis con tickets de falla automáticos.</p>
+        <div class="cta">
+          <a class="btn" href="../index.html#proyectos">← Volver</a>
+          <!-- Cambia esta URL si tienes repo público -->
+          <a class="btn ghost" href="https://github.com/tuusuario/tu-repo" target="_blank" rel="noopener">Ver en GitHub</a>
+        </div>
+      </div>
+      <div>
+        <img class="avatar" loading="lazy" decoding="async" alt="Imagen representativa del proyecto" src="../img/ICT-proyecto1-main.png" />
+      </div>
+    </div>
+  </div>
 
-        <h2>Arquitectura / Flujo</h2>
-        <img src="../img/ejemplos/arquitectura.png" alt="Diagrama de arquitectura" />
-        <p class="muted">Sustituye por tu diagrama. Evita logos o datos sensibles.</p>
+  <!-- Breadcrumb -->
+  <div class="wrap" style="margin-top:10px">
+    <nav class="crumbs" aria-label="breadcrumb">
+      <a href="../index.html">Inicio</a>
+      <span class="sep">›</span>
+      <a href="../index.html#proyectos">Proyectos</a>
+      <span class="sep">›</span>
+      <span aria-current="page">ICT Ticket Fallas</span>
+    </nav>
+  </div>
 
-        <h2>Implementación</h2>
-        <h3>Descripción</h3>
-        <p>Explica los módulos clave (backend, UI, base de datos, endpoints MES/IMES, servicios Windows, etc.).</p>
-
-        <h3>Fragmentos de código</h3>
-        <pre><code>// Ejemplo ASP.NET Controller
-[HttpPost("/configuracion/registrar/entrada")]
-public IActionResult RegistrarEntrada([FromBody] EntradaDto dto) {
-    // Validaciones, persistencia, retorno
-    return Ok(new { ok = true });
-}
-
-// Ejemplo WPF ViewModel (MVVM)
-public class ConveyorViewModel {
-    public ICommand StartCmd { get; }
-    // ... lógica de estados / reglas de negocio
-}
-</code></pre>
-
-        <h2>Resultados</h2>
-        <ul>
-          <li>+X% FPY, -Y% tiempo de ciclo, -Z% errores de registro.</li>
-          <li>Mejor visibilidad en tiempo real y trazabilidad.</li>
-        </ul>
-
-        <h2>Lecciones aprendidas</h2>
-        <ul>
-          <li>Buenas prácticas, validaciones tempranas, pruebas automatizadas, etc.</li>
-        </ul>
-      </main>
-
-      <!-- Aside derecho -->
-      <aside class="card">
-        <h3>Ficha técnica</h3>
-        <div class="row">
+  <!-- Contenido principal -->
+  <main class="wrap">
+    <!-- Resumen -->
+    <section>
+      <h2>Resumen</h2>
+      <div class="panel">
+        <p>
+          Normalmente, los equipos ICT Keysight i3070 imprimen los tickets de falla en una impresora física integrada.
+          Sin embargo, este proceso genera gasto de consumibles, requiere mantenimiento y complica la trazabilidad digital.
+          El objetivo del proyecto fue reemplazar la impresión física por una <strong>generación virtual de tickets</strong>,
+          almacenando las fallas en archivos accesibles desde cualquier PC.
+        </p>
+        <div class="row" style="margin-top:8px">
           <span class="tag">ASP.NET</span>
           <span class="tag">WPF</span>
           <span class="tag">SQL Server</span>
-          <span class="tag">SQLite</span>
-          <span class="tag">MES/IMES</span>
-          <span class="tag">SPC / NPI</span>
+          <span class="tag">REST</span>
+          <span class="tag">ICT/FCT</span>
         </div>
+      </div>
+    </section>
 
-        <h3>Galería</h3>
-        <div class="gallery">
-          <img src="../img/ejemplos/captura1.png" alt="Captura 1" />
-          <img src="../img/ejemplos/captura2.png" alt="Captura 2" />
-          <!-- Agrega más imágenes si lo necesitas -->
-        </div>
+    <!-- Arquitectura -->
+    <section>
+      <h2>Arquitectura</h2>
+      <ul>
+        <li><strong>Equipo base:</strong> ICT Keysight i3070</li>
+        <li><strong>Scripts Batch:</strong> automatizan la apertura y limpieza de archivos de falla.</li>
+        <li><strong>Carpeta central:</strong> <code>C:/infoict</code> donde se concentran logs y tickets.</li>
+        <li><strong>Ajustes en Testplan:</strong> modificados para copiar, abrir y limpiar el archivo de fallas.</li>
+      </ul>
+      <div class="grid cards">
+        <div class="card"><img loading="lazy" decoding="async" src="../img/ICT-proyecto1-arquitectura.png" alt="Arquitectura general"></div>
+        <div class="card"><img loading="lazy" decoding="async" src="../img/ICT-proyecto1-diagramadeflujo.png" alt="Flujo de datos"></div>
+      </div>
+    </section>
 
-        <h3>Descargas</h3>
+    <!-- Procedimiento realizado -->
+    <section>
+      <h2>Procedimiento realizado</h2>
+      <div class="steps">
+        <!-- Paso 1 -->
+        <article class="step" data-step="1">
+          <h3>Definición del flujo e identificación de puntos de falla</h3>
+          <p class="muted">Revisión de logs, mapeo de testplan ICT y tiempos de diagnóstico. Se definieron categorías de falla y severidades.</p>
+          <figure class="figure">
+            <img loading="lazy" decoding="async" src="../img/ICT-proyecto1-ishikawa.png" alt="Mapa de flujo / Ishikawa" />
+            <figcaption>Mapa de flujo y categorías priorizadas.</figcaption>
+          </figure>
+        </article>
+
+        <!-- Paso 2 -->
+        <article class="step" data-step="2">
+          <h3>Testplan: registrar log de falla en archivo central</h3>
+          <p class="muted">Se escribe/adjunta el log de falla en <code>C:/infoict/falla.txt</code>.</p>
+          <pre><button class="copy" data-copy>Copiar</button><code>!Archivo log general
+Fallaruta$= "C:/infoict/falla.txt"
+append "Fail.txt" to Fallaruta$, Err</code></pre>
+        </article>
+
+        <!-- Paso 3 -->
+        <article class="step" data-step="3">
+          <h3>Testplan: abrir ticket virtual al detectar panel fallido</h3>
+          <p class="muted">Cierra instancia previa y abre el TXT para el análisis inmediato.</p>
+          <pre><button class="copy" data-copy>Copiar</button><code>if panelfailed then
+  if Verificar_Panel &lt;&gt; Number_Boards_On_Panel then
+    !Cerrar y después abrir archivo fail.txt
+    execute "C:/infoict/cerrarfalla.bat"
+    execute "C:/infoict/abrirtxt.bat " &amp; "C:/infoict/falla.txt"
+  end if
+end if</code></pre>
+        </article>
+
+        <!-- Paso 4 -->
+        <article class="step" data-step="4">
+          <h3>Testplan: limpiar archivo de falla al finalizar</h3>
+          <p class="muted">Deja el ticket listo para el siguiente ciclo.</p>
+          <pre><button class="copy" data-copy>Copiar</button><code>!------Borrar contenido de archivo de falla general
+Fallaruta$= "C:/infoict/falla.txt"
+output Fallaruta$; ""</code></pre>
+        </article>
+
+        <!-- Paso 5 -->
+        <article class="step" data-step="5">
+          <h3>Conteo de ciclos por fixture (Failed/Passed)</h3>
+          <p class="muted">Incrementa contadores por fixture en carpetas <code>Conteos/Failed</code> y <code>Conteos/Passed</code>.</p>
+          <pre><button class="copy" data-copy>Copiar</button><code>!---File LOG Generator------------------------------------------------
+for I = 1 to Number_Boards_On_Panel
+  if Mes_Eneable = 1 and Verificar_Panel = Number_Boards_On_Panel then
+    if Status(I) &lt;&gt; 0 and Status(I) &lt;&gt; 13 then
+      Fix_Id_Auto$ = val$(autofile)
+      Cont$ = "C:\\infoict\\Conteos\\Failed\\" &amp; Fix_Id_Auto$ &amp; ".txt"
+      enter Cont$; Dato$
+      Inc = val(Dato$)
+      Inc = Inc + 1
+      output Cont$; Inc
+    end if
+    if Status(I) = 0 and Status(I) &lt;&gt; 13 then
+      Fix_Id_Auto$ = val$(autofile)
+      Cont$ = "C:\\infoict\\Conteos\\Passed\\" &amp; Fix_Id_Auto$ &amp; ".txt"
+      enter Cont$; Dato$
+      Inc = val(Dato$)
+      Inc = Inc + 1
+      output Cont$; Inc
+    end if
+  end if
+next I</code></pre>
+        </article>
+
+        <!-- Paso 6 -->
+        <article class="step" data-step="6">
+          <h3>Generación de reportes por tarjeta y logging de FAIL/PASS</h3>
+          <p class="muted">Crea el nombre de archivo de reporte, imprime encabezado y persiste logs; rutas genéricas (sin datos de empresa).</p>
+          <pre><button class="copy" data-copy>Copiar</button><code>for I = 1 to Number_Boards_On_Panel
+  if BRD_TEST(I) = 1 then
+    board number is I
+
+    Report_File$ = Board$(I) &amp; "_" &amp; System$ &amp; "_20" &amp; Dateandtime$[1;6] &amp; "log.txt"
+
+    if Status(I) &lt;&gt; 0 and Status(I) &lt;&gt; 13 then
+      if boardfailed then
+        report is Serial$(I)
+        report "========================================"
+        report "        Customer:  [REDACTED]"
+        report "Test Result: FAILED ICT"
+        report "Assy #: " &amp; Board$(I) &amp; " Rev. " &amp; Board_Rev$(I)
+        report Serial_Nr$ &amp; Serial$(I)
+        report "Tested " &amp; time$
+        report "System tested on: " ; System$
+        report "Employee ID: " ; Oper$
+        report "Test Time:" ; Test_Time ; " seconds"
+        report "========================================"
+        report out
+        report clear
+        report is Report_File$
+        report "Assy #: " &amp; Board$(I) &amp; " Rev. " &amp; Board_Rev$(I) &amp; "|Serial #: " &amp; Serial$(I) &amp; "|Test Result: FAILED ICT|Tested " &amp; time$ &amp; "|Employee ID: " &amp; Oper$ &amp; "| Test Time: " ; Test_Time ; " seconds"
+        report out
+        report is "test_result"
+
+        copy Serial$(I) over "Fail.txt"
+        ! Archivo log general
+        Fallaruta$ = "C:/infoict/falla.txt"
+        append "Fail.txt" to Fallaruta$, Err
+
+        Year$ = datetime$[1;2]
+        Month$ = datetime$[3;2]
+        Serial2$ = Serial$(I)[1;13] &amp; "#" &amp; Serial$(I)[15;15]
+        Assy$ = Serial$(I)[2;12]
+        Model$ = Assy$
+        Path_Log_Fail$ = "C:\\ICT_Log\\" &amp; Model$ &amp; "\\Log_Fail\" &amp; Year$ &amp; "_" &amp; Month$ &amp; "\\"
+        Path_Log_Fail_Server$ = "\\\\SERVIDOR\\RutaCompartida\\ICT_Log\\" &amp; Model$ &amp; "\\Log_Fail\" &amp; Year$ &amp; "_" &amp; Month$ &amp; "\\"
+
+        copy "Fail.txt" over Path_Log_Fail$ &amp; Serial2$ &amp; "_" &amp; Dateandtime$ &amp; "_" &amp; System$ &amp; "_Fail.txt"
+        copy "Fail.txt" over Path_Log_Fail_Server$ &amp; Serial2$ &amp; "_" &amp; Dateandtime$ &amp; "_" &amp; System$ &amp; "_Fail.txt"
+        unlink "Fail.txt"
+      else
+        report is Serial$(I)
+        report "========================================"
+        report "        Customer:  [REDACTED]"
+        report "Test Result: PASSED ICT"
+        report "Assy #: " &amp; Board$(I) &amp; " Rev. " &amp; Board_Rev$(I)
+        report Serial_Nr$ &amp; Serial$(I)
+        report "Tested " &amp; time$
+        report "System tested on: " ; System$
+        report "Employee ID: " ; Oper$
+        report "Test Time:" ; Test_Time ; " seconds"
+        report "========================================"
+        report ""
+        report using "40(""-"")"
+        report "[REDACTED]"
+        report "Board #" ; I ; ":  " ; Board$(I)
+        report "Board Revision% " &amp; Board_Rev$(I)
+        if Serializing then report Serial_Nr$ &amp; Serial$(I)
+        report using "40(""-"")"
+        report "                                        "
+        report "      ############################"
+        report "      ###  P A S S E D  I C T  ###"
+        report "      ############################"
+        report "                                        "
+        report using "40(""-"")"
+        report out
+        report clear
+        report is Report_File$
+        report "Assy #: " &amp; Board$(I) &amp; " Rev. " &amp; Board_Rev$(I) &amp; "|Serial #: " &amp; Serial$(I) &amp; "|Test Result: PASSED ICT|Tested " &amp; time$ &amp; "|Employee ID: " &amp; Oper$ &amp; "| Test Time: " ; Test_Time ; " seconds"
+        report out
+        report is "test_result"
+      end if
+
+      execute "trecord.sh " &amp; Report_File$ &amp; " " &amp; Serial$(I)
+      copy Serial$(I) over "/dev/tty"
+      if boardfailed then
+        copy Serial$(I) over btgetenv$("RPR" &amp; th$)
+      end if
+      unlink Serial$(I)
+    end if
+  end if
+next I
+
+SKIP_REPORT:
+! ---File LOG Generator------------------------------------------------</code></pre>
+          <p class="muted"><strong>Notas de anonimización:</strong> se removieron nombres de cliente, IPs y rutas internas. Sustituye <code>[REDACTED]</code>, <code>\\SERVIDOR\\RutaCompartida</code> y directorios por los de tu entorno.</p>
+        </article>
+
+        <!-- Paso 7 -->
+        <article class="step" data-step="7">
+          <h3>Script batch: abrir ticket local</h3>
+          <p class="muted">Abre el archivo que recibe como argumento (asociado al editor por defecto).</p>
+          <pre><button class="copy" data-copy>Copiar</button><code>@echo off
+set "archivo=%~1"
+if not exist "%archivo%" (
+  echo El archivo no existe: "%archivo%"
+  exit /b 1
+)
+start "" "%archivo%"</code></pre>
+        </article>
+      </div>
+    </section>
+
+    <!-- Galería -->
+    <section>
+      <h2>Galería</h2>
+      <div class="grid cards">
+        <div class="card"><img loading="lazy" decoding="async" src="../img/ICT-proyecto1-captura1.png" alt="Captura 1"></div>
+        <div class="card"><img loading="lazy" decoding="async" src="../img/ICT-proyecto1-captura2.png" alt="Captura 2"></div>
+      </div>
+    </section>
+
+    <!-- Detalles técnicos -->
+    <section>
+      <h2>Detalles técnicos</h2>
+      <div class="panel">
         <ul>
-          <li><a href="#">Manual/diagrama PDF (opcional)</a></li>
-          <li><a href="#">Dataset/CV (opcional)</a></li>
+          <li>Lenguajes/Frameworks: C#, ASP.NET, WPF (MVVM), SQL Server/SQLite.</li>
+          <li>Integraciones: Endpoints REST con MES/IMES, testplan ICT Keysight.</li>
+          <li>Testing: ICT/FCT, SPC, validación de fixtures, golden units.</li>
+          <li>Observabilidad: logs, métricas (MTTR/MTBF), dashboard Andon.</li>
         </ul>
-      </aside>
-    </div>
-  </div>
+      </div>
+    </section>
+
+    <!-- Resultados -->
+    <section>
+      <h2>Resultados</h2>
+      <div class="panel">
+        <ul>
+          <li>–100% consumo de papel/insumos de impresión.</li>
+          <li>–10–20 min/día en atención de issues de impresora.</li>
+          <li>+Accesibilidad: tickets consultables en red para auditoría y FA.</li>
+          <li>+Velocidad de diagnóstico (dependiente de línea/equipo).</li>
+        </ul>
+      </div>
+    </section>
+  </main>
+
+  <!-- Botón subir -->
+  <div id="toTop">▲ Arriba</div>
+
+  <!-- Footer -->
+  <footer>
+    <div class="wrap">© <span id="year"></span> Marco Antonio Muñiz Abad · Hecho con HTML/CSS/JS · Publicado en GitHub Pages</div>
+  </footer>
+
+  <script>
+    // Año dinámico
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // ===== Tema: claro por defecto; respeta preferencia guardada =====
+    const modeBtn = document.getElementById('mode');
+    const themeMeta = document.getElementById('themeColor');
+    function applyTheme(isDark){
+      document.documentElement.dataset.theme = isDark ? 'dark' : 'light';
+      if (modeBtn) modeBtn.textContent = isDark ? '🌙' : '☀️';
+      if (themeMeta) themeMeta.setAttribute('content', isDark ? '#0b1220' : '#f8fafc');
+    }
+    (function initTheme(){
+      const saved = localStorage.getItem('theme');
+      const isDark = saved ? (saved === 'dark') : false; // claro por defecto
+      applyTheme(isDark);
+    })();
+    if (modeBtn){
+      modeBtn.addEventListener('click', ()=>{
+        const nowDark = (document.documentElement.dataset.theme !== 'dark');
+        applyTheme(nowDark);
+        localStorage.setItem('theme', nowDark ? 'dark' : 'light');
+      });
+    }
+
+    // ===== Botón copiar en bloques de código =====
+    document.querySelectorAll('[data-copy]').forEach(btn=>{
+      btn.addEventListener('click', ()=>{
+        const code = btn.nextElementSibling?.innerText || '';
+        navigator.clipboard.writeText(code).then(()=>{
+          const old = btn.textContent;
+          btn.textContent = '¡Copiado!';
+          setTimeout(()=> btn.textContent = old, 1200);
+        });
+      });
+    });
+
+    // ===== Botón subir =====
+    const toTop = document.getElementById('toTop');
+    window.addEventListener('scroll', ()=>{
+      toTop.style.display = window.scrollY > 500 ? 'inline-flex' : 'none';
+    });
+    toTop.addEventListener('click', ()=>window.scrollTo({top:0,behavior:'smooth'}));
+  </script>
 </body>
 </html>
