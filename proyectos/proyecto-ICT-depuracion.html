@@ -157,7 +157,7 @@
       <div class="panel">
         <p>
           Una prueba de capacitor en <strong>ICT i3070</strong> presentaba <em>CPK negativo</em> debido a que el nominal se consideraba 2.2 µF cuando en realidad el circuito tenía <strong>dos capacitores de 2.2 µF en paralelo</strong>. 
-          Tras validar el esquemático y ajustar el test plan (nominal, frecuencia, repeticiones y <em>remote sense</em>), el <strong>CPK</strong> mejoró a <strong>24.1</strong>.
+          Tras validar el esquemático y ajustar la prueba analoga en el debug board (nominal, frecuencia, resistencia de referencia y <em>remote sense</em>), el <strong>CPK</strong> mejoró a <strong>24.1</strong>.
         </p>
         <div class="row" style="margin-top:8px">
           <span class="tag">Keysight i3070</span>
@@ -181,7 +181,6 @@ disconnect all
 connect s to "GND"
 connect i to "NetC259_1"
 connect g to "+3V3"; l to "+3V3"
-
 capacitor 2.2u, 25, 25, fr1024, re2, ar200.0m, en, nocomp
 ! DUT: nominal 2.2u, plus tol 10.0 %, minus tol 10.0 %
 ! TEST: high limit 2.438u, low limit 1.962u
@@ -215,7 +214,7 @@ capacitor 4.4u, 24, 4, fr128, re4, ar200.0m, sa, sb, en, nocomp, ed
             <li><code>4.4u</code> = 2.2 µF + 2.2 µF en paralelo.</li>
             <li><code>sa, sb</code>: medición Kelvin/remote sense para reducir caída en leads/fixture.</li>
             <li><code>fr128</code>: frecuencia más adecuada para estabilidad en C.</li>
-            <li><code>re4</code>: más repeticiones → mejor estadística.</li>
+            <li><code>re4</code>: resistencia de referencia de 10kOhms para el MOA.</li>
           </ul>
         </article>
 
@@ -235,16 +234,28 @@ Cpk = min( (USL - μ) / (3σ), (μ - LSL) / (3σ) )</code></pre>
       <h2>Galería</h2>
       <div class="grid cards" id="galeria">
         <div class="card">
-          <div class="thumb"><img loading="lazy" decoding="async" src="../img/ict-cpk-antes.png" alt="CPK antes: -0.9022"></div>
-          <button class="view-full" data-full="../img/ict-cpk-antes.png">🔎 Ver completa</button>
+          <div class="thumb"><img loading="lazy" decoding="async" src="../img/ICT-depuracion-captura1.png" alt="CPK antes: -0.9022"></div>
+          <button class="view-full" data-full="../img/ICT-depuracion-captura1.png">🔎 Ver completa</button>
         </div>
         <div class="card">
-          <div class="thumb"><img loading="lazy" decoding="async" src="../img/ict-cpk-esquematico.png" alt="Esquemático: dos capacitores en paralelo"></div>
-          <button class="view-full" data-full="../img/ict-cpk-esquematico.png">🔎 Ver completa</button>
+          <div class="thumb"><img loading="lazy" decoding="async" src="../img/ICT-depuracion-esquematico.png" alt="Esquemático: dos capacitores en paralelo"></div>
+          <button class="view-full" data-full="../img/ICT-depuracion-esquematico.png">🔎 Ver completa</button>
         </div>
         <div class="card">
-          <div class="thumb"><img loading="lazy" decoding="async" src="../img/ict-cpk-despues.png" alt="CPK después: 24.1"></div>
-          <button class="view-full" data-full="../img/ict-cpk-despues.png">🔎 Ver completa</button>
+          <div class="thumb"><img loading="lazy" decoding="async" src="../img/ICT-depuracion-captura2.png" alt="CPK después: 24.1"></div>
+          <button class="view-full" data-full="../img/ICT-depuracion-captura2.png">🔎 Ver completa</button>
+        </div>
+		<div class="card">
+          <div class="thumb"><img loading="lazy" decoding="async" src="../img/ICT-depuracion-captura3.png" alt="CPK después: 24.1"></div>
+          <button class="view-full" data-full="../img/ICT-depuracion-captura3.png">🔎 Ver completa</button>
+        </div>
+		<div class="card">
+          <div class="thumb"><img loading="lazy" decoding="async" src="../img/ICT-depuracion-captura4.png" alt="CPK después: 24.1"></div>
+          <button class="view-full" data-full="../img/ICT-depuracion-captura4.png">🔎 Ver completa</button>
+        </div>
+		<div class="card">
+          <div class="thumb"><img loading="lazy" decoding="async" src="../img/ICT-depuracion-captura5.png" alt="CPK después: 24.1"></div>
+          <button class="view-full" data-full="../img/ICT-depuracion-captura5.png">🔎 Ver completa</button>
         </div>
       </div>
     </section>
