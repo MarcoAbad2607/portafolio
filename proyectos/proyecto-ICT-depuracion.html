@@ -267,7 +267,7 @@ Cpk = min( (USL - μ) / (3σ), (μ - LSL) / (3σ) )</code></pre>
         <ul>
           <li><strong>Tipo de prueba:</strong> medición de capacidad en ICT (analógica).</li>
           <li><strong>Hallazgo:</strong> dos capacitores de 2.2 µF en paralelo → nominal efectivo 4.4 µF.</li>
-          <li><strong>Ajustes clave:</strong> <code>capacitor 4.4u</code>, <code>sa/sb</code> (Kelvin), <code>fr128</code> (frecuencia), <code>re4</code> (repeticiones).</li>
+          <li><strong>Ajustes clave:</strong> <code>capacitor 4.4u</code>, <code>sa/sb</code> (Kelvin), <code>fr128</code> (frecuencia), <code>re4</code> (resistencia de referencia MOA).</li>
           <li><strong>Límites:</strong> ±10 % → LSL 3.96 µF, USL 4.84 µF (ajustables según política de guard band).</li>
           <li><strong>Buenas prácticas:</strong> validar nominal en la <em>red real</em>, confirmar variante de BOM y revisar paths a alimentación.</li>
         </ul>
